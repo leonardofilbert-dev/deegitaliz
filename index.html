@@ -193,7 +193,7 @@ input,textarea,select{outline:none}
 
       <section id="page-kelas" class="page space-y-4"><h2 id="kelasTitle" class="text-xl font-black">Kelas</h2><div id="kelasModulList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div></section>
     </div>
-    <p class="text-center text-[11px] text-zinc-400 pb-4">© 2026 Deegitaliz - Made for Gen Z • <a href="#learn" onclick="go('learn')" class="text-orange-500 font-bold">#learn</a> • <a href="#dashboard" onclick="go('dashboard')" class="text-orange-500 font-bold">#dashboard</a> • <a href="#reseller" onclick="go('reseller')" class="text-orange-500 font-bold">#reseller</a></p>
+    <p class="text-center text-[11px] text-zinc-400 pb-4">© 2026 Deegitaliz - Made in Gen DeegiZ • <a href="#learn" onclick="go('learn')" class="text-orange-500 font-bold">#learn</a> • <a href="#dashboard" onclick="go('dashboard')" class="text-orange-500 font-bold">#dashboard</a> • <a href="#reseller" onclick="go('reseller')" class="text-orange-500 font-bold">#reseller</a></p>
   </main>
 </div>
 
@@ -279,7 +279,8 @@ function doLogin(){
   currentUser=found; localStorage.setItem('deegitaliz_session', JSON.stringify(found)); enterApp();
 }
   else document.getElementById('loginMsg').classList.remove('hidden');
-}
+} function setujuiUser(i){ DB.users[i].status="aktif"; saveDB(); renderAll(); alert("Member disetujui! Sekarang dia bisa login."); }
+function tolakUser(i){ DB.users[i].status="ditolak"; saveDB(); renderAll(); alert("Member ditolak."); }
 function doLogout(){ currentUser=null; localStorage.removeItem('deegitaliz_session'); location.hash='home'; location.reload(); }
 function enterApp(){
   document.getElementById('loginPage').classList.add('hidden');
@@ -327,7 +328,7 @@ function renderAll(){
   document.getElementById('karyaList').innerHTML=myKarya.map(k=>`<div class="bg-zinc-50 dark:bg-zinc-800 rounded-2xl p-4"><p class="font-bold text-sm">${k.judul}</p><p class="text-xs text-orange-600 break-all">${k.link}</p><p class="text-xs mt-1 font-bold">${k.harga}</p><div class="flex gap-2 mt-2"><a href="${k.link}" target="_blank" class="bg-zinc-900 dark:bg-white dark:text-black text-white px-3 py-2 rounded-lg text-xs font-bold">Lihat Karya ↗</a><button onclick="hapusKarya(${DB.karya.indexOf(k)})" class="bg-red-100 text-red-600 px-3 py-2 rounded-lg text-xs font-bold">Hapus</button></div></div>`).join('') || '<p class="text-xs text-zinc-400">Belum ada karya.</p>';
   document.getElementById('kelasListSidebar').innerHTML=DB.kelas.map(k=>`<button onclick="openKelas('${k}')" class="w-full text-left px-3 py-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 flex justify-between"><span>📁 ${k}</span><span class="text-xs text-zinc-400">${DB.modul.filter(m=>m.kelas===k).length}</span></button>`).join('');
   if(isAdmin()){
-    document.getElementById('memberList').innerHTML=DB.users.map((u,i)=>`<div class="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-3 flex justify-between gap-2"><div class="text-xs"><b>${u.nama}</b> • @${u.user} • ${u.role} • ${u.kelas}<br><span class="text-red-500 font-mono">Pass: ${u.pass}</span> ${u.wa?`• WA: ${u.wa}`:''}</div><button onclick="hapusMember(${i})" class="bg-red-600 text-white px-2 py-1 rounded-lg text-xs">Hapus</button></div>`).join('');
+    document.getElementById('memberList').innerHTML=DB.users.map((u,i)=>`<div class="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-3 flex justify-between gap-2"><div class="text-xs"><b>${u.nama}</b> • @${u.user} • ${u.role} • ${u.kelas}<br><span class="text-red-500 font-mono">Pass: ${u.pass}</span> ${u.wa?`• WA: ${u.wa}`:''} ${u.status==='pending'?'<b class="text-orange-600"> • PENDING </b><button onclick="setujuiUser('+i+')" class="bg-green-600 text-white px-2 py-1 rounded-lg text-xs font-bold">Setujui</button> <button onclick="tolakUser('+i+')" class="bg-red-600 text-white px-2 py-1 rounded-lg text-xs font-bold">Tolak</button>':' • '+(u.status||'aktif')} </div><button onclick="hapusMember(${i})" class="bg-red-600 text-white px-2 py-1 rounded-lg text-xs">Hapus</button></div>`).join('');
     document.getElementById('kelasAdminList').innerHTML=DB.kelas.map((k,i)=>`<div class="flex justify-between bg-zinc-50 dark:bg-zinc-800 p-2.5 rounded-xl text-sm"><span>${k}</span><button onclick="hapusKelas(${i})" class="text-red-500 text-xs font-bold">Hapus</button></div>`).join('');
   }
 }
