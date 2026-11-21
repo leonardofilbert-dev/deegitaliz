@@ -265,8 +265,8 @@ function doRegister(){
   if(pass.length<4){ msg.innerText='Password minimal 4 karakter!'; msg.classList.remove('hidden'); return; }
   if(pass!==pass2){ msg.innerText='Password tidak sama!'; msg.classList.remove('hidden'); return; }
   if(DB.users.find(x=>x.user.toLowerCase()===user)){ msg.innerText='Username '+user+' sudah dipakai!'; msg.classList.remove('hidden'); return; }
-  DB.users.push({user:user, pass:pass, nama:nama, kelas:'Umum', role:'member', wa:wa}); saveDB();
-  alert('Berhasil Daftar! Halo '+nama+', silahkan login ya!');
+  DB.users.push({user:user, pass:pass, nama:nama, kelas:'Umum', role:'member', wa:wa, status: "pending" }); saveDB();
+  alert("Pendaftaran berhasil! Tunggu Admin menyetujui akun kamu ya.");
   document.getElementById('loginUser').value=user; showLoginPage();
 }
 function doLogin(){
