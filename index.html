@@ -273,7 +273,11 @@ function doLogin(){
   let u=document.getElementById('loginUser').value.trim().toLowerCase();
   let p=document.getElementById('loginPass').value.trim();
   let found=DB.users.find(x=>x.user.toLowerCase()===u && x.pass===p);
-  if(found){ currentUser=found; localStorage.setItem('deegitaliz_session', JSON.stringify(found)); enterApp(); }
+  if(found){
+  if(found.status==="pending"){ alert("Akun kamu masih menunggu persetujuan Admin. Chat Admin dulu ya!"); return; }
+  if(found.status==="ditolak"){ alert("Maaf, pendaftaran kamu ditolak Admin."); return; }
+  currentUser=found; localStorage.setItem('deegitaliz_session', JSON.stringify(found)); enterApp();
+}
   else document.getElementById('loginMsg').classList.remove('hidden');
 }
 function doLogout(){ currentUser=null; localStorage.removeItem('deegitaliz_session'); location.hash='home'; location.reload(); }
