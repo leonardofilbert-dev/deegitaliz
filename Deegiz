@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deegitaliz - Belajar Digital Buat Gen Z</title>
+<meta name="description" content="Deegitaliz - LMS Belajar Canva, Jualan WA, Undangan Digital & Affiliate untuk Gen Z">
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<script>tailwind.config={darkMode:'class'}</script>
+<style>
+*{ -webkit-tap-highlight-color: transparent; }
+.sidebar-link.active{background:#0F172A;color:white}
+.dark .sidebar-link.active{background:#F97316;color:white}
+.no-scrollbar::-webkit-scrollbar{display:none}
+.line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+input,textarea,select{outline:none}
+.brand-bg{background:linear-gradient(135deg,#0F172A 0%,#1E293B 50%,#F97316 100%)}
+.brand-btn{background:linear-gradient(90deg,#F97316,#F43F5E);color:white}
+.page{display:none}.page.show{display:block}
+.bottom-link.active{color:#F97316}
+</style>
+</head>
+<body class="bg-[#FFF7ED] dark:bg-[#0B0B0F] text-slate-900 dark:text-white pb-[70px] md:pb-0">
+
+<!-- ========== LOGIN ========== -->
+<div id="loginPage" class="min-h-screen flex items-center justify-center p-4 brand-bg">
+  <div class="w-full max-w-md bg-white dark:bg-zinc-900 rounded-[28px] p-6 sm:p-7 shadow-2xl">
+    <div class="text-center">
+      <div class="w-16 h-16 mx-auto rounded-2xl brand-bg flex items-center justify-center text-3xl text-white font-black">D.</div>
+      <h1 class="text-[28px] font-black leading-tight mt-3">DEEGITALIZ<span class="text-orange-500">.</span></h1>
+      <p class="text-sm text-zinc-500">Belajar Digital. Cuan Digital. Buat Gen Z.</p>
+      <div class="flex flex-wrap gap-2 justify-center mt-3 text-[11px] font-bold">
+        <span class="bg-zinc-100 dark:bg-zinc-800 px-2.5 py-1 rounded-full">ADMIN: admin / admin123</span>
+        <span class="bg-orange-100 text-orange-700 px-2.5 py-1 rounded-full">MEMBER: member / member123</span>
+      </div>
+    </div>
+    <label class="text-xs font-bold mt-5 block">USERNAME</label>
+    <input id="loginUser" class="w-full mt-1 p-3.5 rounded-2xl border dark:bg-zinc-800" placeholder="username kamu">
+    <label class="text-xs font-bold mt-3 block">PASSWORD</label>
+    <input id="loginPass" type="password" class="w-full mt-1 p-3.5 rounded-2xl border dark:bg-zinc-800" placeholder="••••••••">
+    <button onclick="doLogin()" class="w-full mt-5 brand-btn font-black py-4 rounded-2xl">MASUK 🚀</button>
+    <p id="loginMsg" class="text-center text-red-500 text-sm mt-3 hidden">Username / Password salah!</p>
+    <div class="flex items-center gap-3 my-4"><div class="flex-1 h-px bg-zinc-200"></div><p class="text-xs text-zinc-400">BELUM PUNYA AKUN?</p><div class="flex-1 h-px bg-zinc-200"></div></div>
+    <button onclick="showRegister()" class="w-full border-2 border-zinc-900 dark:border-white font-bold py-3.5 rounded-2xl">📝 DAFTAR GRATIS</button>
+    <p class="text-center text-[11px] text-zinc-400 mt-4">Dengan daftar, kamu setuju jadi bagian dari Deegitaliz Squad.</p>
+  </div>
+</div>
+
+<!-- ========== REGISTER ========== -->
+<div id="registerPage" class="hidden min-h-screen flex items-center justify-center p-4 brand-bg">
+  <div class="w-full max-w-md bg-white dark:bg-zinc-900 rounded-[28px] p-6 sm:p-7 shadow-2xl">
+    <h1 class="text-2xl font-black text-center">Join Deegitaliz Squad! 🎉</h1>
+    <p class="text-sm text-zinc-500 text-center mb-4">Daftar 30 detik, langsung belajar.</p>
+    <label class="text-xs font-bold">NAMA LENGKAP *</label><input id="regNama" class="w-full mt-1 mb-3 p-3 rounded-2xl border dark:bg-zinc-800" placeholder="Nama kamu">
+    <label class="text-xs font-bold">USERNAME *</label><input id="regUser" class="w-full mt-1 mb-3 p-3 rounded-2xl border dark:bg-zinc-800" placeholder="cth: zara_genz">
+    <label class="text-xs font-bold">NOMOR WA</label><input id="regWa" class="w-full mt-1 mb-3 p-3 rounded-2xl border dark:bg-zinc-800" placeholder="0812...">
+    <label class="text-xs font-bold">PASSWORD *</label><input id="regPass" type="password" class="w-full mt-1 mb-3 p-3 rounded-2xl border dark:bg-zinc-800" placeholder="Min 4 karakter">
+    <label class="text-xs font-bold">ULANGI PASSWORD *</label><input id="regPass2" type="password" class="w-full mt-1 p-3 rounded-2xl border dark:bg-zinc-800">
+    <button onclick="doRegister()" class="w-full mt-5 bg-emerald-500 text-white font-black py-4 rounded-2xl">DAFTAR SEKARANG ✅</button>
+    <p id="regMsg" class="text-center text-red-500 text-sm mt-3 hidden"></p>
+    <button onclick="showLoginPage()" class="w-full mt-3 bg-zinc-100 dark:bg-zinc-800 font-bold py-3 rounded-xl text-sm">← Balik ke Login</button>
+  </div>
+</div>
+
+<!-- ========== APP ========== -->
+<div id="appPage" class="hidden min-h-screen md:flex">
+  <!-- SIDEBAR DESKTOP -->
+  <aside class="hidden md:flex w-[260px] shrink-0 bg-white dark:bg-zinc-900 border-r flex-col sticky top-0 h-screen p-4">
+    <div class="flex items-center gap-3 px-1 mb-6">
+      <div class="w-11 h-11 brand-bg rounded-2xl flex items-center justify-center text-white font-black text-xl">D.</div>
+      <div><p class="font-black leading-none text-lg">DEEGITALIZ<span class="text-orange-500">.</span></p><p class="text-[11px] text-zinc-400 font-bold">LEARN • SELL • CUAN</p></div>
+    </div>
+    <p class="text-[10px] font-bold tracking-widest text-zinc-400 px-2 mb-2">MENU UTAMA</p>
+    <nav class="space-y-1 text-sm">
+      <a href="#home" onclick="go('home')" data-nav="home" class="sidebar-link active flex items-center gap-3 px-3 py-2.5 rounded-xl"><i class="fa-solid fa-house w-5"></i> Home</a>
+      <a href="#dashboard" onclick="go('dashboard')" data-nav="dashboard" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl"><i class="fa-solid fa-chart-line w-5"></i> Dashboard</a>
+      <a href="#learn" onclick="go('learn')" data-nav="learn" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl"><i class="fa-solid fa-book-open w-5"></i> Modul Belajar <span class="ml-auto text-[10px] bg-orange-100 text-orange-700 px-1.5 py-0.5 rounded-full font-bold">#learn</span></a>
+      <a href="#reseller" onclick="go('reseller')" data-nav="reseller" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl"><i class="fa-solid fa-link w-5"></i> Link Reseller</a>
+      <a href="#favorit" onclick="go('favorit')" data-nav="favorit" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl"><i class="fa-solid fa-heart w-5"></i> Favorit</a>
+      <a href="#testimoni" onclick="go('testimoni')" data-nav="testimoni" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl"><i class="fa-solid fa-star w-5"></i> Testimoni</a>
+    </nav>
+    <p class="text-[10px] font-bold tracking-widest text-zinc-400 px-2 mt-5 mb-2">KELAS AKSES</p>
+    <div id="kelasListSidebar" class="space-y-1 text-sm max-h-[160px] overflow-auto"></div>
+    <div id="adminMenuBox" class="hidden mt-4"><p class="text-[10px] font-bold text-red-500 px-2 mb-2">ADMIN ONLY</p><a href="#admin" onclick="go('admin')" data-nav="admin" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl bg-red-50 text-red-600"><i class="fa-solid fa-shield-halved w-5"></i> Panel Admin</a></div>
+    <div class="mt-auto brand-bg text-white rounded-2xl p-4"><p class="font-bold text-sm">Mau Kelas VIP? 🔥</p><p class="text-xs opacity-90">Chat Admin buat upgrade.</p><a target="_blank" href="https://wa.me/6281234567890?text=Halo%20Admin%20Deegitaliz%2C%20mau%20tanya%20kelas" class="block text-center bg-white text-zinc-900 font-bold text-xs py-2.5 rounded-xl mt-3">CHAT WA ADMIN 💬</a></div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="flex-1 min-w-0">
+    <header class="sticky top-0 z-30 bg-white/95 dark:bg-zinc-900/95 backdrop-blur border-b px-3 sm:px-4 py-3 flex items-center gap-2 sm:gap-3">
+      <div class="md:hidden w-9 h-9 brand-bg rounded-xl flex items-center justify-center text-white font-black">D.</div>
+      <div class="flex-1 relative"><i class="fa-solid fa-magnifying-glass absolute left-3 top-3.5 text-zinc-400 text-sm"></i><input id="searchInput" oninput="onSearch()" placeholder="Cari Canva, WA, Undangan..." class="w-full bg-zinc-100 dark:bg-zinc-800 rounded-xl py-2.5 pl-9 pr-3 text-sm"></div>
+      <button onclick="toggleTheme()" class="w-10 h-10 shrink-0 rounded-xl bg-zinc-100 dark:bg-zinc-800"><span id="themeIcon">🌙</span></button>
+      <button onclick="go('profil')" class="flex items-center gap-2 shrink-0"><img src="https://i.pravatar.cc/100?img=32" class="w-10 h-10 rounded-full border-2 border-orange-500"><span class="hidden lg:block text-left leading-none"><b id="topName" class="text-sm block">Member</b><span id="topRole" class="text-[11px] text-orange-500 font-bold">MEMBER</span></span></button>
+      <button onclick="doLogout()" class="w-10 h-10 shrink-0 rounded-xl bg-red-50 text-red-600"><i class="fa-solid fa-right-from-bracket"></i></button>
+    </header>
+
+    <div class="p-3 sm:p-4 max-w-6xl mx-auto space-y-5">
+      <!-- HOME -->
+      <section id="page-home" class="page show space-y-5">
+        <div class="brand-bg text-white rounded-[24px] p-5 sm:p-7 flex flex-col md:flex-row justify-between gap-4">
+          <div><p class="text-xs opacity-80">HALO BESTIE,</p><h2 id="homeName" class="text-2xl sm:text-3xl font-black">Halo, Member! 👋</h2><p class="text-sm opacity-90 mt-1">Hari ini belajar apa? Canva? Jualan WA? Gas cuan!</p><div class="flex flex-wrap gap-2 mt-4"><a href="#learn" onclick="go('learn')" class="bg-white text-zinc-900 font-bold px-4 py-2.5 rounded-xl text-sm">Mulai Belajar →</a><a href="#dashboard" onclick="go('dashboard')" class="bg-white/20 font-bold px-4 py-2.5 rounded-xl text-sm">Jual Karya 💰</a></div></div>
+          <div class="bg-white/15 rounded-2xl p-4 min-w-[170px] text-center self-center"><p class="text-3xl font-black" id="statModul">0</p><p class="text-xs">Total Modul</p><p class="text-xs mt-2 bg-white text-zinc-900 rounded-full py-1 px-2 font-bold" id="homeKelas">Kelas: Umum</p></div>
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 text-center text-sm font-bold">
+          <button onclick="openKelas('Canva')" class="bg-white dark:bg-zinc-900 p-4 rounded-2xl">🎨<br>Belajar Canva</button>
+          <button onclick="openKelas('Jualan WA')" class="bg-white dark:bg-zinc-900 p-4 rounded-2xl">💬<br>Jualan di WA</button>
+          <button onclick="openKelas('Undangan')" class="bg-white dark:bg-zinc-900 p-4 rounded-2xl">💌<br>Bikin Undangan</button>
+          <button onclick="openKelas('Affiliate')" class="bg-white dark:bg-zinc-900 p-4 rounded-2xl">💰<br>Affiliate</button>
+        </div>
+        <div class="flex justify-between items-center"><h3 class="font-black">🔥 Modul Terbaru</h3><a href="#learn" onclick="go('learn')" class="text-orange-500 text-xs font-bold">Lihat Semua →</a></div>
+        <div id="homeModulList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div>
+        <h3 class="font-black">💬 Kata Member Deegitaliz</h3>
+        <div id="homeTestiList" class="grid sm:grid-cols-2 gap-3 sm:gap-4"></div>
+        <div class="bg-white dark:bg-zinc-900 rounded-2xl p-5 text-center">
+          <p class="font-black">Share Link Ini Ke Teman Kamu!</p>
+          <p class="text-xs text-zinc-500 mt-1">Biar mereka langsung masuk ke Modul Belajar:</p>
+          <div class="flex gap-2 mt-3 max-w-md mx-auto"><input id="shareLearnLink" readonly value="https://deegitaliz.vercel.app/#learn" class="flex-1 p-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-xs"><button onclick="copyShareLink()" class="bg-zinc-900 dark:bg-white dark:text-black text-white px-4 rounded-xl text-xs font-bold">Salin</button></div>
+        </div>
+      </section>
+
+      <!-- DASHBOARD = #dashboard -->
+      <section id="page-dashboard" class="page space-y-5">
+        <h2 class="text-xl font-black">Dashboard Aku 💜 <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">#dashboard</span></h2>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div class="bg-white dark:bg-zinc-900 rounded-2xl p-4"><p class="text-xs text-zinc-400">Modul</p><p class="text-2xl font-black" id="dModul">0</p></div>
+          <div class="bg-white dark:bg-zinc-900 rounded-2xl p-4"><p class="text-xs text-zinc-400">Favorit</p><p class="text-2xl font-black" id="dFav">0</p></div>
+          <div class="bg-white dark:bg-zinc-900 rounded-2xl p-4"><p class="text-xs text-zinc-400">Karya Dijual</p><p class="text-2xl font-black" id="dKarya">0</p></div>
+          <div class="bg-white dark:bg-zinc-900 rounded-2xl p-4"><p class="text-xs text-zinc-400">Kelas</p><p class="text-sm font-bold" id="dKelas">Umum</p></div>
+        </div>
+        <div class="bg-white dark:bg-zinc-900 rounded-2xl p-4 sm:p-5">
+          <div class="flex justify-between gap-2"><h3 class="font-bold">🛍️ Jual Karya Kamu - Biar Cuan!</h3><span class="text-[11px] bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full font-bold shrink-0">MEMBER</span></div>
+          <p class="text-xs text-zinc-500 mt-1">Template Canva? Undangan? Jual di sini pakai link kamu sendiri.</p>
+          <div class="grid sm:grid-cols-3 gap-3 mt-4">
+            <input id="karyaJudul" placeholder="Judul - cth: Template Undangan Pink" class="p-3 rounded-xl border dark:bg-zinc-800">
+            <input id="karyaLink" placeholder="https://..." class="p-3 rounded-xl border dark:bg-zinc-800">
+            <input id="karyaHarga" placeholder="Harga - cth: Rp 25.000" class="p-3 rounded-xl border dark:bg-zinc-800">
+          </div>
+          <button onclick="tambahKarya()" class="mt-3 brand-btn font-bold px-5 py-3 rounded-xl text-sm w-full sm:w-auto">+ Tambah Karya Aku</button>
+          <div id="karyaList" class="grid sm:grid-cols-2 gap-3 mt-4"></div>
+        </div>
+        <div class="bg-white dark:bg-zinc-900 rounded-2xl p-5"><h3 class="font-bold">❤️ Modul Yang Kamu Simpan</h3><div id="dashboardFavList" class="grid sm:grid-cols-2 gap-3 mt-3"></div></div>
+      </section>
+
+      <!-- LEARN = #learn -->
+      <section id="page-learn" class="page space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between gap-3"><div><h2 class="text-xl font-black">Modul Belajar 📚 <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">#learn</span></h2><p class="text-sm text-zinc-500">Semua materi Deegitaliz ada di sini.</p></div><button id="btnTambahModul" onclick="openModulForm()" class="hidden bg-zinc-900 dark:bg-white dark:text-black text-white px-4 py-2.5 rounded-xl text-sm font-bold shrink-0">+ Tambah Modul (Admin)</button></div>
+        <div id="modulList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div>
+      </section>
+
+      <!-- RESELLER = #reseller -->
+      <section id="page-reseller" class="page space-y-4">
+        <div class="flex flex-col sm:flex-row justify-between gap-3"><div><h2 class="text-xl font-black">Link Reseller 🔗 <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">#reseller</span></h2><p class="text-sm text-zinc-500">Salin, share ke WA / IG / TikTok. Cuan masuk!</p></div><button id="btnTambahReseller" onclick="openResellerForm()" class="hidden bg-zinc-900 dark:bg-white dark:text-black text-white px-4 py-2.5 rounded-xl text-sm font-bold shrink-0">+ Tambah Link (Admin)</button></div>
+        <div id="resellerList" class="space-y-3"></div>
+      </section>
+
+      <section id="page-favorit" class="page space-y-4"><h2 class="text-xl font-black">Favorit Aku ❤️</h2><div id="favoritList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div></section>
+
+      <section id="page-testimoni" class="page space-y-4">
+        <h2 class="text-xl font-black">Testimoni Squad ⭐</h2>
+        <div id="testimoniList" class="grid sm:grid-cols-2 gap-3 sm:gap-4"></div>
+        <div class="bg-white dark:bg-zinc-900 rounded-2xl p-5"><h3 class="font-bold text-sm">Tulis Testimoni Kamu</h3><textarea id="testiInput" placeholder="Ceritain pengalaman belajar kamu..." class="w-full mt-2 p-3 rounded-xl border dark:bg-zinc-800"></textarea><button onclick="tambahTesti()" class="mt-2 brand-btn px-5 py-2.5 rounded-xl font-bold text-sm">Kirim Testimoni</button></div>
+      </section>
+
+      <section id="page-profil" class="page space-y-4">
+        <h2 class="text-xl font-black">Profil & Keamanan</h2>
+        <div class="bg-white dark:bg-zinc-900 rounded-2xl p-5 space-y-3">
+          <label class="text-xs font-bold">NAMA LENGKAP</label><input id="profilNama" class="w-full p-3 rounded-xl border dark:bg-zinc-800">
+          <label class="text-xs font-bold">USERNAME</label><input id="profilUser" disabled class="w-full p-3 rounded-xl border bg-zinc-100 dark:bg-zinc-800">
+          <label class="text-xs font-bold">PASSWORD BARU</label><input id="profilPass" placeholder="Isi kalau mau ganti password" class="w-full p-3 rounded-xl border dark:bg-zinc-800">
+          <button onclick="simpanProfil()" class="brand-btn font-bold px-5 py-3 rounded-xl w-full">SIMPAN PERUBAHAN</button>
+        </div>
+      </section>
+
+      <section id="page-admin" class="page space-y-5">
+        <h2 class="text-xl font-black text-red-600">🛡️ Panel Admin - Deegitaliz</h2>
+        <div class="grid lg:grid-cols-2 gap-4">
+          <div class="bg-white dark:bg-zinc-900 rounded-2xl p-5">
+            <h3 class="font-bold mb-3">👥 Kelola Member</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2"><input id="newUser" placeholder="Username" class="p-2.5 rounded-xl border dark:bg-zinc-800"><input id="newPass" placeholder="Password" class="p-2.5 rounded-xl border dark:bg-zinc-800"><input id="newNama" placeholder="Nama" class="p-2.5 rounded-xl border dark:bg-zinc-800"></div>
+            <div class="flex gap-2 mt-2"><select id="newKelas" class="flex-1 p-2.5 rounded-xl border dark:bg-zinc-800"><option>Umum</option><option>Canva</option><option>Jualan WA</option><option>Undangan</option><option>Affiliate</option><option>VIP</option></select><button onclick="tambahMember()" class="brand-btn px-4 rounded-xl font-bold text-sm">+ Tambah</button></div>
+            <div id="memberList" class="mt-4 space-y-2 max-h-[300px] overflow-auto"></div>
+          </div>
+          <div class="bg-white dark:bg-zinc-900 rounded-2xl p-5">
+            <h3 class="font-bold mb-3">🏷️ Kelola Kelas Akses</h3>
+            <div class="flex gap-2"><input id="newKelasNama" placeholder="Nama Kelas Baru" class="flex-1 p-2.5 rounded-xl border dark:bg-zinc-800"><button onclick="tambahKelas()" class="bg-emerald-600 text-white px-4 rounded-xl font-bold text-sm">+ Tambah</button></div>
+            <div id="kelasAdminList" class="mt-3 space-y-2"></div>
+            <hr class="my-4"><button onclick="resetData()" class="bg-red-100 text-red-600 px-4 py-2.5 rounded-xl font-bold text-sm">Reset Data</button><button onclick="exportData()" class="bg-zinc-100 dark:bg-zinc-800 px-4 py-2.5 rounded-xl font-bold text-sm ml-2">Export JSON</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="page-kelas" class="page space-y-4"><h2 id="kelasTitle" class="text-xl font-black">Kelas</h2><div id="kelasModulList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div></section>
+    </div>
+    <p class="text-center text-[11px] text-zinc-400 pb-4">© 2026 Deegitaliz - Made for Gen Z • <a href="#learn" onclick="go('learn')" class="text-orange-500 font-bold">#learn</a> • <a href="#dashboard" onclick="go('dashboard')" class="text-orange-500 font-bold">#dashboard</a> • <a href="#reseller" onclick="go('reseller')" class="text-orange-500 font-bold">#reseller</a></p>
+  </main>
+</div>
+
+<!-- BOTTOM NAV HP -->
+<div id="bottomNav" class="hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 border-t z-40 flex justify-around py-2 text-[10px] md:hidden">
+  <a href="#home" onclick="go('home')" data-nav="home" class="bottom-link active flex flex-col items-center px-2"><i class="fa-solid fa-house text-lg"></i>Home</a>
+  <a href="#learn" onclick="go('learn')" data-nav="learn" class="bottom-link flex flex-col items-center px-2"><i class="fa-solid fa-book-open text-lg"></i>Learn</a>
+  <a href="#dashboard" onclick="go('dashboard')" data-nav="dashboard" class="bottom-link flex flex-col items-center px-2"><i class="fa-solid fa-chart-line text-lg"></i>Dashboard</a>
+  <a href="#reseller" onclick="go('reseller')" data-nav="reseller" class="bottom-link flex flex-col items-center px-2"><i class="fa-solid fa-link text-lg"></i>Reseller</a>
+  <a href="#profil" onclick="go('profil')" data-nav="profil" class="bottom-link flex flex-col items-center px-2"><i class="fa-solid fa-user text-lg"></i>Profil</a>
+</div>
+
+<div id="modalForm" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60"><div class="bg-white dark:bg-zinc-900 w-full max-w-lg rounded-3xl p-5 sm:p-6 max-h-[90vh] overflow-auto"><div class="flex justify-between mb-4"><h3 id="modalTitle" class="font-black">Form</h3><button onclick="closeModal()">✕</button></div><div id="modalBody"></div></div></div>
+
+<script>
+const DEFAULT_DATA = {
+  users:[
+    {user:'admin', pass:'admin123', nama:'Admin Deegitaliz', kelas:'VIP', role:'admin'},
+    {user:'member', pass:'member123', nama:'Member Gen Z', kelas:'Umum', role:'member'},
+  ],
+  kelas:['Umum','Canva','Jualan WA','Undangan','Affiliate','VIP'],
+  modul:[
+    {id:1, judul:'Belajar Canva dari NOL - Bikin Feed IG Aesthetic 5 Menit', kelas:'Canva', deskripsi:'Dari bikin akun, pilih template, sampai export HD. Buat jualan & personal branding.', youtube:'https://www.youtube.com/watch?v=dQw4w9WgXcQ', img:'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600'},
+    {id:2, judul:'Jualan di WA Sampai Closing - Script Chat Anti Dicuekin', kelas:'Jualan WA', deskripsi:'Script opening, follow up, & closing yang bikin orang nggak cuma nanya harga terus hilang.', youtube:'https://www.youtube.com/watch?v=dQw4w9WgXcQ', img:'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600'},
+    {id:3, judul:'Bikin Undangan Digital Cantik - Laku Dijual 25 Ribuan', kelas:'Undangan', deskripsi:'Bikin undangan di Canva, tinggal ganti nama & foto. Bisa langsung dijual!', youtube:'https://www.youtube.com/watch?v=dQw4w9WgXcQ', img:'https://images.unsplash.com/photo-1519741497674-611481863552?w=600'},
+    {id:4, judul:'Affiliate Buat Pemula - Cuan Tanpa Stok Barang', kelas:'Affiliate', deskripsi:'Daftar affiliate, pilih produk yang gampang laku, bikin konten promosi dari HP.', youtube:'https://www.youtube.com/watch?v=dQw4w9WgXcQ', img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600'},
+  ],
+  reseller:[
+    {id:1, judul:'Link Katalog Template Canva Best Seller', link:'https://wa.me/6281234567890?text=Halo%20mau%20order%20template', desc:'Share link ini, komisi tiap ada yang order.'},
+    {id:2, judul:'Link Join Reseller Deegitaliz', link:'https://wa.me/6281234567890?text=Halo%20mau%20join%20reseller', desc:'Buat rekrut member baru jadi reseller.'},
+  ],
+  testimoni:[
+    {nama:'Putri - Singkawang, 19th', isi:'Baru seminggu belajar Canva di sini, udah bisa jual template undangan 3x. Worth it!'},
+    {nama:'Rendi - Pontianak, 21th', isi:'Script WA-nya ngena banget. Yang tadinya cuma nanya doang, sekarang pada closing.'},
+  ],
+  karya:[{user:'member', judul:'Template Undangan Pink Gen Z', link:'https://drive.google.com/', harga:'Rp 25.000'}],
+  favorit:['1']
+};
+let DB = JSON.parse(localStorage.getItem('deegitaliz_db') || 'null') || JSON.parse(JSON.stringify(DEFAULT_DATA));
+let currentUser = JSON.parse(localStorage.getItem('deegitaliz_session') || 'null');
+let currentFilter='';
+function saveDB(){ localStorage.setItem('deegitaliz_db', JSON.stringify(DB)); }
+function isAdmin(){ return currentUser && currentUser.role==='admin'; }
+function go(page){ location.hash = page; handleHash(); }
+function handleHash(){
+  let h = (location.hash || '#home').replace('#','');
+  let valid = ['home','dashboard','learn','reseller','favorit','testimoni','profil','admin','kelas'];
+  if(!valid.includes(h)) h='home';
+  // Jika belum login, jangan pindah halaman app, tapi simpan target
+  if(!currentUser){ return; }
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('show'));
+  let t=document.getElementById('page-'+h); if(t) t.classList.add('show');
+  document.querySelectorAll('[data-nav]').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll(`[data-nav="${h}"]`).forEach(el=>el.classList.add('active'));
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(h==='admin' && !isAdmin()){ alert('Hanya Admin!'); go('home'); }
+}
+window.addEventListener('hashchange', handleHash);
+function showRegister(){ document.getElementById('loginPage').classList.add('hidden'); document.getElementById('registerPage').classList.remove('hidden'); }
+function showLoginPage(){ document.getElementById('registerPage').classList.add('hidden'); document.getElementById('loginPage').classList.remove('hidden'); }
+function doRegister(){
+  let nama=document.getElementById('regNama').value.trim();
+  let user=document.getElementById('regUser').value.trim().toLowerCase().replace(/\s/g,'');
+  let wa=document.getElementById('regWa').value.trim();
+  let pass=document.getElementById('regPass').value.trim();
+  let pass2=document.getElementById('regPass2').value.trim();
+  let msg=document.getElementById('regMsg');
+  if(!nama||!user||!pass){ msg.innerText='Nama, Username & Password wajib diisi!'; msg.classList.remove('hidden'); return; }
+  if(pass.length<4){ msg.innerText='Password minimal 4 karakter!'; msg.classList.remove('hidden'); return; }
+  if(pass!==pass2){ msg.innerText='Password tidak sama!'; msg.classList.remove('hidden'); return; }
+  if(DB.users.find(x=>x.user.toLowerCase()===user)){ msg.innerText='Username '+user+' sudah dipakai!'; msg.classList.remove('hidden'); return; }
+  DB.users.push({user:user, pass:pass, nama:nama, kelas:'Umum', role:'member', wa:wa}); saveDB();
+  alert('Berhasil Daftar! Halo '+nama+', silahkan login ya!');
+  document.getElementById('loginUser').value=user; showLoginPage();
+}
+function doLogin(){
+  let u=document.getElementById('loginUser').value.trim().toLowerCase();
+  let p=document.getElementById('loginPass').value.trim();
+  let found=DB.users.find(x=>x.user.toLowerCase()===u && x.pass===p);
+  if(found){ currentUser=found; localStorage.setItem('deegitaliz_session', JSON.stringify(found)); enterApp(); }
+  else document.getElementById('loginMsg').classList.remove('hidden');
+}
+function doLogout(){ currentUser=null; localStorage.removeItem('deegitaliz_session'); location.hash='home'; location.reload(); }
+function enterApp(){
+  document.getElementById('loginPage').classList.add('hidden');
+  document.getElementById('registerPage').classList.add('hidden');
+  document.getElementById('appPage').classList.remove('hidden');
+  document.getElementById('bottomNav').classList.remove('hidden');
+  document.getElementById('topName').innerText=currentUser.nama;
+  document.getElementById('topRole').innerText=currentUser.role.toUpperCase();
+  document.getElementById('homeName').innerText='Halo, '+currentUser.nama+' 👋';
+  document.getElementById('homeKelas').innerText='Kelas: '+currentUser.kelas;
+  document.getElementById('profilNama').value=currentUser.nama;
+  document.getElementById('profilUser').value=currentUser.user;
+  if(isAdmin()){ document.getElementById('adminMenuBox').classList.remove('hidden'); document.getElementById('btnTambahModul').classList.remove('hidden'); document.getElementById('btnTambahReseller').classList.remove('hidden'); }
+  // Update share link ke domain asli
+  let base = location.origin + location.pathname;
+  document.getElementById('shareLearnLink').value = base + '#learn';
+  renderAll(); handleHash();
+}
+function toggleTheme(){ let isDark=document.documentElement.classList.toggle('dark'); document.getElementById('themeIcon').innerText=isDark?'☀️':'🌙'; localStorage.setItem('deegitaliz_theme', isDark?'dark':'light'); }
+function onSearch(){ currentFilter=document.getElementById('searchInput').value.toLowerCase(); renderAll(); if(currentFilter) go('learn'); }
+function getYoutubeId(url){ let m=url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/); return m?m[1]:null; }
+function modulCard(m){
+  let isFav=DB.favorit.includes(String(m.id)); let yt=getYoutubeId(m.youtube);
+  let embed=yt?`<iframe class="w-full h-[160px] rounded-xl" src="https://www.youtube.com/embed/${yt}" frameborder="0" allowfullscreen></iframe>`:`<a href="${m.youtube}" target="_blank" class="block bg-red-600 text-white text-center py-3 rounded-xl text-sm font-bold">▶ Tonton di Youtube</a>`;
+  let adminBtn=isAdmin()?`<div class="flex gap-2 mt-3"><button onclick="editModul(${m.id})" class="flex-1 bg-amber-100 text-amber-700 py-2 rounded-lg text-xs font-bold">✏️ Edit</button><button onclick="hapusModul(${m.id})" class="flex-1 bg-red-100 text-red-600 py-2 rounded-lg text-xs font-bold">🗑️ Hapus</button></div>`:'';
+  return `<div class="bg-white dark:bg-zinc-900 rounded-2xl overflow-hidden border"><img src="${m.img}" class="w-full h-[140px] object-cover"><div class="p-4"><span class="text-[10px] bg-orange-100 text-orange-700 px-2 py-1 rounded-full font-bold">KELAS: ${m.kelas}</span><h4 class="font-bold mt-2 line-clamp-2">${m.judul}</h4><p class="text-xs text-zinc-500 mt-1 line-clamp-2">${m.deskripsi}</p><div class="mt-3">${embed}</div><div class="flex gap-2 mt-3"><button onclick="toggleFav('${m.id}')" class="flex-1 ${isFav?'bg-pink-600 text-white':'bg-zinc-100 dark:bg-zinc-800'} py-2.5 rounded-xl text-xs font-bold">${isFav?'❤️ Disimpan':'♡ Simpan'}</button><a href="${m.youtube}" target="_blank" class="flex-1 bg-zinc-900 dark:bg-white dark:text-black text-white text-center py-2.5 rounded-xl text-xs font-bold">Youtube ↗</a></div>${adminBtn}</div></div>`;
+}
+function renderAll(){
+  let mf=DB.modul.filter(m=>(m.judul+m.deskripsi+m.kelas).toLowerCase().includes(currentFilter));
+  let rf=DB.reseller.filter(r=>(r.judul+r.desc).toLowerCase().includes(currentFilter));
+  document.getElementById('statModul').innerText=DB.modul.length;
+  document.getElementById('dModul').innerText=DB.modul.length;
+  document.getElementById('dFav').innerText=DB.favorit.length;
+  document.getElementById('dKarya').innerText=DB.karya.filter(k=>k.user===currentUser.user).length;
+  document.getElementById('dKelas').innerText=currentUser.kelas;
+  document.getElementById('homeModulList').innerHTML=DB.modul.slice(0,3).map(modulCard).join('');
+  document.getElementById('modulList').innerHTML=mf.map(modulCard).join('') || '<p class="text-sm text-zinc-400">Tidak ditemukan.</p>';
+  let favModul=DB.modul.filter(m=>DB.favorit.includes(String(m.id)));
+  document.getElementById('favoritList').innerHTML=favModul.map(modulCard).join('') || '<p class="text-sm text-zinc-400">Belum ada favorit.</p>';
+  document.getElementById('dashboardFavList').innerHTML=favModul.map(modulCard).join('') || '<p class="text-sm text-zinc-400">Belum ada.</p>';
+  document.getElementById('resellerList').innerHTML=rf.map(r=>`<div class="bg-white dark:bg-zinc-900 rounded-2xl p-4 flex flex-col sm:flex-row justify-between gap-3 border"><div><h4 class="font-bold">${r.judul}</h4><p class="text-xs text-zinc-500">${r.desc}</p><p class="text-xs text-orange-600 break-all mt-1">${r.link}</p></div><div class="flex gap-2 shrink-0"><button onclick="copyLink('${r.link}')" class="bg-zinc-900 dark:bg-white dark:text-black text-white px-4 py-2.5 rounded-xl text-xs font-bold">📋 Salin</button><a href="https://wa.me/?text=${encodeURIComponent('Cek ini: '+r.link)}" target="_blank" class="bg-emerald-600 text-white px-4 py-2.5 rounded-xl text-xs font-bold">Share WA</a>${isAdmin()?`<button onclick="hapusReseller(${r.id})" class="bg-red-100 text-red-600 px-3 py-2.5 rounded-xl text-xs font-bold">Hapus</button>`:''}</div></div>`).join('');
+  document.getElementById('testimoniList').innerHTML=DB.testimoni.map(t=>`<div class="bg-white dark:bg-zinc-900 rounded-2xl p-4 border"><p>⭐⭐⭐⭐⭐</p><p class="text-sm mt-1">"${t.isi}"</p><p class="font-bold text-xs mt-2">- ${t.nama}</p></div>`).join('');
+  document.getElementById('homeTestiList').innerHTML=DB.testimoni.slice(0,2).map(t=>`<div class="bg-white dark:bg-zinc-900 rounded-2xl p-4"><p class="text-sm">"${t.isi}"</p><p class="font-bold text-xs mt-2">- ${t.nama}</p></div>`).join('');
+  let myKarya=DB.karya.filter(k=>k.user===currentUser.user);
+  document.getElementById('karyaList').innerHTML=myKarya.map(k=>`<div class="bg-zinc-50 dark:bg-zinc-800 rounded-2xl p-4"><p class="font-bold text-sm">${k.judul}</p><p class="text-xs text-orange-600 break-all">${k.link}</p><p class="text-xs mt-1 font-bold">${k.harga}</p><div class="flex gap-2 mt-2"><a href="${k.link}" target="_blank" class="bg-zinc-900 dark:bg-white dark:text-black text-white px-3 py-2 rounded-lg text-xs font-bold">Lihat Karya ↗</a><button onclick="hapusKarya(${DB.karya.indexOf(k)})" class="bg-red-100 text-red-600 px-3 py-2 rounded-lg text-xs font-bold">Hapus</button></div></div>`).join('') || '<p class="text-xs text-zinc-400">Belum ada karya.</p>';
+  document.getElementById('kelasListSidebar').innerHTML=DB.kelas.map(k=>`<button onclick="openKelas('${k}')" class="w-full text-left px-3 py-2.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 flex justify-between"><span>📁 ${k}</span><span class="text-xs text-zinc-400">${DB.modul.filter(m=>m.kelas===k).length}</span></button>`).join('');
+  if(isAdmin()){
+    document.getElementById('memberList').innerHTML=DB.users.map((u,i)=>`<div class="bg-zinc-50 dark:bg-zinc-800 rounded-xl p-3 flex justify-between gap-2"><div class="text-xs"><b>${u.nama}</b> • @${u.user} • ${u.role} • ${u.kelas}<br><span class="text-red-500 font-mono">Pass: ${u.pass}</span> ${u.wa?`• WA: ${u.wa}`:''}</div><button onclick="hapusMember(${i})" class="bg-red-600 text-white px-2 py-1 rounded-lg text-xs">Hapus</button></div>`).join('');
+    document.getElementById('kelasAdminList').innerHTML=DB.kelas.map((k,i)=>`<div class="flex justify-between bg-zinc-50 dark:bg-zinc-800 p-2.5 rounded-xl text-sm"><span>${k}</span><button onclick="hapusKelas(${i})" class="text-red-500 text-xs font-bold">Hapus</button></div>`).join('');
+  }
+}
+function openKelas(k){ document.getElementById('kelasTitle').innerText='Kelas: '+k; let list=DB.modul.filter(m=>m.kelas===k); document.getElementById('kelasModulList').innerHTML=list.map(modulCard).join('') || '<p class="text-sm text-zinc-400">Belum ada modul di kelas ini.</p>'; go('kelas'); }
+function toggleFav(id){ if(DB.favorit.includes(String(id))) DB.favorit=DB.favorit.filter(x=>x!==String(id)); else DB.favorit.push(String(id)); saveDB(); renderAll(); }
+function copyLink(l){ navigator.clipboard.writeText(l).then(()=>alert('Link tersalin!')); }
+function copyShareLink(){ let v=document.getElementById('shareLearnLink').value; navigator.clipboard.writeText(v).then(()=>alert('Link #learn tersalin! '+v)); }
+function tambahKarya(){ let j=document.getElementById('karyaJudul').value.trim(); let l=document.getElementById('karyaLink').value.trim(); let h=document.getElementById('karyaHarga').value.trim()||'Gratis'; if(!j||!l) return alert('Isi Judul & Link dulu!'); DB.karya.push({user:currentUser.user, judul:j, link:l, harga:h}); saveDB(); renderAll(); alert('Karya ditambahkan!'); document.getElementById('karyaJudul').value=''; document.getElementById('karyaLink').value=''; document.getElementById('karyaHarga').value=''; }
+function hapusKarya(idx){ if(confirm('Hapus karya ini?')){ DB.karya.splice(idx,1); saveDB(); renderAll(); } }
+function tambahTesti(){ let isi=document.getElementById('testiInput').value.trim(); if(!isi) return alert('Tulis dulu'); DB.testimoni.push({nama:currentUser.nama, isi:isi}); saveDB(); renderAll(); document.getElementById('testiInput').value=''; alert('Testimoni terkirim, thank you bestie!'); }
+function simpanProfil(){ let nama=document.getElementById('profilNama').value.trim(); let pass=document.getElementById('profilPass').value.trim(); if(!nama) return alert('Nama tidak boleh kosong'); let u=DB.users.find(x=>x.user===currentUser.user); u.nama=nama; if(pass) u.pass=pass; currentUser=u; saveDB(); localStorage.setItem('deegitaliz_session', JSON.stringify(u)); renderAll(); alert('Profil disimpan!'); }
+function openModulForm(editId=null){ if(!isAdmin()) return alert('Hanya Admin!'); let m=editId?DB.modul.find(x=>x.id===editId):{judul:'',kelas:'Canva',deskripsi:'',youtube:'',img:''}; document.getElementById('modalTitle').innerText=editId?'Edit Modul':'Tambah Modul Baru'; document.getElementById('modalBody').innerHTML=`<input id="fJudul" value="${m.judul}" placeholder="Judul Modul" class="w-full p-3 rounded-xl border dark:bg-zinc-800 mb-2"><select id="fKelas" class="w-full p-3 rounded-xl border dark:bg-zinc-800 mb-2">${DB.kelas.map(k=>`<option ${m.kelas===k?'selected':''}>${k}</option>`).join('')}</select><textarea id="fDesk" placeholder="Deskripsi" class="w-full p-3 rounded-xl border dark:bg-zinc-800 mb-2">${m.deskripsi}</textarea><input id="fYoutube" value="${m.youtube}" placeholder="Link Youtube" class="w-full p-3 rounded-xl border dark:bg-zinc-800 mb-2"><input id="fImg" value="${m.img}" placeholder="Link Gambar" class="w-full p-3 rounded-xl border dark:bg-zinc-800 mb-2"><button onclick="saveModul(${editId||0})" class="w-full brand-btn font-bold py-3 rounded-xl">SIMPAN</button>`; openModal(); }
+function saveModul(editId){ let judul=document.getElementById('fJudul').value.trim(); let kelas=document.getElementById('fKelas').value; let desk=document.getElementById('fDesk').value.trim(); let yt=document.getElementById('fYoutube').value.trim(); let img=document.getElementById('fImg').value.trim()||'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600'; if(!judul) return alert('Judul wajib!'); if(editId){ let m=DB.modul.find(x=>x.id===editId); m.judul=judul; m.kelas=kelas; m.deskripsi=desk; m.youtube=yt; m.img=img; } else { DB.modul.push({id:Date.now(), judul, kelas, deskripsi:desk, youtube:yt, img}); } saveDB(); renderAll(); closeModal(); go('learn'); }
+function editModul(id){ openModulForm(id); }
+function hapusModul(id){ if(confirm('Hapus modul ini?')){ DB.modul=DB.modul.filter(m=>m.id!==id); saveDB(); renderAll(); } }
+function openResellerForm(){ if(!isAdmin()) return alert('Hanya Admin!'); document.getElementById('modalTitle').innerText='Tambah Link Reseller'; document.getElementById('modalBody').innerHTML=`<input id="rJudul" placeholder="Judul Link" class="w-full p-3 rounded-xl border dark:bg-zinc-800 mb-2"><input id="rLink" placeholder="https://..." class="w-full p-3 rounded-xl border dark:bg-zinc-800 mb-2"><textarea id="rDesc" placeholder="Deskripsi" class="w-full p-3 rounded-xl border dark:bg-zinc-800 mb-2"></textarea><button onclick="saveReseller()" class="w-full brand-btn font-bold py-3 rounded-xl">SIMPAN LINK</button>`; openModal(); }
+function saveReseller(){ let j=document.getElementById('rJudul').value.trim(); let l=document.getElementById('rLink').value.trim(); let d=document.getElementById('rDesc').value.trim(); if(!j||!l) return alert('Isi Judul & Link!'); DB.reseller.push({id:Date.now(), judul:j, link:l, desc:d}); saveDB(); renderAll(); closeModal(); go('reseller'); }
+function hapusReseller(id){ if(confirm('Hapus link ini?')){ DB.reseller=DB.reseller.filter(r=>r.id!==id); saveDB(); renderAll(); } }
+function tambahMember(){ let u=document.getElementById('newUser').value.trim().toLowerCase(); let p=document.getElementById('newPass').value.trim(); let n=document.getElementById('newNama').value.trim(); let k=document.getElementById('newKelas').value; if(!u||!p||!n) return alert('Isi semua!'); if(DB.users.find(x=>x.user===u)) return alert('Username sudah ada!'); DB.users.push({user:u, pass:p, nama:n, kelas:k, role:'member'}); saveDB(); renderAll(); alert('Member ditambahkan!'); }
+function hapusMember(i){ if(confirm('Hapus member ini?')){ DB.users.splice(i,1); saveDB(); renderAll(); } }
+function tambahKelas(){ let k=document.getElementById('newKelasNama').value.trim(); if(!k) return alert('Isi nama kelas!'); if(DB.kelas.includes(k)) return alert('Kelas sudah ada!'); DB.kelas.push(k); saveDB(); renderAll(); document.getElementById('newKelasNama').value=''; alert('Kelas '+k+' ditambahkan!'); }
+function hapusKelas(i){ if(confirm('Hapus kelas ini?')){ DB.kelas.splice(i,1); saveDB(); renderAll(); } }
+function resetData(){ if(confirm('Reset semua?')){ localStorage.removeItem('deegitaliz_db'); DB=JSON.parse(JSON.stringify(DEFAULT_DATA)); saveDB(); renderAll(); } }
+function exportData(){ let blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'}); let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='backup-deegitaliz.json'; a.click(); }
+function openModal(){ let m=document.getElementById('modalForm'); m.classList.remove('hidden'); m.classList.add('flex'); }
+function closeModal(){ let m=document.getElementById('modalForm'); m.classList.add('hidden'); m.classList.remove('flex'); }
+if(localStorage.getItem('deegitaliz_theme')==='dark'){ document.documentElement.classList.add('dark'); document.getElementById('themeIcon').innerText='☀️'; }
+document.getElementById('loginPass').addEventListener('keypress', e=>{ if(e.key==='Enter') doLogin(); });
+if(currentUser){ let still=DB.users.find(x=>x.user===currentUser.user); if(still){ currentUser=still; enterApp(); } }
+</script>
+</body>
+</html>
