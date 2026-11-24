@@ -381,6 +381,15 @@ function closeModal(){ let m=document.getElementById('modalForm'); m.classList.a
 if(localStorage.getItem('deegitaliz_theme')==='dark'){ document.documentElement.classList.add('dark'); document.getElementById('themeIcon').innerText='☀️'; }
 document.getElementById('loginPass').addEventListener('keypress', e=>{ if(e.key==='Enter') doLogin(); });
 if(currentUser){ let still=DB.users.find(x=>x.user===currentUser.user); if(still){ currentUser=still; enterApp(); } }
+function tambahModul(){
+ let j=prompt("Judul Modul baru:");
+ if(!j) return;
+ if(!DB.modul) DB.modul=[];
+ DB.modul.push({judul:j, kelas:[]});
+ saveDB();
+ location.reload();
+ alert("Modul berhasil ditambah!");
+}
 </script>
 </body>
 </html>
