@@ -290,7 +290,7 @@ function doRegister(){
   alert("Pendaftaran berhasil! Tunggu Admin menyetujui akun kamu ya.");
   document.getElementById('loginUser').value=user; showLoginPage();
 }
-(function doLogin){
+function doLogin(){
   let u=document.getElementById('loginUser').value.trim().toLowerCase();
   let p=document.getElementById('loginPass').value.trim();
   if(!DB.users) DB.users=[];
