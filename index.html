@@ -291,11 +291,12 @@ function doRegister(){
   alert("Pendaftaran berhasil! Tunggu Admin menyetujui akun kamu ya.");
   document.getElementById('loginUser').value=user; showLoginPage();
 }
-function doLogin(){
+(function doLogin){
   let u=document.getElementById('loginUser').value.trim().toLowerCase();
   let p=document.getElementById('loginPass').value.trim();
-  let found=DB.users.find(x=>x.user.toLowerCase()===u && x.pass===p);
-  if(found){
+  if(!DB.users) DB.users=[];
+  let found=DB.users.find(x=>x.user.toLowerCase()==u && x.pass==p);
+  if(!found){ alert("Akun tidak ditemukan. Coba Daftar dulu ya!"); return; }
   if(found.status==="pending"){ alert("Akun kamu masih menunggu persetujuan Admin. Chat Admin dulu ya!"); return; }
   if(found.status==="ditolak"){ alert("Maaf, pendaftaran kamu ditolak Admin."); return; }
   currentUser=found; localStorage.setItem('deegitaliz_session', JSON.stringify(found)); enterApp();
