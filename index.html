@@ -140,10 +140,16 @@ input,textarea,select{outline:none}
       </section>
 
       <!-- LEARN = #learn -->
-      <section id="page-learn" class="page space-y-4">
-        <div class="flex flex-col sm:flex-row justify-between gap-3"><div><h2 class="text-xl font-black">Modul Belajar 📚 <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">#learn</span></h2><p class="text-sm text-zinc-500">Semua materi Deegitaliz ada di sini.</p></div><button id="btnTambahModul" onclick="openModulForm()" class="hidden bg-zinc-900 dark:bg-white dark:text-black text-white px-4 py-2.5 rounded-xl text-sm font-bold shrink-0">+ Tambah Modul (Admin)</button></div>
-        <div id="modulList" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4"></div>
-      </section>
+<section id="page-learn" class="page space-y-4">
+  <div class="flex flex-col sm:flex-row justify-between gap-3">
+    <div><h2 class="text-xl font-black">Modul Belajar 📚 <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-bold">6 Modul • 24 Kelas</span></h2>
+    <p class="text-xs text-zinc-500">Klik modul untuk buka kelasnya</p></div>
+    <button onclick="toggleAdmin()" id="adminBtn" class="bg-green-600 text-white px-3 py-2 rounded-full text-xs font-bold self-start">✏️ Mode Edit: OFF</button>
+  </div>
+  <button onclick="tambahModul()" id="btnTambahModul" class="hidden w-full border-2 border-dashed border-green-500 text-green-600 py-2 rounded-xl font-bold text-sm">+ Tambah Modul Baru</button>
+  <div id="modulList" class="space-y-3"></div>
+</section>
+<!-- END LEARN -->
 
       <!-- RESELLER = #reseller -->
       <section id="page-reseller" class="page space-y-4">
@@ -210,13 +216,33 @@ const DEFAULT_DATA = {
     {user:'admin', pass:'admin123', nama:'Admin Deegitaliz', kelas:'VIP', role:'admin'},
     {user:'member', pass:'member123', nama:'Member Gen Z', kelas:'Umum', role:'member'},
   ],
-  kelas:['Umum','Canva','Jualan WA','Undangan','Affiliate','VIP'],
-  modul:[
-    {id:1, judul:'Belajar Canva dari NOL - Bikin Feed IG Aesthetic 5 Menit', kelas:'Canva', deskripsi:'Dari bikin akun, pilih template, sampai export HD. Buat jualan & personal branding.', youtube:'https://www.youtube.com/watch?v=dQw4w9WgXcQ', img:'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600'},
-    {id:2, judul:'Jualan di WA Sampai Closing - Script Chat Anti Dicuekin', kelas:'Jualan WA', deskripsi:'Script opening, follow up, & closing yang bikin orang nggak cuma nanya harga terus hilang.', youtube:'https://www.youtube.com/watch?v=dQw4w9WgXcQ', img:'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=600'},
-    {id:3, judul:'Bikin Undangan Digital Cantik - Laku Dijual 25 Ribuan', kelas:'Undangan', deskripsi:'Bikin undangan di Canva, tinggal ganti nama & foto. Bisa langsung dijual!', youtube:'https://www.youtube.com/watch?v=dQw4w9WgXcQ', img:'https://images.unsplash.com/photo-1519741497674-611481863552?w=600'},
-    {id:4, judul:'Affiliate Buat Pemula - Cuan Tanpa Stok Barang', kelas:'Affiliate', deskripsi:'Daftar affiliate, pilih produk yang gampang laku, bikin konten promosi dari HP.', youtube:'https://www.youtube.com/watch?v=dQw4w9WgXcQ', img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600'},
-  ],
+  kelas:['Digital Marketing 101','Creating & Selling Digital Products','Reselling & Wholesaling','Freelancing & Remote Work','Content Creation & Monetization','AI Tools & Automation'],,
+  modul:modul:[
+  {id:1, judul:'Kelas 1: Dasar Digital Marketing', kelas:'Digital Marketing 101', deskripsi:'Kenalan sama digital marketing, funnel, dan cara kerja jualan online.'},
+  {id:2, judul:'Kelas 2: Riset Pasar & Target', kelas:'Digital Marketing 101', deskripsi:'Cara cari target pasar yang tepat dan ngerti maunya customer.'},
+  {id:3, judul:'Kelas 3: Bikin Konten yang Jualan', kelas:'Digital Marketing 101', deskripsi:'Rumus konten hook, isi, CTA yang bikin orang beli.'},
+  {id:4, judul:'Kelas 4: Iklan Meta & TikTok', kelas:'Digital Marketing 101', deskripsi:'Setting iklan dasar Meta & TikTok biar gak boncos.'},
+  {id:5, judul:'Kelas 1: Cari Ide Produk', kelas:'Creating & Selling Digital Products', deskripsi:'Cari ide produk digital yang laku dari masalah sehari-hari.'},
+  {id:6, judul:'Kelas 2: Bikin Ebook / Template', kelas:'Creating & Selling Digital Products', deskripsi:'Bikin ebook & template di Canva step by step.'},
+  {id:7, judul:'Kelas 3: Setting Harga', kelas:'Creating & Selling Digital Products', deskripsi:'Cara nentuin harga yang cuan tapi tetep laku.'},
+  {id:8, judul:'Kelas 4: Bikin Landing Page', kelas:'Creating & Selling Digital Products', deskripsi:'Bikin halaman jualan yang bikin orang langsung checkout.'},
+  {id:9, judul:'Kelas 1: Cara Jadi Reseller', kelas:'Reselling & Wholesaling', deskripsi:'Mulai jadi reseller tanpa modal & tanpa stok.'},
+  {id:10, judul:'Kelas 2: Cari Supplier', kelas:'Reselling & Wholesaling', deskripsi:'Cara cari supplier terpercaya & harga grosir.'},
+  {id:11, judul:'Kelas 3: Strategi Harga Resell', kelas:'Reselling & Wholesaling', deskripsi:'Atur margin & bundling biar untung gede.'},
+  {id:12, judul:'Kelas 4: Bangun Toko', kelas:'Reselling & Wholesaling', deskripsi:'Bangun toko di WA & IG biar keliatan profesional.'},
+  {id:13, judul:'Kelas 1: Tentukan Skill', kelas:'Freelancing & Remote Work', deskripsi:'Tentukan skill yang bisa dijual dari HP.'},
+  {id:14, judul:'Kelas 2: Bikin Portofolio', kelas:'Freelancing & Remote Work', deskripsi:'Bikin portofolio simple tapi dipercaya klien.'},
+  {id:15, judul:'Kelas 3: Cari Klien Pertama', kelas:'Freelancing & Remote Work', deskripsi:'Cara cari klien pertama di Fiverr & sosmed.'},
+  {id:16, judul:'Kelas 4: Negosiasi Harga', kelas:'Freelancing & Remote Work', deskripsi:'Cara nego harga tanpa takut ditolak klien.'},
+  {id:17, judul:'Kelas 1: Personal Branding', kelas:'Content Creation & Monetization', deskripsi:'Bangun personal branding dari NOL.'},
+  {id:18, judul:'Kelas 2: Scripting Konten', kelas:'Content Creation & Monetization', deskripsi:'Nulis script konten 30 detik yang FYP.'},
+  {id:19, judul:'Kelas 3: Editing Video', kelas:'Content Creation & Monetization', deskripsi:'Editing video di CapCut biar keliatan pro.'},
+  {id:20, judul:'Kelas 4: Monetisasi', kelas:'Content Creation & Monetization', deskripsi:'Cara monetisasi: affiliate, endorse, jual produk.'},
+  {id:21, judul:'Kelas 1: Kenalan AI Tools', kelas:'AI Tools & Automation', deskripsi:'Kenalan AI yang bisa bantu kerjaan kamu.'},
+  {id:22, judul:'Kelas 2: ChatGPT untuk Bisnis', kelas:'AI Tools & Automation', deskripsi:'Prompt ChatGPT untuk bikin konten & jualan.'},
+  {id:23, judul:'Kelas 3: Automasi dengan AI', kelas:'AI Tools & Automation', deskripsi:'Automasi chat & konten pakai AI.'},
+  {id:24, judul:'Kelas 4: Studi Kasus AI', kelas:'AI Tools & Automation', deskripsi:'Studi kasus nyata cuan pake AI.'},
+],
   reseller:[
     {id:1, judul:'Link Katalog Template Canva Best Seller', link:'https://wa.me/6281234567890?text=Halo%20mau%20order%20template', desc:'Share link ini, komisi tiap ada yang order.'},
     {id:2, judul:'Link Join Reseller Deegitaliz', link:'https://wa.me/6281234567890?text=Halo%20mau%20join%20reseller', desc:'Buat rekrut member baru jadi reseller.'},
