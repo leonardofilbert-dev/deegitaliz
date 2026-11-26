@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DeegitaliZ HUB</title>
+<title>DeegitaliZ</title>
 <style>
 *{box-sizing:border-box;font-family:Inter,Arial,sans-serif}body{margin:0;background:#f1f5f9;display:flex;min-height:100vh}
 button{cursor:pointer;border:0;font-weight:700}
@@ -55,14 +55,14 @@ button{cursor:pointer;border:0;font-weight:700}
 <div class="sidebar">
   <div class="logo"><span>D</span>DeegitaliZ<br>HUB</div>
   <div class="menu">
-    <button class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
-    <button onclick="showPage('builder',this)">💻 App Builder</button>
-    <button onclick="showPage('learning',this)">🎓 Learning</button>
-    <button onclick="showPage('prompt',this)">✨ AI Prompt</button>
-    <button onclick="showPage('produk',this)">🛍️ Produk Digital</button>
+    <button class="active" onclick="showPage('dashboard',this)">Dashboard</button>
+    <button onclick="showPage('builder',this)">App Builder</button>
+    <button onclick="showPage('learning',this)">Learning</button>
+    <button onclick="showPage('prompt',this)">AI Prompt</button>
+    <button onclick="showPage('produk',this)">Produk Digital</button>
     <button onclick="showPage('pengaturan',this)" style="margin-top:18px">⚙️ Pengaturan</button>
-    <button onclick="showPage('bantuan',this)">❓ Bantuan</button>
-    <button onclick="doLogout()">↩️ Keluar</button>
+    <button onclick="showPage('bantuan',this)">Bantuan</button>
+    <button onclick="doLogout()">Keluar</button>
   </div>
   <div class="rocket"><div style="font-size:40px">🚀</div><b>Bersama<br>DeegitaliZ HUB</b><p style="font-size:13px;opacity:.8">Wujudkan Ide Digital Anda!</p><button onclick="alert('Mulai Sekarang!')">Mulai Sekarang →</button></div>
 </div>
@@ -76,7 +76,7 @@ button{cursor:pointer;border:0;font-weight:700}
 
   <!-- ADMIN BAR - muncul kalau Mode Edit ON -->
   <div id="adminBar" class="adminBar hidden">
-    <b>🛠️ Mode Admin AKTIF -</b>
+    <b>Mode Admin AKTIF -</b>
     <button onclick="editHero()" style="background:#111;color:#fff;padding:8px 12px;border-radius:99px">✏️ Edit Hero / Judul</button>
     <button onclick="editStatistik()" style="background:#111;color:#fff;padding:8px 12px;border-radius:99px">✏️ Edit Angka Statistik</button>
     <button onclick="tambahModul()" style="background:#16a34a;color:#fff;padding:8px 12px;border-radius:99px">+ Tambah Modul</button>
