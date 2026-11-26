@@ -83,6 +83,16 @@ button{cursor:pointer;border:0;font-weight:700}
       <div style="display:flex;align-items:center;gap:10px;color:#888;font-size:13px;margin:18px 0"><span style="flex:1;height:1px;background:#eee"></span>atau<span style="flex:1;height:1px;background:#eee"></span></div>
       <button onclick="alert('Login Google belum aktif')" style="width:100%;padding:12px;background:#fff;border:1px solid #ddd;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-weight:600"><span style="font-size:18px;font-weight:900;color:#4285F4">G</span> Login dengan Google</button>
      </div>
+    <p style="text-align:center;font-size:13px;margin-top:18px">Belum punya akun? <a href="#" onclick="document.getElementById('registerBox').style.display='block';return false" style="color:#0b5ed7;font-weight:700;text-decoration:none">Daftar sekarang</a></p>
+
+<!-- KOTAK DAFTAR -->
+<div id="registerBox" style="display:none;margin-top:14px;background:#f0f7ff;padding:14px;border-radius:12px">
+  <b style="font-size:14px">Buat Akun Baru</b>
+  <input id="regUser" placeholder="Username baru" style="width:100%;padding:11px;margin-top:10px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box">
+  <input id="regPass" type="password" placeholder="Password baru" style="width:100%;padding:11px;margin-top:8px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box">
+  <button onclick="doRegister()" style="width:100%;padding:11px;margin-top:10px;background:#10b981;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer">Daftar Akun</button>
+  <p onclick="document.getElementById('registerBox').style.display='none'" style="text-align:center;font-size:12px;color:#888;cursor:pointer;margin:8px 0 0">Batal</p>
+</div>
   </div>
 </div>
 <div class="sidebar">
@@ -254,6 +264,17 @@ function doLogin(){
   localStorage.setItem('deegitalizLogin','login');
   document.getElementById('pageLogin').style.display='none';
   document.getElementById('namaUser').innerText=u;
+}
+  function doRegister(){
+  let u=document.getElementById('regUser').value.trim();
+  let p=document.getElementById('regPass').value.trim();
+  if(!u||!p){alert('Isi username & password dulu!');return}
+  if(DB.users.find(x=>x.username===u)){alert('Username udah dipake!');return}
+  DB.users.push({username:u,password:p,role:'siswa'});
+  localStorage.setItem('deegitalizDB2',JSON.stringify(DB));
+  alert('Berhasil daftar! Sekarang login pakai akun baru kamu.');
+  document.getElementById('registerBox').style.display='none';
+  document.getElementById('loginUser').value=u;
 }
 function doLogout(){
   if(!confirm('Yakin mau keluar?')) return;
