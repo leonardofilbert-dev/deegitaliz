@@ -295,7 +295,8 @@ renderAll();
   import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
   import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
-  const firebaseConfig = {
+  const ADMIN_EMAILS = ["leonardofilbert@gmail.com"];
+    const firebaseConfig = {
     apiKey: "AIzaSyDqgPPq9qX6CVG04Y7HH3wjFM-HTYboL30",
     authDomain: "deegitaliz.firebaseapp.com",
     projectId: "deegitaliz",
@@ -320,7 +321,7 @@ renderAll();
         nama: user.displayName,
         email: user.email,
         foto: user.photoURL,
-        role: "member"
+        role: ADMIN_EMAILS.includes(user.email) ? "admin" : "member"
       }));
 
       alert("Halo " + user.displayName + "!");
