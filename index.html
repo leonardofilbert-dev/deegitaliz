@@ -51,7 +51,19 @@ button{cursor:pointer;border:0;font-weight:700}
 </style>
 </head>
 <body>
-
+<!-- HALAMAN LOGIN -->
+<div id="pageLogin" style="position:fixed;inset:0;background:#0a1f6b;z-index:9999;display:grid;place-items:center;padding:20px">
+  <div style="background:#fff;border-radius:18px;padding:28px;width:100%;max-width:400px;text-align:center">
+    <div style="font-size:50px">D</div>
+    <h2>DeegitaliZ HUB</h2>
+    <p style="color:#666">Login untuk masuk</p>
+    <input id="loginUser" placeholder="Username - admin / user" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0">
+    <input id="loginPass" type="password" placeholder="Password - admin123 / 123456" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0">
+    <button onclick="doLogin()" style="width:100%;background:#0a1f6b;color:#fff;padding:12px;border-radius:99px">Masuk →</button>
+    <p id="loginMsg" style="color:red;font-size:13px"></p>
+    <p style="font-size:12px;color:#888">Admin: admin / admin123<br>User: user / 123456</p>
+  </div>
+</div>
 <div class="sidebar">
   <div class="logo"><span>D</span>DeegitaliZ<br>HUB</div>
   <div class="menu">
@@ -213,7 +225,28 @@ function hapusModul(i){
 function bukaModul(i){ alert(DB.modul[i].judul+'\n'+DB.modul[i].desc+'\n\n'+DB.modul[i].kelas+' Kelas'); }
 function kelolaUser(){ alert('User terdaftar:\n'+DB.users.map(u=>u.username+' ('+u.role+')').join('\n')); }
 function resetData(){ if(!confirm('Reset semua ke awal?')) return; localStorage.removeItem('deegitalizDB2'); location.reload(); }
-function doLogout(){ location.reload(); }
+function doLogin(){
+  let u=document.getElementById('loginUser').value.trim();
+  let p=document.getElementById('loginPass').value.trim();
+  let found=DB.users.find(x=>x.username===u && x.password===p);
+  if(!found){ document.getElementById('loginMsg').innerText='Username / password salah!'; return; }
+  localStorage.setItem('deegitalizLogin','login');
+  document.getElementById('pageLogin').style.display='none';
+  document.getElementById('namaUser').innerText=u;
+}
+function doLogout(){
+  if(!confirm('Yakin mau keluar?')) return;
+  localStorage.removeItem('deegitalizLogin');
+  document.getElementById('pageLogin').style.display='grid';
+  document.getElementById('loginUser').value='';
+  document.getElementById('loginPass').value='';
+  isAdmin=false;
+  document.getElementById('modeLabel').innerText='Admin: OFF';
+  document.getElementById('adminBar').classList.add('hidden');
+}
+if(localStorage.getItem('deegitalizLogin')==='login'){
+  document.getElementById('pageLogin').style.display='none';
+}
 renderAll();
 </script>
 </body>
