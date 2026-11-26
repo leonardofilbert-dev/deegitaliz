@@ -1,155 +1,220 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deegitaliz - Belajar Digital</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DeegitaliZ HUB</title>
 <style>
-*{box-sizing:border-box;font-family:Arial,sans-serif}
-body{margin:0;background:#f4f6fb;color:#222}
-header{background:#6a11cb;color:#fff;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
-header b{font-size:20px}
-button{border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:700}
-.btn-primary{background:#6a11cb;color:#fff}
-.btn-green{background:#16a34a;color:#fff}
-.btn-red{background:#dc2626;color:#fff}
-.btn-gray{background:#e5e7eb}
-.card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
-.wrap{max-width:1000px;margin:0 auto;padding:20px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:6px 0}
-.badge{background:#ede9fe;color:#6a11cb;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:700}
+*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}body{margin:0;background:#f1f5f9;display:flex;min-height:100vh}
+button{cursor:pointer;border:0;font-weight:700}
+/* SIDEBAR - persis gambar */
+.sidebar{width:260px;background:#0a1f6b;color:#fff;padding:22px 14px;position:fixed;height:100vh;display:flex;flex-direction:column}
+.logo{display:flex;gap:10px;align-items:center;font-size:20px;font-weight:900;line-height:1;margin-bottom:26px}
+.logo span{font-size:36px;background:#00a8ff;width:44px;height:44px;display:grid;place-items:center;border-radius:12px}
+.menu button{width:100%;text-align:left;background:transparent;color:#cbd5e1;padding:12px;border-radius:12px;margin:2px 0;font-size:15px}
+.menu button.active{background:#0d6efd;color:#fff}
+.menu button:hover{background:rgba(255,255,255,.1)}
+.rocket{background:linear-gradient(180deg,#1e3a8a,#0a1f6b);border-radius:16px;padding:16px;text-align:center;margin-top:auto;border:1px solid rgba(255,255,255,.15)}
+.rocket button{background:#fff;color:#111;padding:10px 14px;border-radius:99px;width:100%}
+/* MAIN */
+.main{margin-left:260px;flex:1;padding:18px 22px;width:100%}
+.topbar{display:flex;gap:16px;align-items:center;margin-bottom:18px}
+.search{flex:1;background:#fff;border-radius:99px;padding:12px 16px;border:1px solid #e2e8f0;display:flex;gap:8px}
+.search input{border:0;outline:0;width:100%}
+.user{display:flex;gap:10px;align-items:center;background:#fff;padding:6px 12px;border-radius:99px}
+.avatar{width:38px;height:38px;border-radius:50%;background:#f59e0b;display:grid;place-items:center;font-size:20px}
+/* HERO */
+.hero{background:linear-gradient(90deg,#0052ff,#0ea5e9);color:#fff;border-radius:18px;padding:28px;display:flex;justify-content:space-between;align-items:center;overflow:hidden;position:relative}
+.hero h1{font-size:28px;margin:0 0 8px}.hero p{opacity:.9;max-width:480px}
+.hero button{background:#fff;padding:10px 18px;border-radius:99px;margin-top:14px}
+.hero .illus{font-size:90px}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0}
+.stat{background:#fff;border-radius:16px;padding:16px;display:flex;gap:12px;align-items:center}
+.stat b{font-size:26px}.stat small{color:#16a34a;font-weight:700}
+.icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:22px;color:#fff}
+/* GRID BAWAH */
+.grid2{display:grid;grid-template-columns:2fr 1fr;gap:16px}
+.card{background:#fff;border-radius:16px;padding:18px}
+.chart{height:170px;display:flex;align-items:flex-end;gap:18px;padding:10px 0 0;border-bottom:1px solid #eee}
+.bar{flex:1;background:linear-gradient(180deg,#2563eb,#bfdbfe);border-radius:8px 8px 0 0;position:relative}
+.bar span{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:700}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.quick div{border-radius:12px;padding:14px;text-align:center;cursor:pointer}
+.quick b{font-size:13px}.quick small{color:#666}
+.premium{background:linear-gradient(90deg,#0052ff,#0ea5e9);color:#fff;border-radius:16px;padding:18px;margin-top:16px;display:flex;justify-content:space-between;align-items:center}
+.premium button{background:#fff;padding:10px 16px;border-radius:99px}
+.modul-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
+.modul{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:14px}
 .hidden{display:none!important}
-.flex{display:flex;gap:8px;flex-wrap:wrap}
-.topbar{display:flex;justify-content:space-between;align-items:center;margin:16px 0}
+.adminBar{background:#fef08a;padding:12px;border-radius:12px;margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap}
+@media(max-width:900px){.sidebar{display:none}.main{margin-left:0}.stats{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header><b>🚀 Deegitaliz</b><span id="userInfo"></span></header>
 
-<div class="wrap" id="pageLogin">
-  <div class="card" style="max-width:420px;margin:40px auto;text-align:center">
-    <h2>Selamat Datang 👋</h2><p>Login untuk belajar</p>
-    <input id="loginUser" placeholder="Username - coba: admin / user">
-    <input id="loginPass" type="password" placeholder="Password - admin: admin123 / user: 123456">
-    <button class="btn-primary" style="width:100%" onclick="doLogin()">Masuk</button>
-    <p style="font-size:13px;color:#666">Belum punya akun? <a href="#" onclick="doRegister();return false">Daftar</a></p>
-    <p id="loginMsg" style="color:red"></p>
+<div class="sidebar">
+  <div class="logo"><span>D</span>DeegitaliZ<br>HUB</div>
+  <div class="menu">
+    <button class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
+    <button onclick="showPage('builder',this)">💻 App Builder</button>
+    <button onclick="showPage('learning',this)">🎓 Learning</button>
+    <button onclick="showPage('prompt',this)">✨ AI Prompt</button>
+    <button onclick="showPage('produk',this)">🛍️ Produk Digital</button>
+    <button onclick="showPage('pengaturan',this)" style="margin-top:18px">⚙️ Pengaturan</button>
+    <button onclick="showPage('bantuan',this)">❓ Bantuan</button>
+    <button onclick="doLogout()">↩️ Keluar</button>
   </div>
+  <div class="rocket"><div style="font-size:40px">🚀</div><b>Bersama<br>DeegitaliZ HUB</b><p style="font-size:13px;opacity:.8">Wujudkan Ide Digital Anda!</p><button onclick="alert('Mulai Sekarang!')">Mulai Sekarang →</button></div>
 </div>
 
-<div class="wrap hidden" id="pageHome">
+<div class="main">
   <div class="topbar">
-    <div><h2 style="margin:0">Modul Belajar</h2><span id="modulCount" class="badge">0 Modul</span> <span id="modeLabel" class="badge">Mode Edit: OFF</span></div>
-    <div class="flex">
-      <button class="btn-gray" onclick="toggleAdmin()">Mode Edit</button>
-      <button class="btn-green" onclick="tambahModul()">+ Tambah Modul</button>
-      <button class="btn-gray" onclick="doLogout()">Logout</button>
+    <div class="search">🔍 <input id="searchInput" placeholder="Cari fitur, aplikasi, atau tutorial..." oninput="cariModul()"></div>
+    <div>🔔<sup style="color:red">3</sup></div>
+    <div class="user"><div class="avatar">👦</div><div><b id="namaUser">Leonard</b><br><small style="color:#2563eb">⭐ Premium Member</small></div><button onclick="toggleAdmin()" style="background:#eef2ff;padding:8px 12px;border-radius:99px">🛠️ <span id="modeLabel">Admin: OFF</span></button></div>
+  </div>
+
+  <!-- ADMIN BAR - muncul kalau Mode Edit ON -->
+  <div id="adminBar" class="adminBar hidden">
+    <b>🛠️ Mode Admin AKTIF -</b>
+    <button onclick="editHero()" style="background:#111;color:#fff;padding:8px 12px;border-radius:99px">✏️ Edit Hero / Judul</button>
+    <button onclick="editStatistik()" style="background:#111;color:#fff;padding:8px 12px;border-radius:99px">✏️ Edit Angka Statistik</button>
+    <button onclick="tambahModul()" style="background:#16a34a;color:#fff;padding:8px 12px;border-radius:99px">+ Tambah Modul</button>
+    <button onclick="kelolaUser()" style="background:#7c3aed;color:#fff;padding:8px 12px;border-radius:99px">👥 Kelola User</button>
+    <button onclick="resetData()" style="background:#dc2626;color:#fff;padding:8px 12px;border-radius:99px">Reset Data</button>
+  </div>
+
+  <div id="page-dashboard">
+    <div class="hero">
+      <div><h1 id="heroTitle">Selamat Datang di DeegitaliZ HUB!</h1><p id="heroDesc">Platform lengkap untuk membuat aplikasi, belajar, dan menghasilkan produk digital dengan mudah.</p><button onclick="alert('Mulai Belajar!')">Mulai Sekarang →</button></div>
+      <div class="illus">💻</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="icon" style="background:#0ea5e9">▦</div><div><b id="stat1">12</b><br><small>Aplikasi Saya</small><br><small>↑ 12%</small></div></div>
+      <div class="stat"><div class="icon" style="background:#a855f7">📖</div><div><b id="stat2">8</b><br><small>Materi Belajar</small><br><small>↑ 8%</small></div></div>
+      <div class="stat"><div class="icon" style="background:#16a34a">🛒</div><div><b id="stat3">24</b><br><small>Produk Digital</small><br><small>↑ 20%</small></div></div>
+      <div class="stat"><div class="icon" style="background:#f97316">👥</div><div><b id="stat4">1.250</b><br><small>Total Pengguna</small><br><small>↑ 18%</small></div></div>
+    </div>
+
+    <div class="grid2">
+      <div>
+        <div class="card"><b>📊 Ringkasan Aktivitas</b><span style="float:right">7 Hari Terakhir ⌄</span>
+          <div class="chart" id="chartBox"></div>
+          <div style="display:flex;justify-content:space-between;font-size:12px;color:#666;margin-top:8px"><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span></div>
+        </div>
+        <div class="card" style="margin-top:16px"><b>🕐 Aktivitas Terbaru</b><span style="float:right;color:#2563eb">Lihat Semua →</span>
+          <p>💻 Anda membuat aplikasi baru: Website Undangan <span style="float:right;color:#888">2 jam yang lalu</span></p>
+          <p>📖 Menyelesaikan kursus: Next.js untuk Pemula <span style="float:right;color:#888">5 jam yang lalu</span></p>
+          <p>🛒 Produk digital baru ditambahkan: Template Desain Premium <span style="float:right;color:#888">1 hari yang lalu</span></p>
+        </div>
+        <div class="card" style="margin-top:16px"><b>🎓 Modul Belajar - Bisa Di-Edit Admin</b><div id="modulList" class="modul-grid"></div><p id="emptyModul" style="color:#888">Belum ada modul.</p></div>
+      </div>
+      <div>
+        <div class="card"><b>⚡ Aksi Cepat</b>
+          <div class="quick" style="margin-top:12px">
+            <div style="background:#eff6ff" onclick="alert('Buat Aplikasi dengan AI')"><div>📱</div><b>Buat Aplikasi</b><br><small>Dengan AI</small></div>
+            <div style="background:#faf5ff" onclick="showPage('learning')"><div>▶️</div><b>Mulai Belajar</b><br><small>Tutorial & Kursus</small></div>
+            <div style="background:#f0fdf4" onclick="alert('Kelola Produk')"><div>📦</div><b>Kelola Produk</b><br><small>Jual & Bagikan</small></div>
+            <div style="background:#fff7ed" onclick="alert('Atur Prompt')"><div>🤖</div><b>Atur Prompt</b><br><small>AI Assistant</small></div>
+          </div>
+        </div>
+        <div class="premium"><div><b>🏆 Upgrade ke Premium</b><p style="font-size:13px;opacity:.9">Dapatkan fitur lebih lengkap dan akses tanpa batas!</p><button>Upgrade Sekarang →</button></div><div style="font-size:50px">🎁</div></div>
+      </div>
     </div>
   </div>
 
-  <div class="card hidden" id="panelAdmin" style="margin-bottom:16px">
-    <h3>🛠️ Panel Admin</h3>
-    <p id="adminInfo">Kelola user & modul di sini.</p>
-    <div id="userList"></div>
-  </div>
-
-  <input id="searchModul" placeholder="🔍 Cari modul..." oninput="renderModulList()">
-  <div id="modulList" class="grid" style="margin-top:16px"></div>
-  <p id="emptyMsg" class="hidden" style="text-align:center;color:#888">Belum ada modul. Klik + Tambah Modul.</p>
+  <div id="page-learning" class="hidden"><div class="card"><h2>🎓 Learning</h2><p>Semua modul ada di Dashboard. Admin bisa tambah / edit / hapus modul dari sana.</p><button onclick="tambahModul()" style="background:#16a34a;color:#fff;padding:10px 14px;border-radius:99px">+ Tambah Modul</button><div id="modulList2" class="modul-grid" style="margin-top:12px"></div></div></div>
+  <div id="page-builder" class="hidden"><div class="card"><h2>💻 App Builder</h2><p>Buat aplikasi tanpa coding. Fitur ini bisa di-edit admin dari Dashboard.</p></div></div>
+  <div id="page-prompt" class="hidden"><div class="card"><h2>✨ AI Prompt</h2><p id="promptText">Prompt default: Buatkan saya website undangan pernikahan yang elegan...</p><button onclick="editPrompt()" style="background:#7c3aed;color:#fff;padding:10px 14px;border-radius:99px">✏️ Edit Prompt (Admin)</button></div></div>
+  <div id="page-produk" class="hidden"><div class="card"><h2>🛍️ Produk Digital</h2><p>24 Produk Digital - Edit angkanya lewat tombol Edit Statistik di Dashboard.</p></div></div>
+  <div id="page-pengaturan" class="hidden"><div class="card"><h2>⚙️ Pengaturan</h2><button onclick="editHero()" style="background:#111;color:#fff;padding:10px 14px;border-radius:99px">Edit Judul Hero</button></div></div>
+  <div id="page-bantuan" class="hidden"><div class="card"><h2>❓ Bantuan</h2><p>Hubungi admin DeegitaliZ HUB.</p></div></div>
 </div>
 
 <script>
-let DB = JSON.parse(localStorage.getItem('deegitalizDB') || 'null');
-if(!DB){
-  DB = {
-    users:[{username:'admin',password:'admin123',role:'admin',status:'disetujui'},{username:'user',password:'123456',role:'user',status:'disetujui'}],
-    modul:[
-      {id:1,judul:'Dasar Komputer',desc:'Pengenalan komputer & internet',kelas:[{judul:'Apa itu Komputer?'}]},
-      {id:2,judul:'Microsoft Word',desc:'Mengetik & format dokumen',kelas:[{judul:'Membuat Dokumen Baru'}]},
-      {id:3,judul:'Microsoft Excel',desc:'Rumus & tabel',kelas:[{judul:'Rumus Dasar'}]},
-      {id:4,judul:'Canva & Desain',desc:'Desain poster & presentasi',kelas:[{judul:'Desain Poster'}]},
-      {id:5,judul:'Keamanan Digital',desc:'Password & penipuan online',kelas:[{judul:'Password Aman'}]},
-      {id:6,judul:'AI & Masa Depan',desc:'Mengenal AI untuk belajar',kelas:[{judul:'Apa itu AI?'}]}
-    ]
-  };
-}
-let currentUser = null;
-let isEditMode = false;
-function saveDB(){ localStorage.setItem('deegitalizDB', JSON.stringify(DB)); }
-
-function doLogin(){
-  let u=document.getElementById('loginUser').value.trim();
-  let p=document.getElementById('loginPass').value.trim();
-  let found=DB.users.find(x=>x.username===u && x.password===p);
-  if(!found){ document.getElementById('loginMsg').innerText='Username / password salah!'; return; }
-  if(found.status!=='disetujui'){ document.getElementById('loginMsg').innerText='Akun belum disetujui admin!'; return; }
-  currentUser=found;
-  document.getElementById('pageLogin').classList.add('hidden');
-  document.getElementById('pageHome').classList.remove('hidden');
-  document.getElementById('userInfo').innerText='Halo, '+found.username+' ('+found.role+')';
-  renderModulList(); renderUsers();
-}
-function doRegister(){
-  let u=prompt('Username baru:'); if(!u) return;
-  let p=prompt('Password baru:'); if(!p) return;
-  if(DB.users.find(x=>x.username===u)){ alert('Username sudah ada!'); return; }
-  DB.users.push({username:u,password:p,role:'user',status:'menunggu'});
-  saveDB(); alert('Pendaftaran berhasil! Tunggu disetujui admin.');
-}
-function doLogout(){ location.reload(); }
-
-function toggleAdmin(){
-  isEditMode=!isEditMode;
-  document.getElementById('modeLabel').innerText='Mode Edit: '+(isEditMode?'ON':'OFF');
-  document.getElementById('panelAdmin').classList.toggle('hidden', !isEditMode);
+let DB=JSON.parse(localStorage.getItem('deegitalizDB2')||'null');
+if(!DB){DB={heroTitle:'Selamat Datang di DeegitaliZ HUB!',heroDesc:'Platform lengkap untuk membuat aplikasi, belajar, dan menghasilkan produk digital dengan mudah.',stat1:'12',stat2:'8',stat3:'24',stat4:'1.250',prompt:'Prompt default: Buatkan saya website undangan pernikahan yang elegan...',users:[{username:'admin',password:'admin123',role:'admin'}],modul:[{id:1,judul:'Next.js untuk Pemula',desc:'Belajar Next.js dari nol',kelas:5},{id:2,judul:'Website Undangan',desc:'Buat undangan digital',kelas:3},{id:3,judul:'Template Desain Premium',desc:'Desain Canva premium',kelas:4},{id:4,judul:'Dasar Komputer',desc:'Komputer & internet',kelas:6},{id:5,judul:'Excel Dasar',desc:'Rumus & tabel',kelas:4},{id:6,judul:'AI untuk Pemula',desc:'Mengenal AI',kelas:2}]};}
+let isAdmin=false;
+function saveDB(){localStorage.setItem('deegitalizDB2',JSON.stringify(DB));}
+function renderAll(){
+  document.getElementById('heroTitle').innerText=DB.heroTitle;
+  document.getElementById('heroDesc').innerText=DB.heroDesc;
+  document.getElementById('stat1').innerText=DB.stat1;
+  document.getElementById('stat2').innerText=DB.stat2;
+  document.getElementById('stat3').innerText=DB.stat3;
+  document.getElementById('stat4').innerText=DB.stat4;
+  document.getElementById('promptText').innerText=DB.prompt;
+  let vals=[250,480,520,420,680,500,860];
+  document.getElementById('chartBox').innerHTML=vals.map(v=>`<div class="bar" style="height:${v/10}%"><span>${v}</span></div>`).join('');
   renderModulList();
 }
-function renderUsers(){
-  let el=document.getElementById('userList');
-  el.innerHTML=DB.users.map((u,i)=>`<div style="display:flex;justify-content:space-between;padding:8px;border-bottom:1px solid #eee"><span><b>${u.username}</b> - ${u.role} - ${u.status}</span><span><button class="btn-green" onclick="setujuiUser(${i})">Setujui</button> <button class="btn-red" onclick="hapusUser(${i})">Hapus</button></span></div>`).join('');
-}
-function setujuiUser(i){ DB.users[i].status='disetujui'; saveDB(); renderUsers(); alert('User disetujui!'); }
-function tolakUser(i){ DB.users[i].status='ditolak'; saveDB(); renderUsers(); }
-function hapusUser(i){ if(!confirm('Hapus user ini?')) return; DB.users.splice(i,1); saveDB(); renderUsers(); }
-
 function renderModulList(){
-  let q=(document.getElementById('searchModul').value||'').toLowerCase();
-  let list=DB.modul.filter(m=>(m.judul||'').toLowerCase().includes(q));
-  document.getElementById('modulCount').innerText=list.length+' Modul • '+DB.modul.reduce((a,m)=>a+(m.kelas?m.kelas.length:0),0)+' Kelas';
-  document.getElementById('emptyMsg').classList.toggle('hidden', list.length>0);
-  document.getElementById('modulList').innerHTML=list.map(m=>{
+  let q=(document.getElementById('searchInput').value||'').toLowerCase();
+  let list=DB.modul.filter(m=>m.judul.toLowerCase().includes(q));
+  let html=list.map((m)=>{
     let idx=DB.modul.indexOf(m);
-    return `<div class="card"><span class="badge">${m.kelas?m.kelas.length:0} Kelas</span><h3>${m.judul}</h3><p style="color:#666">${m.desc||''}</p><div class="flex"><button class="btn-primary" onclick="bukaModul(${idx})">Buka</button>${isEditMode?`<button class="btn-gray" onclick="editModul(${idx})">Edit</button><button class="btn-red" onclick="hapusModul(${idx})">Hapus</button>`:''}</div></div>`;
+    return `<div class="modul"><b>${m.judul}</b><p style="font-size:13px;color:#666">${m.desc}</p><small>${m.kelas} Kelas</small><br><br><button onclick="bukaModul(${idx})" style="background:#2563eb;color:#fff;padding:8px 12px;border-radius:99px">Buka</button> ${isAdmin?`<button onclick="editModul(${idx})" style="background:#e2e8f0;padding:8px 12px;border-radius:99px">Edit</button> <button onclick="hapusModul(${idx})" style="background:#fee2e2;color:#dc2626;padding:8px 12px;border-radius:99px">Hapus</button>`:''}</div>`;
   }).join('');
+  document.getElementById('modulList').innerHTML=html;
+  document.getElementById('modulList2').innerHTML=html;
+  document.getElementById('emptyModul').style.display=list.length?'none':'block';
+}
+function cariModul(){renderModulList();}
+function showPage(id,btn){
+  ['dashboard','builder','learning','prompt','produk','pengaturan','bantuan'].forEach(p=>document.getElementById('page-'+p).classList.add('hidden'));
+  document.getElementById('page-'+id).classList.remove('hidden');
+  if(btn){document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+}
+function toggleAdmin(){
+  // Untuk demo, langsung aktif. Kalau mau pakai login, ganti dengan cek password
+  let pass=prompt('Masukkan password admin (coba: admin123) untuk aktifkan Mode Admin:');
+  if(pass!=='admin123'){alert('Password salah!');return;}
+  isAdmin=!isAdmin;
+  document.getElementById('modeLabel').innerText='Admin: '+(isAdmin?'ON':'OFF');
+  document.getElementById('adminBar').classList.toggle('hidden',!isAdmin);
+  renderModulList();
+  if(isAdmin) alert('Mode Admin AKTIF! Sekarang tombol Edit / Hapus muncul di setiap modul.');
+}
+function editHero(){
+  if(!isAdmin) return alert('Aktifkan Mode Admin dulu!');
+  let t=prompt('Edit Judul Hero:',DB.heroTitle); if(t===null) return;
+  let d=prompt('Edit Deskripsi Hero:',DB.heroDesc); if(d===null) return;
+  DB.heroTitle=t; DB.heroDesc=d; saveDB(); renderAll(); alert('Hero berhasil diedit!');
+}
+function editStatistik(){
+  if(!isAdmin) return alert('Aktifkan Mode Admin dulu!');
+  DB.stat1=prompt('Aplikasi Saya:',DB.stat1)||DB.stat1;
+  DB.stat2=prompt('Materi Belajar:',DB.stat2)||DB.stat2;
+  DB.stat3=prompt('Produk Digital:',DB.stat3)||DB.stat3;
+  DB.stat4=prompt('Total Pengguna:',DB.stat4)||DB.stat4;
+  saveDB(); renderAll(); alert('Statistik berhasil diedit!');
+}
+function editPrompt(){
+  if(!isAdmin) return alert('Aktifkan Mode Admin dulu!');
+  let p=prompt('Edit Prompt:',DB.prompt); if(p===null) return;
+  DB.prompt=p; saveDB(); renderAll(); alert('Prompt berhasil diedit!');
 }
 function tambahModul(){
+  if(!isAdmin) return alert('Klik tombol Admin di atas dulu, password admin123, baru bisa tambah!');
   let j=prompt('Judul Modul baru:'); if(!j) return;
-  let d=prompt('Deskripsi modul:')||'Modul baru';
-  DB.modul.push({id:Date.now(),judul:j,desc:d,kelas:[]});
-  saveDB(); renderModulList(); alert('Modul berhasil ditambah!');
+  let d=prompt('Deskripsi:')||'Modul baru';
+  DB.modul.push({id:Date.now(),judul:j,desc:d,kelas:0}); saveDB(); renderModulList(); alert('Modul berhasil ditambah & langsung muncul di Dashboard!');
 }
 function editModul(i){
-  let j=prompt('Edit judul modul:',DB.modul[i].judul); if(j===null) return;
-  let d=prompt('Edit deskripsi:',DB.modul[i].desc||''); if(d===null) return;
-  DB.modul[i].judul=j; DB.modul[i].desc=d;
-  saveDB(); renderModulList(); alert('Modul berhasil diedit!');
+  let j=prompt('Edit Judul:',DB.modul[i].judul); if(j===null) return;
+  let d=prompt('Edit Deskripsi:',DB.modul[i].desc); if(d===null) return;
+  DB.modul[i].judul=j; DB.modul[i].desc=d; saveDB(); renderModulList(); alert('Modul berhasil diedit!');
 }
 function hapusModul(i){
   if(!confirm('Hapus modul "'+DB.modul[i].judul+'"?')) return;
   DB.modul.splice(i,1); saveDB(); renderModulList();
 }
-function bukaModul(i){
-  let m=DB.modul[i];
-  let kelas=(m.kelas||[]).map(k=>'- '+k.judul).join('\n')||'(Belum ada kelas)';
-  let aksi='';
-  if(isEditMode){ aksi='\n\nKetik OK untuk tambah kelas?'; }
-  alert(m.judul+'\n'+(m.desc||'')+'\n\nKelas:\n'+kelas);
-  if(isEditMode){
-    let nk=prompt('Tambah kelas baru ke modul ini (kosongkan untuk batal):');
-    if(nk){ m.kelas.push({judul:nk}); saveDB(); renderModulList(); alert('Kelas ditambah!'); }
-  }
-}
+function bukaModul(i){ alert(DB.modul[i].judul+'\n'+DB.modul[i].desc+'\n\n'+DB.modul[i].kelas+' Kelas'); }
+function kelolaUser(){ alert('User terdaftar:\n'+DB.users.map(u=>u.username+' ('+u.role+')').join('\n')); }
+function resetData(){ if(!confirm('Reset semua ke awal?')) return; localStorage.removeItem('deegitalizDB2'); location.reload(); }
+function doLogout(){ location.reload(); }
+renderAll();
 </script>
 </body>
 </html>
