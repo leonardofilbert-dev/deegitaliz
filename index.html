@@ -82,7 +82,7 @@ button{cursor:pointer;border:0;font-weight:700}
       <div id="loginMsg" style="color:#dc2626;font-size:13px;text-align:center;min-height:18px;margin-bottom:8px"></div>
       <button onclick="doLogin()" style="width:100%;padding:13px;background:linear-gradient(#2ea5ff,#0b5ed7);color:#fff;border:none;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer">→ Login</button>
       <div style="display:flex;align-items:center;gap:10px;color:#888;font-size:13px;margin:18px 0"><span style="flex:1;height:1px;background:#eee"></span>atau<span style="flex:1;height:1px;background:#eee"></span></div>
-      <button onclick="alert('Login Google belum aktif')" style="width:100%;padding:12px;background:#fff;border:1px solid #ddd;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-weight:600"><span style="font-size:18px;font-weight:900;color:#4285F4">G</span> Login dengan Google</button>
+      <button id="btnGoogle" style="width:100%;padding:12px;background:#fff;border:1px solid #ddd;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-weight:600"><span style="font-size:18px;font-weight:900;color:#4285F4">G</span> Login dengan Google</button>
     <p style="text-align:center;font-size:13px;margin-top:18px">Belum punya akun? <a href="#" onclick="document.getElementById('registerBox').style.display='block';return false" style="color:#0b5ed7;font-weight:700;text-decoration:none">Daftar sekarang</a></p>
 <!-- KOTAK DAFTAR -->
 <div id="registerBox" style="display:none;margin-top:14px;background:#f0f7ff;padding:14px;border-radius:12px">
@@ -290,6 +290,47 @@ if(localStorage.getItem('deegitalizLogin')==='login'){
   document.getElementById('pageLogin').style.display='none';
 }
 renderAll();
+</script>
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDqgPPq9qX6CVG04Y7HH3wjFM-HTYboL30",
+    authDomain: "deegitaliz.firebaseapp.com",
+    projectId: "deegitaliz",
+    storageBucket: "deegitaliz.firebasestorage.app",
+    messagingSenderId: "271579480378",
+    appId: "1:271579480378:web:1d60ed2b82a03dfd0a5003",
+    measurementId: "G-00NY0L2LCH"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // TOMBOL GOOGLE
+  document.getElementById("btnGoogle").onclick = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Simpan biar tetap login
+      localStorage.setItem("userLogin", JSON.stringify({
+        nama: user.displayName,
+        email: user.email,
+        foto: user.photoURL,
+        role: "member"
+      }));
+
+      alert("Halo " + user.displayName + "!");
+      
+      // Pindah ke dashboard - sesuaikan dengan fungsi kamu
+      if (typeof showPage === "function") showPage('dashboard');
+      else document.getElementById("pageDashboard").style.display = "block";
+
+    } catch(e){ alert("Gagal: " + e.message) }
+  };
 </script>
 </body>
 </html>
