@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DeegiZ - Belajar Bareng</title>
+<title>DeegiZ - Firebase Aman</title>
 <style>
-:root{--bg:#eef2ff;--card:#ffffff;--text:#0f172a;--muted:#64748b;--accent:#4f46e5;--accent2:#7c3aed;--border:#e2e8f0;--radius:16px}
+:root{--bg:#eef2ff;--card:#fff;--text:#0f172a;--muted:#64748b;--accent:#4f46e5;--accent2:#7c3aed;--border:#e2e8f0}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
 button{cursor:pointer;border:none;font-family:inherit}
 .top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20}
 .logo{display:flex;gap:10px;align-items:center;font-weight:800;font-size:20px}.logo i{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal}
 .layout{display:flex;max-width:1200px;margin:0 auto;gap:16px;padding:16px}
-.sidebar{width:260px;flex-shrink:0;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;height:fit-content;position:sticky;top:70px}
-.main{flex:1;min-width:0}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.sidebar{width:260px;flex-shrink:0;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;height:fit-content;position:sticky;top:70px}
+.main{flex:1;min-width:0}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
 .navItem{display:flex;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:600;font-size:14px}.navItem.active,.navItem:hover{background:var(--bg)}
 .btnMain{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:11px 16px;border-radius:12px;font-weight:700;width:100%}
 .btnGhost{background:var(--bg);padding:10px 14px;border-radius:12px;font-weight:700;width:100%;margin-top:8px}
 .btnSmall{padding:7px 10px;border-radius:10px;font-weight:700;font-size:13px}
-input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--border);border-radius:12px;margin:6px 0;background:#fff;color:#111}
+input,textarea{width:100%;padding:11px 12px;border:1px solid var(--border);border-radius:12px;margin:6px 0;background:#fff;color:#111}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .qCard{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px;cursor:pointer}
 .qCard b{display:block}.qCard small{color:var(--muted)}
@@ -28,19 +27,19 @@ input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--border
 .chip{font-size:12px;padding:4px 8px;border-radius:99px;background:var(--bg);font-weight:700}
 .themeBtn{padding:9px 12px;border-radius:99px;color:#fff;font-weight:700}
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.gallery img{width:100%;height:90px;object-fit:cover;border-radius:10px}
-@media(max-width:820px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.grid3{grid-template-columns:1fr 1fr}.mod img{width:80px;height:64px}.gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:820px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.grid3{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.grid3{grid-template-columns:1fr}}
 .hidden{display:none!important}
 </style></head>
 <body>
 <div id="authPage" class="loginWrap"><div class="loginCard card">
-<div style="text-align:center"><div style="font-size:44px">🎓</div><h2 style="margin:6px 0">DeegiZ</h2><p style="color:var(--muted);font-size:14px">Belajar Bareng • Aman & Terpercaya</p></div>
-<div id="loginForm"><input id="lUser" placeholder="Username"><input id="lPass" type="password" placeholder="Kata Sandi"><button class="btnMain" onclick="doLogin()">Masuk →</button><button class="btnGhost" onclick="showReg()">Belum Punya Akun? Daftar Sekarang</button><div style="background:#fef9c3;padding:10px;border-radius:12px;font-size:13px;margin-top:12px">Akun Demo:<br><b>Admin:</b> admin / admin123<br><b>Member:</b> leonardo / member123<br><i>Akun baru harus disetujui Admin.</i></div></div>
-<div id="regForm" class="hidden"><input id="rName" placeholder="Nama Lengkap"><input id="rUser" placeholder="Username (tanpa spasi)"><input id="rPass" type="password" placeholder="Buat Kata Sandi (min 6 karakter)"><button class="btnMain" onclick="doRegister()">Daftar & Minta Persetujuan Admin</button><button class="btnGhost" onclick="showLogin()">Sudah Punya Akun? Masuk</button></div>
+<div style="text-align:center"><div style="font-size:44px">🎓</div><h2>DeegiZ - Firebase</h2><p style="color:var(--muted);font-size:14px">Aman • Nyambung Antar HP • Server Google</p><p id="statusFirebase" style="font-size:12px;color:#059669">● Menghubungkan ke Firebase...</p></div>
+<div id="loginForm"><input id="lUser" placeholder="Username"><input id="lPass" type="password" placeholder="Kata Sandi"><button class="btnMain" onclick="doLogin()">Masuk →</button><button class="btnGhost" onclick="showReg()">Belum Punya Akun? Daftar Sekarang</button><div style="background:#fef9c3;padding:10px;border-radius:12px;font-size:13px;margin-top:12px">Cara pertama kali:<br>1. Daftar username <b>admin</b> dulu<br>2. Di Firebase Console > Firestore > users > cari admin > ubah role jadi <b>Admin</b> & approved jadi <b>true</b><br>3. Login lagi sebagai Admin</div></div>
+<div id="regForm" class="hidden"><input id="rName" placeholder="Nama Lengkap"><input id="rUser" placeholder="Username (tanpa spasi)"><input id="rPass" type="password" placeholder="Buat Kata Sandi (min 6)"><button class="btnMain" onclick="doRegister()">Daftar & Minta Persetujuan Admin</button><button class="btnGhost" onclick="showLogin()">Sudah Punya Akun? Masuk</button></div>
 </div></div>
 
 <div id="appPage" class="hidden">
-<div class="top"><div class="logo"><i>D</i> DeegiZ</div><div style="display:flex;gap:8px;align-items:center"><span id="helloUser" class="chip">Halo</span><button class="btnSmall" onclick="openChangePass()" style="background:#fef3c7">🔑 Ganti Sandi</button><button class="btnSmall" onclick="doLogout()" style="background:#fee2e2">Keluar</button></div></div>
+<div class="top"><div class="logo"><i>D</i> DeegiZ <span style="font-size:11px;background:#dcfce7;color:#059669;padding:3px 8px;border-radius:99px">● FIREBASE LIVE</span></div><div style="display:flex;gap:8px;align-items:center"><span id="helloUser" class="chip">Halo</span><button class="btnSmall" onclick="openChangePass()" style="background:#fef3c7">🔑 Ganti Sandi</button><button class="btnSmall" onclick="doLogout()" style="background:#fee2e2">Keluar</button></div></div>
 <div class="layout">
 <aside class="sidebar">
 <div style="text-align:center"><div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto" id="avatarLetter">D</div><b id="sideName">User</b><div style="font-size:12px;color:var(--muted)" id="sideRole">Member</div><div style="display:flex;gap:6px;justify-content:center;margin-top:8px"><span class="chip">🔥 Streak 7 Hari</span><span class="chip">⭐ 80 XP</span></div></div>
@@ -54,7 +53,7 @@ input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--border
 <div class="navItem" onclick="setNav(this);openMemberList()">👥 Lihat Member <span class="badge" id="memberCountSide">0</span></div>
 <div class="navItem" id="navApproval" onclick="setNav(this);openApproval()">✅ Persetujuan Pendaftar <span class="badge" id="pendingBadge">0</span></div>
 </div>
-<div style="margin-top:14px"><b style="font-size:12px;color:var(--muted)">TEMA - BEBAS DIUBAH ADMIN & MEMBER</b>
+<div style="margin-top:14px"><b style="font-size:12px;color:var(--muted)">TEMA</b>
 <button class="btnGhost" onclick="toggleThemePanel()">🎨 Ganti Tema</button>
 <div id="themePanel" style="display:none;margin-top:10px"><div style="display:flex;gap:6px;flex-wrap:wrap">
 <button class="themeBtn" style="background:#4f46e5" onclick="setTheme('ungu')">Ungu</button>
@@ -63,100 +62,181 @@ input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--border
 <button class="themeBtn" style="background:#ea580c" onclick="setTheme('orange')">Orange</button>
 <button class="themeBtn" style="background:#db2777" onclick="setTheme('pink')">Pink</button>
 <button class="themeBtn" style="background:#0891b2" onclick="setTheme('tosca')">Tosca</button>
-</div><small style="color:var(--muted)">Warna senada, bebas pilih. Tersimpan per HP/Laptop.</small></div></div>
+</div></div></div>
 <div style="margin-top:14px"><button class="btnMain" onclick="openUangKopi()">☕ Uang Kopi</button></div>
 </aside>
-
 <main class="main">
-<div class="card" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none"><h2 style="margin:0">Selamat Datang Kembali 👋</h2><p style="opacity:.9;font-size:14px">Lanjutkan belajar kamu hari ini. Konsisten 15 menit setiap hari!</p><button onclick="openProgres()" style="background:#fff;color:#111;padding:10px 16px;border-radius:99px;font-weight:800">▶ Lanjutkan Belajar</button> <button onclick="openDeegiLink()" style="background:rgba(255,255,255,.2);color:#fff;padding:10px 16px;border-radius:99px;font-weight:700">🔗 DeegiZLink</button></div>
+<div class="card" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none"><h2 style="margin:0">Selamat Datang Kembali 👋</h2><p style="opacity:.9;font-size:14px">Data kamu sekarang tersimpan di Firebase, aman & nyambung ke semua HP!</p><button onclick="openProgres()" style="background:#fff;color:#111;padding:10px 16px;border-radius:99px;font-weight:800">▶ Lanjutkan Belajar</button> <button onclick="openDeegiLink()" style="background:rgba(255,255,255,.2);color:#fff;padding:10px 16px;border-radius:99px;font-weight:700">🔗 DeegiZLink</button></div>
 <div class="grid3" style="margin:14px 0"><div class="qCard" onclick="openDeegiLink()"><span>🔗</span><div><b>DeegiZLink</b><small>Resource & File</small></div></div><div class="qCard" onclick="openLibrary()"><span>📚</span><div><b>Library</b><small>Buku & Materi</small></div></div><div class="qCard" onclick="openGallery()"><span>🖼️</span><div><b>Gallery Anda</b><small>Foto Kamu</small></div></div><div class="qCard" onclick="openProgres()"><span>📈</span><div><b>Progres Belajar</b><small>Roadmap & Streak</small></div></div><div class="qCard" onclick="openCatatan()"><span>📝</span><div><b>Catatan</b><small>Simpan & Edit</small></div></div><div class="qCard" onclick="openMemberList()"><span>👥</span><div><b>Member</b><small id="memberCountHome">Memuat...</small></div></div></div>
-
 <div id="adminBar" class="card" style="margin-bottom:14px"><b>🛠️ Panel Admin - Hanya Admin Bisa Edit & Tambah</b><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btnSmall" style="background:var(--accent);color:#fff" onclick="openAddModule()">+ Tambah Modul</button><button class="btnSmall" style="background:#0ea5e9;color:#fff" onclick="openAddLink()">+ Tambah DeegiZLink</button><button class="btnSmall" style="background:#059669;color:#fff" onclick="openAddProgres()">+ Tambah Progres</button><button class="btnSmall" style="background:#7c3aed;color:#fff" onclick="openMemberList()">👥 Lihat Member</button></div></div>
-
-<div style="display:flex;justify-content:space-between;align-items:center"><h3>Modul Rekomendasi Utama <span class="badge">MULAI DARI SINI</span></h3></div><div id="modGrid"></div>
-<div class="card"><b>🔥 Tantangan 7 Hari</b><p style="font-size:13px;color:var(--muted)">Selesaikan 1 modul setiap hari selama 7 hari berturut-turut!</p><div class="progress"><i style="width:45%"></i></div><p style="font-size:13px">3 dari 7 hari • Lanjutkan!</p></div>
+<div><h3>Modul Rekomendasi Utama <span class="badge">MULAI DARI SINI</span></h3></div><div id="modGrid"><p>Memuat modul dari Firebase...</p></div>
 </main></div></div>
 
 <div class="modal" id="linkModal"><div class="modalBox"><h3>🔗 DeegiZLink</h3><div id="linkList"></div><button class="btnGhost" onclick="closeModal('linkModal')">Tutup</button></div></div>
 <div class="modal" id="addLinkModal"><div class="modalBox"><h3>+ Tambah DeegiZLink (Admin)</h3><input id="linkJudul" placeholder="Judul Link"><input id="linkUrl" placeholder="https://..."><button class="btnMain" onclick="saveLink()">Simpan Link</button><button class="btnGhost" onclick="closeModal('addLinkModal')">Batal</button></div></div>
-<div class="modal" id="libraryModal"><div class="modalBox"><h3>📚 DeegiZ Library</h3><div id="libList"></div><input id="libJudul" placeholder="Judul Buku / Materi"><input id="libUrl" placeholder="Link Drive / PDF"><button class="btnMain" onclick="saveLibrary()">+ Tambah ke Library (Admin & Member)</button><button class="btnGhost" onclick="closeModal('libraryModal')">Tutup</button></div></div>
-<div class="modal" id="galleryModal"><div class="modalBox"><h3>🖼️ Gallery Anda</h3><p style="font-size:13px;color:var(--muted)">Gallery ini per akun. Foto kamu tidak tercampur dengan member lain.</p><div class="gallery" id="galGrid"></div><input id="galUrl" placeholder="Link foto (https://...)"><input type="file" id="galFile" accept="image/*"><button class="btnMain" onclick="saveGallery()">+ Tambah Foto</button><button class="btnGhost" onclick="closeModal('galleryModal')">Tutup</button></div></div>
-<div class="modal" id="progresModal"><div class="modalBox"><h3>📈 Progres Belajar</h3><p id="progresText" style="font-size:13px;color:var(--muted)"></p><div id="progresList"></div><button class="btnMain" onclick="lanjutBelajar()">▶ Lanjutkan Belajar</button><button class="btnGhost" onclick="closeModal('progresModal')">Tutup</button></div></div>
-<div class="modal" id="addProgresModal"><div class="modalBox"><h3>+ Tambah / Edit Progres (Admin)</h3><input id="progJudul" placeholder="Judul Progres, misal: EP4 Deploy"><input id="progPct" type="number" placeholder="Persen 0-100"><button class="btnMain" onclick="saveProgres()">Simpan Progres</button><button class="btnGhost" onclick="closeModal('addProgresModal')">Batal</button></div></div>
-<div class="modal" id="addModuleModal"><div class="modalBox"><h3>+ Tambah Modul (Admin)</h3><input id="modTitle" placeholder="Judul Modul"><input id="modDesc" placeholder="Deskripsi Modul"><input id="modImg" placeholder="Link Gambar (opsional)"><button class="btnMain" onclick="saveModule()">Simpan Modul</button><button class="btnGhost" onclick="closeModal('addModuleModal')">Batal</button></div></div>
-<div class="modal" id="catatanModal"><div class="modalBox"><h3>📝 Catatan Saya</h3><p style="font-size:13px;color:var(--muted)">Catatan ini pribadi per akun.</p><div id="catList"></div><textarea id="catText" placeholder="Tulis catatan baru..."></textarea><button class="btnMain" onclick="saveCatatan()">💾 Simpan Catatan</button><button class="btnGhost" onclick="closeModal('catatanModal')">Tutup</button></div></div>
+<div class="modal" id="libraryModal"><div class="modalBox"><h3>📚 DeegiZ Library</h3><div id="libList"></div><input id="libJudul" placeholder="Judul Buku / Materi"><input id="libUrl" placeholder="Link Drive / PDF"><button class="btnMain" onclick="saveLibrary()">+ Tambah ke Library</button><button class="btnGhost" onclick="closeModal('libraryModal')">Tutup</button></div></div>
+<div class="modal" id="galleryModal"><div class="modalBox"><h3>🖼️ Gallery Anda</h3><div class="gallery" id="galGrid"></div><input id="galUrl" placeholder="Link foto (https://...)"><button class="btnMain" onclick="saveGallery()">+ Tambah Foto</button><button class="btnGhost" onclick="closeModal('galleryModal')">Tutup</button></div></div>
+<div class="modal" id="progresModal"><div class="modalBox"><h3>📈 Progres Belajar</h3><p id="progresText"></p><div id="progresList"></div><button class="btnMain" onclick="lanjutBelajar()">▶ Lanjutkan Belajar</button><button class="btnGhost" onclick="closeModal('progresModal')">Tutup</button></div></div>
+<div class="modal" id="addProgresModal"><div class="modalBox"><h3>+ Tambah Progres (Admin)</h3><input id="progJudul" placeholder="Judul Progres"><input id="progPct" type="number" placeholder="Persen 0-100"><button class="btnMain" onclick="saveProgres()">Simpan</button><button class="btnGhost" onclick="closeModal('addProgresModal')">Batal</button></div></div>
+<div class="modal" id="addModuleModal"><div class="modalBox"><h3>+ Tambah Modul (Admin)</h3><input id="modTitle" placeholder="Judul Modul"><input id="modDesc" placeholder="Deskripsi"><input id="modImg" placeholder="Link Gambar"><button class="btnMain" onclick="saveModule()">Simpan Modul</button><button class="btnGhost" onclick="closeModal('addModuleModal')">Batal</button></div></div>
+<div class="modal" id="catatanModal"><div class="modalBox"><h3>📝 Catatan Saya</h3><div id="catList"></div><textarea id="catText" placeholder="Tulis catatan baru..."></textarea><button class="btnMain" onclick="saveCatatan()">💾 Simpan Catatan</button><button class="btnGhost" onclick="closeModal('catatanModal')">Tutup</button></div></div>
 <div class="modal" id="memberModal"><div class="modalBox"><h3 id="memberTitle">👥 Daftar Member</h3><p id="memberCount"></p><input id="cariMember" placeholder="Cari username..." oninput="openMemberList()"><div id="memberList"></div><button class="btnGhost" onclick="closeModal('memberModal')">Tutup</button></div></div>
 <div class="modal" id="approvalModal"><div class="modalBox"><h3>✅ Persetujuan Pendaftar</h3><div id="approvalList"></div><button class="btnGhost" onclick="closeModal('approvalModal')">Tutup</button></div></div>
-<div class="modal" id="passModal"><div class="modalBox"><h3>🔑 Ganti Kata Sandi Sendiri</h3><input id="oldPass" type="password" placeholder="Sandi Lama"><input id="newPass" type="password" placeholder="Sandi Baru (min 6)"><button class="btnMain" onclick="changePass()">Simpan Sandi Baru</button><button class="btnGhost" onclick="closeModal('passModal')">Batal</button></div></div>
-<div class="modal" id="kopiModal"><div class="modalBox" style="text-align:center"><div style="font-size:32px">☕</div><h3>Uang Kopi Buat DeegiZ</h3><p style="font-size:13px;color:var(--muted)">Scan QR pakai GoPay / OVO / DANA / m-Banking</p><img src="qris-deegiz.jpg" style="width:100%;max-width:260px;border-radius:14px" onerror="this.style.display='none'"><button class="btnMain" onclick="window.open('https://wa.me/6281234567890?text=Halo%20Admin%2C%20saya%20sudah%20transfer%20Uang%20Kopi','_blank')">Kirim Bukti ke WhatsApp →</button><button class="btnGhost" onclick="closeModal('kopiModal')">Tutup</button></div></div>
+<div class="modal" id="passModal"><div class="modalBox"><h3>🔑 Ganti Kata Sandi</h3><input id="newPass" type="password" placeholder="Sandi Baru (min 6)"><button class="btnMain" onclick="changePass()">Simpan Sandi Baru</button><button class="btnGhost" onclick="closeModal('passModal')">Batal</button></div></div>
+<div class="modal" id="kopiModal"><div class="modalBox" style="text-align:center"><div style="font-size:32px">☕</div><h3>Uang Kopi Buat DeegiZ</h3><img src="qris-deegiz.jpg" style="width:100%;max-width:260px;border-radius:14px" onerror="this.style.display='none'"><button class="btnMain" onclick="window.open('https://wa.me/6281234567890?text=Halo%20Admin','_blank')">Kirim Bukti ke WhatsApp →</button><button class="btnGhost" onclick="closeModal('kopiModal')">Tutup</button></div></div>
 
-<script>
-let currentUser=null;
-let modules=JSON.parse(localStorage.getItem('dz_modules')||'[{"title":"MODUL 01 : Fondasi & Mindset Belajar","desc":"Dasar belajar, mindset, dan cara belajar cepat.","pct":100,"count":"5 Video • 2 File","progress":"5/5 Selesai","img":"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400"},{"title":"MODUL 02 : Niche & Riset Ide","desc":"Riset ide konten & niche yang cuan.","pct":60,"count":"4 Video • 1 File","progress":"3/5 Selesai","img":"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400"}]');
-async function hashPass(p){const e=new TextEncoder().encode(p);const b=await crypto.subtle.digest('SHA-256',e);return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
-function getUsers(){return JSON.parse(localStorage.getItem('dz_users')||'[]')}
-function saveUsers(u){localStorage.setItem('dz_users',JSON.stringify(u))}
-function getPending(){return JSON.parse(localStorage.getItem('dz_pending')||'[]')}
-async function seed(){let u=getUsers();if(u.length===0){u=[{name:'DeegiZ Admin',username:'admin',passHash:await hashPass('admin123'),role:'Admin',approved:true},{name:'Leonardo',username:'leonardo',passHash:await hashPass('member123'),role:'Member',approved:true}];saveUsers(u)}}
-seed();
-function showReg(){document.getElementById('loginForm').classList.add('hidden');document.getElementById('regForm').classList.remove('hidden')}
-function showLogin(){document.getElementById('regForm').classList.add('hidden');document.getElementById('loginForm').classList.remove('hidden')}
-async function doRegister(){let n=document.getElementById('rName').value.trim(),u=document.getElementById('rUser').value.trim().toLowerCase(),p=document.getElementById('rPass').value;if(!n||!u||p.length<6){alert('Lengkapi data! Sandi min 6 karakter.');return}let users=getUsers();if(users.find(x=>x.username===u)||getPending().find(x=>x.username===u)){alert('Username sudah dipakai!');return}let pend=getPending();pend.push({name:n,username:u,passHash:await hashPass(p),role:'Member',approved:false,time:new Date().toLocaleString('id-ID')});localStorage.setItem('dz_pending',JSON.stringify(pend));alert('✅ Pendaftaran terkirim! Tunggu Admin menyetujui.');showLogin()}
-async function doLogin(){let u=document.getElementById('lUser').value.trim().toLowerCase(),p=document.getElementById('lPass').value;let users=getUsers();let h=await hashPass(p);let f=users.find(x=>x.username===u&&x.passHash===h);if(!f){let pen=getPending().find(x=>x.username===u);if(pen){alert(pen.passHash===h?'⏳ Akun kamu masih menunggu persetujuan Admin.':'❌ Username / Sandi salah.');}else alert('❌ Username / Sandi salah.');return}if(!f.approved){alert('⏳ Akun belum disetujui Admin.');return}currentUser=f;localStorage.setItem('dz_session',JSON.stringify({username:f.username}));enterApp()}
-function enterApp(){document.getElementById('authPage').classList.add('hidden');document.getElementById('appPage').classList.remove('hidden');document.getElementById('sideName').textContent=currentUser.name;document.getElementById('sideRole').textContent=currentUser.role;document.getElementById('avatarLetter').textContent=currentUser.name.charAt(0).toUpperCase();document.getElementById('helloUser').textContent='Halo, '+currentUser.name;let isAdmin=currentUser.role==='Admin';document.getElementById('adminBar').style.display=isAdmin?'block':'none';document.getElementById('navApproval').style.display=isAdmin?'flex':'none';renderModules();updatePendingBadge();updateMemberCount();let th=localStorage.getItem('dz_theme_'+currentUser.username)||localStorage.getItem('dz_theme')||'ungu';setTheme(th)}
-function updateMemberCount(){let total=getUsers().length;let h=document.getElementById('memberCountHome');if(h)h.textContent=total+' Orang Terdaftar';let s=document.getElementById('memberCountSide');if(s)s.textContent=total}
-function doLogout(){localStorage.removeItem('dz_session');location.reload()}
-function setNav(el){document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));el.classList.add('active')}
-function toggleThemePanel(){let p=document.getElementById('themePanel');p.style.display=p.style.display==='none'?'block':'none'}
-function setTheme(n){let map={ungu:['#eef2ff','#ffffff','#0f172a','#4f46e5','#7c3aed'],biru:['#eff6ff','#ffffff','#0f172a','#0ea5e9','#2563eb'],hijau:['#f0fdf4','#ffffff','#0f172a','#059669','#10b981'],orange:['#fff7ed','#ffffff','#0f172a','#ea580c','#f97316'],pink:['#fdf2f8','#ffffff','#0f172a','#db2777','#ec4899'],tosca:['#ecfeff','#ffffff','#0f172a','#0891b2','#06b6d4']};let t=map[n]||map.ungu;document.documentElement.style.setProperty('--bg',t[0]);document.documentElement.style.setProperty('--card',t[1]);document.documentElement.style.setProperty('--text',t[2]);document.documentElement.style.setProperty('--accent',t[3]);document.documentElement.style.setProperty('--accent2',t[4]);if(currentUser)localStorage.setItem('dz_theme_'+currentUser.username,n);localStorage.setItem('dz_theme',n);let p=document.getElementById('themePanel');if(p)p.style.display='none'}
-function renderModules(){let g=document.getElementById('modGrid');g.innerHTML=modules.map((m,i)=>`<div class="mod"><img src="${m.img||'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400'}"><div style="flex:1"><b>${m.title}</b><div style="font-size:13px;color:var(--muted)">${m.desc}</div><div style="font-size:12px;margin:6px 0">${m.progress} • ${m.count}</div><div class="progress"><i style="width:${m.pct}%"></i></div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btnSmall" style="background:var(--accent);color:#fff" onclick="openProgres()">Masuk Progres →</button>${currentUser&&currentUser.role==='Admin'?`<button class="btnSmall" style="background:#fef3c7" onclick="editModule(${i})">✏️ Edit</button><button class="btnSmall" style="background:#fee2e2" onclick="delModule(${i})">🗑️</button>`:''}</div></div>`).join('')}
-function openAddModule(){if(!isAdmin())return;document.getElementById('addModuleModal').classList.add('open')}
-function isAdmin(){if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin yang boleh!');return false}return true}
-function saveModule(){let t=document.getElementById('modTitle').value.trim(),d=document.getElementById('modDesc').value.trim(),img=document.getElementById('modImg').value.trim();if(!t){alert('Judul wajib!');return}modules.push({title:t,desc:d||'Modul baru',pct:0,count:'0 Video',progress:'0/0 Selesai',img:img});localStorage.setItem('dz_modules',JSON.stringify(modules));closeModal('addModuleModal');renderModules()}
-function editModule(i){let m=modules[i];let nt=prompt('Edit Judul Modul:',m.title);if(nt===null)return;let np=prompt('Edit Progres (0-100):',m.pct);modules[i].title=nt;if(np!==null)modules[i].pct=parseInt(np)||0;localStorage.setItem('dz_modules',JSON.stringify(modules));renderModules()}
-function delModule(i){if(!confirm('Hapus modul ini?'))return;modules.splice(i,1);localStorage.setItem('dz_modules',JSON.stringify(modules));renderModules()}
-function getLinks(){return JSON.parse(localStorage.getItem('dz_links')||'[]')}
-function openDeegiLink(){let l=document.getElementById('linkList');let links=getLinks();l.innerHTML=links.length?links.map((x,i)=>`<div style="display:flex;gap:8px;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="flex:1"><b>${x.judul}</b><div style="font-size:12px;color:#64748b;word-break:break-all">${x.url}</div></div><button class="btnSmall" style="background:#059669;color:#fff" onclick="window.open('${x.url}','_blank')">Buka →</button>${currentUser.role==='Admin'?`<button class="btnSmall" style="background:#fee2e2" onclick="delLink(${i})">🗑️</button>`:''}</div>`).join(''):'<p style="background:#f1f5f9;padding:12px;border-radius:10px">Belum ada link. Admin bisa tambah.</p>';document.getElementById('linkModal').classList.add('open')}
-function openAddLink(){if(!isAdmin())return;document.getElementById('addLinkModal').classList.add('open')}
-function saveLink(){let j=document.getElementById('linkJudul').value.trim(),u=document.getElementById('linkUrl').value.trim();if(!j||!u){alert('Isi judul & link!');return}if(!u.startsWith('http'))u='https://'+u;let a=getLinks();a.push({judul:j,url:u});localStorage.setItem('dz_links',JSON.stringify(a));closeModal('addLinkModal');alert('✅ Link ditambah!')}
-function delLink(i){if(!confirm('Hapus link?'))return;let a=getLinks();a.splice(i,1);localStorage.setItem('dz_links',JSON.stringify(a));openDeegiLink()}
-function getLib(){return JSON.parse(localStorage.getItem('dz_lib')||'[]')}
-function openLibrary(){let l=document.getElementById('libList');let a=getLib();l.innerHTML=a.length?a.map((x,i)=>`<div style="display:flex;gap:8px;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="flex:1"><b>📚 ${x.judul}</b><div style="font-size:12px;color:#64748b">Oleh: ${x.by} • ${x.url}</div></div><button class="btnSmall" style="background:#059669;color:#fff" onclick="window.open('${x.url}','_blank')">Buka</button><button class="btnSmall" style="background:#fee2e2" onclick="delLib(${i})">🗑️</button></div>`).join(''):'<p style="background:#f1f5f9;padding:12px;border-radius:10px">Library masih kosong. Admin & Member bisa tambah.</p>';document.getElementById('libraryModal').classList.add('open')}
-function saveLibrary(){let j=document.getElementById('libJudul').value.trim(),u=document.getElementById('libUrl').value.trim();if(!j||!u){alert('Isi judul & link!');return}if(!u.startsWith('http'))u='https://'+u;let a=getLib();a.push({judul:j,url:u,by:currentUser.username});localStorage.setItem('dz_lib',JSON.stringify(a));document.getElementById('libJudul').value='';document.getElementById('libUrl').value='';openLibrary()}
-function delLib(i){let a=getLib();if(a[i].by!==currentUser.username&&currentUser.role!=='Admin'){alert('Hanya pemilik / Admin yang boleh hapus!');return}if(!confirm('Hapus?'))return;a.splice(i,1);localStorage.setItem('dz_lib',JSON.stringify(a));openLibrary()}
-function galKey(){return 'dz_gallery_'+currentUser.username}
-function openGallery(){let a=JSON.parse(localStorage.getItem(galKey())||'[]');let g=document.getElementById('galGrid');g.innerHTML=a.length?a.map((x,i)=>`<div style="position:relative"><img src="${x}"><button onclick="delGal(${i})" style="position:absolute;top:4px;right:4px;background:#fee2e2;border-radius:50%;width:24px;height:24px">×</button></div>`).join(''):'<p style="grid-column:1/-1;background:#f1f5f9;padding:12px;border-radius:10px">Belum ada foto. Tambah foto kamu!</p>';document.getElementById('galleryModal').classList.add('open')}
-function saveGallery(){let u=document.getElementById('galUrl').value.trim();let f=document.getElementById('galFile').files[0];let a=JSON.parse(localStorage.getItem(galKey())||'[]');if(f){let r=new FileReader();r.onload=e=>{a.push(e.target.result);localStorage.setItem(galKey(),JSON.stringify(a));openGallery()};r.readAsDataURL(f);return}if(u){a.push(u);localStorage.setItem(galKey(),JSON.stringify(a));document.getElementById('galUrl').value='';openGallery();return}alert('Pilih foto / isi link foto!')}
-function delGal(i){if(!confirm('Hapus foto?'))return;let a=JSON.parse(localStorage.getItem(galKey())||'[]');a.splice(i,1);localStorage.setItem(galKey(),JSON.stringify(a));openGallery()}
-function openProgres(){let list=document.getElementById('progresList');let avg=modules.length?Math.round(modules.reduce((s,m)=>s+m.pct,0)/modules.length):0;document.getElementById('progresText').textContent=`Halo ${currentUser.name}! Total progres kamu ${avg}%.`;list.innerHTML=modules.map((m,i)=>`<div style="background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="display:flex;justify-content:space-between"><b>${m.title}</b><b>${m.pct}%</b></div><div class="progress" style="margin-top:8px"><i style="width:${m.pct}%"></i></div><div style="font-size:12px;color:#64748b">${m.progress}</div></div>`).join('');document.getElementById('progresModal').classList.add('open')}
-function openAddProgres(){if(!isAdmin())return;document.getElementById('addProgresModal').classList.add('open')}
-function saveProgres(){let j=document.getElementById('progJudul').value.trim(),p=parseInt(document.getElementById('progPct').value)||0;if(!j){alert('Isi judul!');return}modules.push({title:j,desc:'Progres baru dari Admin',pct:p,count:'-',progress:p+'% Selesai',img:''});localStorage.setItem('dz_modules',JSON.stringify(modules));closeModal('addProgresModal');renderModules();alert('✅ Progres ditambah!')}
-function lanjutBelajar(){closeModal('progresModal');document.getElementById('modGrid').scrollIntoView({behavior:'smooth'})}
-function catKey(){return 'dz_cat_'+currentUser.username}
-function openCatatan(){let a=JSON.parse(localStorage.getItem(catKey())||'[]');let l=document.getElementById('catList');l.innerHTML=a.length?a.map((x,i)=>`<div style="background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><b>${x.time}</b><div>${x.text}</div><div style="margin-top:8px"><button class="btnSmall" style="background:#fef3c7" onclick="editCat(${i})">✏️ Edit</button> <button class="btnSmall" style="background:#fee2e2" onclick="delCat(${i})">🗑️ Hapus</button></div></div>`).join(''):'<p style="background:#f1f5f9;padding:12px;border-radius:10px">Belum ada catatan.</p>';document.getElementById('catatanModal').classList.add('open')}
-function saveCatatan(){let t=document.getElementById('catText').value.trim();if(!t){alert('Tulis dulu!');return}let a=JSON.parse(localStorage.getItem(catKey())||'[]');a.push({text:t,time:new Date().toLocaleString('id-ID')});localStorage.setItem(catKey(),JSON.stringify(a));document.getElementById('catText').value='';openCatatan()}
-function editCat(i){let a=JSON.parse(localStorage.getItem(catKey())||'[]');let nt=prompt('Edit catatan:',a[i].text);if(nt===null)return;a[i].text=nt;localStorage.setItem(catKey(),JSON.stringify(a));openCatatan()}
-function delCat(i){if(!confirm('Hapus catatan?'))return;let a=JSON.parse(localStorage.getItem(catKey())||'[]');a.splice(i,1);localStorage.setItem(catKey(),JSON.stringify(a));openCatatan()}
-function openMemberList(){
+<script type="module">
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updatePassword} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import {getFirestore, doc, setDoc, getDoc, getDocs, collection, addDoc, deleteDoc, updateDoc, query, where, onSnapshot} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+// ===== GANTI DISINI PAKAI CONFIG KAMU =====
+const firebaseConfig = {
+  apiKey: "AIzaSyDgPPq9qX6CVG04Y7HH3wjFM-HTYboL30",
+  authDomain: "deegitaliz.firebaseapp.com",
+  projectId: "deegitaliz",
+  storageBucket: "deegitaliz.firebasestorage.app",
+  messagingSenderId: "271579480378",
+  appId: "1:271579480378:web:1d60ed2b82a03dfd0a5003",
+  measurementId: "G-00NY0L2LCH"
+};
+// ==========================================
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+let currentUser=null, currentUid=null, modules=[];
+let toEmail=u=>u.toLowerCase().trim()+'@deegiz.id';
+
+window.showReg=()=>{document.getElementById('loginForm').classList.add('hidden');document.getElementById('regForm').classList.remove('hidden')}
+window.showLogin=()=>{document.getElementById('regForm').classList.add('hidden');document.getElementById('loginForm').classList.remove('hidden')}
+window.doRegister=async()=>{
+  let n=document.getElementById('rName').value.trim(), u=document.getElementById('rUser').value.trim().toLowerCase(), p=document.getElementById('rPass').value;
+  if(!n||!u||p.length<6){alert('Lengkapi data! Sandi min 6');return}
+  try{
+    let cred=await createUserWithEmailAndPassword(auth, toEmail(u), p);
+    await setDoc(doc(db,'users',cred.user.uid),{name:n, username:u, role:'Member', approved:false, createdAt:new Date().toLocaleString('id-ID')});
+    await signOut(auth);
+    alert('✅ Pendaftaran terkirim! Tunggu Admin menyetujui.');
+    showLogin();
+  }catch(e){alert('Gagal daftar: '+e.message)}
+};
+window.doLogin=async()=>{
+  let u=document.getElementById('lUser').value.trim().toLowerCase(), p=document.getElementById('lPass').value;
+  try{
+    let cred=await signInWithEmailAndPassword(auth, toEmail(u), p);
+    let snap=await getDoc(doc(db,'users',cred.user.uid));
+    if(!snap.exists()){alert('Data user tidak ditemukan di Firestore!');return}
+    let data=snap.data();
+    if(!data.approved){await signOut(auth); alert('⏳ Akun kamu masih menunggu persetujuan Admin.'); return}
+    currentUser=data; currentUid=cred.user.uid; enterApp();
+  }catch(e){alert('❌ Login gagal: Username / Sandi salah atau belum disetujui.')}
+};
+window.doLogout=async()=>{await signOut(auth); location.reload()};
+function enterApp(){
+  document.getElementById('authPage').classList.add('hidden'); document.getElementById('appPage').classList.remove('hidden');
+  document.getElementById('sideName').textContent=currentUser.name; document.getElementById('sideRole').textContent=currentUser.role;
+  document.getElementById('avatarLetter').textContent=currentUser.name.charAt(0).toUpperCase();
+  document.getElementById('helloUser').textContent='Halo, '+currentUser.name;
+  let isAdmin=currentUser.role==='Admin';
+  document.getElementById('adminBar').style.display=isAdmin?'block':'none';
+  document.getElementById('navApproval').style.display=isAdmin?'flex':'none';
+  listenModules(); listenMembers(); listenPending();
+  let th=localStorage.getItem('dz_theme')||'ungu'; setTheme(th);
+}
+window.setNav=(el)=>{document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active')); el.classList.add('active')}
+window.toggleThemePanel=()=>{let p=document.getElementById('themePanel'); p.style.display=p.style.display==='none'?'block':'none'}
+window.setTheme=(n)=>{let map={ungu:['#eef2ff','#fff','#0f172a','#4f46e5','#7c3aed'],biru:['#eff6ff','#fff','#0f172a','#0ea5e9','#2563eb'],hijau:['#f0fdf4','#fff','#0f172a','#059669','#10b981'],orange:['#fff7ed','#fff','#0f172a','#ea580c','#f97316'],pink:['#fdf2f8','#fff','#0f172a','#db2777','#ec4899'],tosca:['#ecfeff','#fff','#0f172a','#0891b2','#06b6d4']};let t=map[n]||map.ungu;document.documentElement.style.setProperty('--bg',t[0]);document.documentElement.style.setProperty('--card',t[1]);document.documentElement.style.setProperty('--text',t[2]);document.documentElement.style.setProperty('--accent',t[3]);document.documentElement.style.setProperty('--accent2',t[4]);localStorage.setItem('dz_theme',n);let p=document.getElementById('themePanel'); if(p)p.style.display='none'}
+// Modules - Realtime
+function listenModules(){
+  onSnapshot(collection(db,'modules'), (snap)=>{
+    modules=snap.docs.map(d=>({id:d.id, ...d.data()}));
+    if(modules.length===0 && currentUser.role==='Admin'){
+      // Seed awal sekali
+      addDoc(collection(db,'modules'),{title:'MODUL 01 : Fondasi & Mindset Belajar',desc:'Dasar belajar, mindset, dan cara belajar cepat.',pct:100,count:'5 Video • 2 File',progress:'5/5 Selesai',img:'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400'});
+      addDoc(collection(db,'modules'),{title:'MODUL 02 : Niche & Riset Ide',desc:'Riset ide konten & niche yang cuan.',pct:60,count:'4 Video • 1 File',progress:'3/5 Selesai',img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400'});
+    }
+    renderModules();
+  });
+}
+function renderModules(){
+  let g=document.getElementById('modGrid');
+  g.innerHTML=modules.length?modules.map(m=>`<div class="mod"><img src="${m.img||'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400'}"><div style="flex:1"><b>${m.title}</b><div style="font-size:13px;color:var(--muted)">${m.desc}</div><div style="font-size:12px;margin:6px 0">${m.progress} • ${m.count}</div><div class="progress"><i style="width:${m.pct}%"></i></div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btnSmall" style="background:var(--accent);color:#fff" onclick="openProgres()">Masuk Progres →</button>${currentUser.role==='Admin'?`<button class="btnSmall" style="background:#fef3c7" onclick="editModule('${m.id}','${m.title}',${m.pct})">✏️ Edit</button><button class="btnSmall" style="background:#fee2e2" onclick="delModule('${m.id}')">🗑️</button>`:''}</div></div>`).join(''):'<p>Belum ada modul.</p>';
+}
+window.openAddModule=()=>{if(currentUser.role!=='Admin'){alert('Hanya Admin!');return} document.getElementById('addModuleModal').classList.add('open')}
+window.saveModule=async()=>{let t=document.getElementById('modTitle').value.trim(),d=document.getElementById('modDesc').value.trim(),img=document.getElementById('modImg').value.trim(); if(!t){alert('Judul wajib!');return} await addDoc(collection(db,'modules'),{title:t,desc:d||'Modul baru',pct:0,count:'0 Video',progress:'0/0 Selesai',img:img}); closeModal('addModuleModal')}
+window.editModule=async(id,oldTitle,oldPct)=>{let nt=prompt('Edit Judul:',oldTitle); if(nt===null)return; let np=prompt('Edit Progres 0-100:',oldPct); await updateDoc(doc(db,'modules',id),{title:nt, pct:parseInt(np)||0})}
+window.delModule=async(id)=>{if(!confirm('Hapus modul?'))return; await deleteDoc(doc(db,'modules',id))}
+// Links
+window.openDeegiLink=async()=>{let snap=await getDocs(collection(db,'links')); let links=snap.docs.map(d=>({id:d.id,...d.data()})); document.getElementById('linkList').innerHTML=links.length?links.map(x=>`<div style="display:flex;gap:8px;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="flex:1"><b>${x.judul}</b><div style="font-size:12px;color:#64748b;word-break:break-all">${x.url}</div></div><button class="btnSmall" style="background:#059669;color:#fff" onclick="window.open('${x.url}','_blank')">Buka →</button>${currentUser.role==='Admin'?`<button class="btnSmall" style="background:#fee2e2" onclick="delLink('${x.id}')">🗑️</button>`:''}</div>`).join(''):'<p>Belum ada link. Admin bisa tambah.</p>'; document.getElementById('linkModal').classList.add('open')}
+window.openAddLink=()=>{if(currentUser.role!=='Admin'){alert('Hanya Admin!');return} document.getElementById('addLinkModal').classList.add('open')}
+window.saveLink=async()=>{let j=document.getElementById('linkJudul').value.trim(), u=document.getElementById('linkUrl').value.trim(); if(!j||!u){alert('Isi judul & link!');return} if(!u.startsWith('http'))u='https://'+u; await addDoc(collection(db,'links'),{judul:j,url:u}); closeModal('addLinkModal'); alert('✅ Link ditambah!')}
+window.delLink=async(id)=>{if(!confirm('Hapus link?'))return; await deleteDoc(doc(db,'links',id)); openDeegiLink()}
+// Library
+window.openLibrary=async()=>{let snap=await getDocs(collection(db,'library')); let a=snap.docs.map(d=>({id:d.id,...d.data()})); document.getElementById('libList').innerHTML=a.length?a.map(x=>`<div style="display:flex;gap:8px;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="flex:1"><b>📚 ${x.judul}</b><div style="font-size:12px;color:#64748b">Oleh: @${x.by} • ${x.url}</div></div><button class="btnSmall" style="background:#059669;color:#fff" onclick="window.open('${x.url}','_blank')">Buka</button><button class="btnSmall" style="background:#fee2e2" onclick="delLib('${x.id}','${x.by}')">🗑️</button></div>`).join(''):'<p>Library masih kosong.</p>'; document.getElementById('libraryModal').classList.add('open')}
+window.saveLibrary=async()=>{let j=document.getElementById('libJudul').value.trim(), u=document.getElementById('libUrl').value.trim(); if(!j||!u){alert('Isi judul & link!');return} if(!u.startsWith('http'))u='https://'+u; await addDoc(collection(db,'library'),{judul:j,url:u,by:currentUser.username}); document.getElementById('libJudul').value=''; document.getElementById('libUrl').value=''; openLibrary()}
+window.delLib=async(id,by)=>{if(by!==currentUser.username&&currentUser.role!=='Admin'){alert('Hanya pemilik / Admin!');return} if(!confirm('Hapus?'))return; await deleteDoc(doc(db,'library',id)); openLibrary()}
+// Gallery - per user
+window.openGallery=async()=>{let q=query(collection(db,'gallery'), where('owner','==',currentUser.username)); let snap=await getDocs(q); let a=snap.docs.map(d=>({id:d.id,...d.data()})); document.getElementById('galGrid').innerHTML=a.length?a.map(x=>`<div style="position:relative"><img src="${x.url}"><button onclick="delGal('${x.id}')" style="position:absolute;top:4px;right:4px;background:#fee2e2;border-radius:50%;width:24px;height:24px">×</button></div>`).join(''):'<p>Belum ada foto.</p>'; document.getElementById('galleryModal').classList.add('open')}
+window.saveGallery=async()=>{let u=document.getElementById('galUrl').value.trim(); if(!u){alert('Isi link foto!');return} await addDoc(collection(db,'gallery'),{url:u, owner:currentUser.username}); document.getElementById('galUrl').value=''; openGallery()}
+window.delGal=async(id)=>{if(!confirm('Hapus foto?'))return; await deleteDoc(doc(db,'gallery',id)); openGallery()}
+// Progres
+window.openProgres=()=>{let avg=modules.length?Math.round(modules.reduce((s,m)=>s+m.pct,0)/modules.length):0; document.getElementById('progresText').textContent=`Halo ${currentUser.name}! Total progres ${avg}%.`; document.getElementById('progresList').innerHTML=modules.map(m=>`<div style="background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="display:flex;justify-content:space-between"><b>${m.title}</b><b>${m.pct}%</b></div><div class="progress" style="margin-top:8px"><i style="width:${m.pct}%"></i></div><div style="font-size:12px;color:#64748b">${m.progress}</div></div>`).join(''); document.getElementById('progresModal').classList.add('open')}
+window.openAddProgres=()=>{if(currentUser.role!=='Admin'){alert('Hanya Admin!');return} document.getElementById('addProgresModal').classList.add('open')}
+window.saveProgres=async()=>{let j=document.getElementById('progJudul').value.trim(), p=parseInt(document.getElementById('progPct').value)||0; if(!j){alert('Isi judul!');return} await addDoc(collection(db,'modules'),{title:j,desc:'Progres baru dari Admin',pct:p,count:'-',progress:p+'% Selesai',img:''}); closeModal('addProgresModal')}
+window.lanjutBelajar=()=>{closeModal('progresModal'); document.getElementById('modGrid').scrollIntoView({behavior:'smooth'})}
+// Catatan - per user
+window.openCatatan=async()=>{let q=query(collection(db,'catatan'), where('owner','==',currentUser.username)); let snap=await getDocs(q); let a=snap.docs.map(d=>({id:d.id,...d.data()})); document.getElementById('catList').innerHTML=a.length?a.map(x=>`<div style="background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><b>${x.time}</b><div>${x.text}</div><div style="margin-top:8px"><button class="btnSmall" style="background:#fef3c7" onclick="editCat('${x.id}','${x.text}')">✏️ Edit</button> <button class="btnSmall" style="background:#fee2e2" onclick="delCat('${x.id}')">🗑️</button></div></div>`).join(''):'<p>Belum ada catatan.</p>'; document.getElementById('catatanModal').classList.add('open')}
+window.saveCatatan=async()=>{let t=document.getElementById('catText').value.trim(); if(!t){alert('Tulis dulu!');return} await addDoc(collection(db,'catatan'),{text:t, time:new Date().toLocaleString('id-ID'), owner:currentUser.username}); document.getElementById('catText').value=''; openCatatan()}
+window.editCat=async(id,oldText)=>{let nt=prompt('Edit catatan:',oldText); if(nt===null)return; await updateDoc(doc(db,'catatan',id),{text:nt}); openCatatan()}
+window.delCat=async(id)=>{if(!confirm('Hapus catatan?'))return; await deleteDoc(doc(db,'catatan',id)); openCatatan()}
+// Member - Realtime
+function listenMembers(){
+  onSnapshot(collection(db,'users'), (snap)=>{
+    let users=snap.docs.map(d=>d.data()).filter(u=>u.approved);
+    document.getElementById('memberCountHome').textContent=users.length+' Orang Terdaftar';
+    document.getElementById('memberCountSide').textContent=users.length;
+  });
+}
+window.openMemberList=async()=>{
   let isAdmin=currentUser.role==='Admin';
   let cari=document.getElementById('cariMember')?document.getElementById('cariMember').value.toLowerCase():'';
-  let users=getUsers();
+  let snap=await getDocs(collection(db,'users'));
+  let users=snap.docs.map(d=>d.data()).filter(u=>u.approved);
   if(cari) users=users.filter(u=>(u.name+u.username).toLowerCase().includes(cari));
   document.getElementById('memberTitle').textContent=isAdmin?'👥 Daftar Member - Admin':'👥 Daftar Member';
-  document.getElementById('memberCount').textContent='Total Member: '+getUsers().length+' orang • Menampilkan: '+users.length;
+  document.getElementById('memberCount').textContent='Total Member: '+snap.docs.filter(d=>d.data().approved).length+' orang • Menampilkan: '+users.length;
   document.getElementById('memberList').innerHTML=users.map(u=>{
-    if(isAdmin){return `<div style="display:flex;gap:10px;align-items:center;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="width:40px;height:40px;border-radius:50%;background:${u.role==='Admin'?'#dc2626':'#059669'};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800">${u.name.charAt(0).toUpperCase()}</div><div style="flex:1"><b>${u.name} ${u.role==='Admin'?'👑':''}</b><div style="font-size:12px;color:#64748b">@${u.username} • ${u.role}</div></div></div>`;}
-    else{return `<div style="display:flex;gap:10px;align-items:center;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="width:40px;height:40px;border-radius:50%;background:#059669;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800">@</div><div style="flex:1"><b>@${u.username}</b><div style="font-size:12px;color:#64748b">${u.role}</div></div></div>`;}
+    if(isAdmin) return `<div style="display:flex;gap:10px;align-items:center;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="width:40px;height:40px;border-radius:50%;background:${u.role==='Admin'?'#dc2626':'#059669'};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800">${u.name.charAt(0).toUpperCase()}</div><div style="flex:1"><b>${u.name} ${u.role==='Admin'?'👑':''}</b><div style="font-size:12px;color:#64748b">@${u.username} • ${u.role}</div></div></div>`;
+    else return `<div style="display:flex;gap:10px;align-items:center;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="width:40px;height:40px;border-radius:50%;background:#059669;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800">@</div><div style="flex:1"><b>@${u.username}</b><div style="font-size:12px;color:#64748b">${u.role}</div></div></div>`;
   }).join('');
   document.getElementById('memberModal').classList.add('open');
+};
+function listenPending(){
+  onSnapshot(query(collection(db,'users'), where('approved','==',false)), (snap)=>{
+    document.getElementById('pendingBadge').textContent=snap.size;
+  });
 }
-function openApproval(){if(!isAdmin())return;let p=getPending();let l=document.getElementById('approvalList');l.innerHTML=p.length?p.map((u,i)=>`<div style="background:#fef9c3;padding:12px;border-radius:12px;margin-bottom:8px"><b>${u.name} (@${u.username})</b><div style="font-size:12px;color:#64748b">${u.time}</div><div style="margin-top:8px"><button class="btnSmall" style="background:#059669;color:#fff" onclick="approveUser(${i})">✅ Setujui</button> <button class="btnSmall" style="background:#fee2e2" onclick="rejectUser(${i})">❌ Tolak</button></div></div>`).join(''):'<p style="background:#f1f5f9;padding:12px;border-radius:10px">Tidak ada pendaftar baru.</p>';document.getElementById('approvalModal').classList.add('open')}
-function updatePendingBadge(){let b=document.getElementById('pendingBadge');if(b)b.textContent=getPending().length}
-async function approveUser(i){let p=getPending();let u=p.splice(i,1)[0];u.approved=true;let users=getUsers();users.push(u);saveUsers(users);localStorage.setItem('dz_pending',JSON.stringify(p));updatePendingBadge();updateMemberCount();openApproval();alert('✅ '+u.name+' disetujui! Sekarang bisa login.')}
-function rejectUser(i){if(!confirm('Tolak pendaftar ini?'))return;let p=getPending();p.splice(i,1);localStorage.setItem('dz_pending',JSON.stringify(p));updatePendingBadge();openApproval()}
-function openChangePass(){document.getElementById('passModal').classList.add('open')}
-async function changePass(){let o=document.getElementById('oldPass').value,n=document.getElementById('newPass').value;if(n.length<6){alert('Sandi baru min 6 karakter!');return}let hOld=await hashPass(o);if(hOld!==currentUser.passHash){alert('Sandi lama salah!');return}let hNew=await hashPass(n);let users=getUsers();let f=users.find(u=>u.username===currentUser.username);f.passHash=hNew;saveUsers(users);currentUser.passHash=hNew;closeModal('passModal');alert('✅ Sandi berhasil diubah!')}
-function openUangKopi(){document.getElementById('kopiModal').classList.add('open')}
-function closeModal(id){document.getElementById(id).classList.remove('open')}
-window.onload=()=>{let s=JSON.parse(localStorage.getItem('dz_session')||'null');if(s){let u=getUsers().find(x=>x.username===s.username);if(u){currentUser=u;enterApp()}}}
+window.openApproval=async()=>{
+  if(currentUser.role!=='Admin'){alert('Hanya Admin!');return}
+  let q=query(collection(db,'users'), where('approved','==',false));
+  let snap=await getDocs(q);
+  let list=snap.docs.map(d=>({id:d.id, ...d.data()}));
+  document.getElementById('approvalList').innerHTML=list.length?list.map(u=>`<div style="background:#fef9c3;padding:12px;border-radius:12px;margin-bottom:8px"><b>${u.name} (@${u.username})</b><div style="font-size:12px;color:#64748b">${u.createdAt||''}</div><div style="margin-top:8px"><button class="btnSmall" style="background:#059669;color:#fff" onclick="approveUser('${u.id}')">✅ Setujui</button> <button class="btnSmall" style="background:#fee2e2" onclick="rejectUser('${u.id}')">❌ Tolak</button></div></div>`).join(''):'<p>Tidak ada pendaftar baru.</p>';
+  document.getElementById('approvalModal').classList.add('open');
+};
+window.approveUser=async(id)=>{await updateDoc(doc(db,'users',id),{approved:true}); openApproval(); alert('✅ Disetujui!')};
+window.rejectUser=async(id)=>{if(!confirm('Tolak pendaftar ini?'))return; await deleteDoc(doc(db,'users',id)); openApproval()};
+window.openChangePass=()=>{document.getElementById('passModal').classList.add('open')}
+window.changePass=async()=>{let n=document.getElementById('newPass').value; if(n.length<6){alert('Sandi baru min 6!');return} await updatePassword(auth.currentUser, n); closeModal('passModal'); alert('✅ Sandi berhasil diubah!')}
+window.openUangKopi=()=>{document.getElementById('kopiModal').classList.add('open')}
+window.closeModal=(id)=>{document.getElementById(id).classList.remove('open')}
+// Auto-login
+onAuthStateChanged(auth, async(user)=>{
+  document.getElementById('statusFirebase').textContent='● Terhubung ke Firebase ✅';
+  if(user){
+    let snap=await getDoc(doc(db,'users',user.uid));
+    if(snap.exists() && snap.data().approved){ currentUser=snap.data(); currentUid=user.uid; enterApp(); }
+  }
+});
 </script></body></html>
