@@ -113,7 +113,7 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
   </div>
 
   <div id="themePanel" style="display:none;background:#fff;border:1px solid #dcfce7;padding:14px;border-radius:14px;margin-bottom:16px">
-    <b>Pilih Tema Warna (Hanya Admin):</b>
+    <b>Pilih Tema Warna (Bebas untuk Member & Admin):</b>
     <div class="themeRow" style="margin-top:10px">
       <button style="background:#059669" onclick="setTheme('green')"></button>
       <button style="background:#2563eb" onclick="setTheme('blue')"></button>
@@ -286,7 +286,7 @@ function rejectUser(i){
 }
 // ===== TEMA & MODUL =====
 function toggleThemePanel(){
-  if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin yang boleh ganti tema.');return}
+  // Sekarang Member & Admin sama-sama boleh ganti tema
   const p=document.getElementById('themePanel'); p.style.display=p.style.display==='none'?'block':'none';
 }
 function setTheme(name){
