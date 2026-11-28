@@ -211,10 +211,10 @@ function showPage(id,btn){
 }
 function toggleAdmin(){
   // Untuk demo, langsung aktif. Kalau mau pakai login, ganti dengan cek password
-  let pass=prompt('Masukkan password admin (coba: admin123) untuk aktifkan Mode Admin:');
+  let pass=prompt('Hanya Untuk Admin');
   if(pass!=='admin123'){alert('Password salah!');return;}
   isAdmin=!isAdmin;
-  document.getElementById('modeLabel').innerText='Admin: '+(isAdmin?'ON':'OFF');
+  document.getElementById('modeLabel')?.innerText='Admin: '+(isAdmin?'ON':'OFF');
   document.getElementById('adminBar').classList.toggle('hidden',!isAdmin);
   renderModulList();
   if(isAdmin) alert('Mode Admin AKTIF! Sekarang tombol Edit / Hapus muncul di setiap modul.');
