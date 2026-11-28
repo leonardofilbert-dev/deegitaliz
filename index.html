@@ -3,14 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZETTBOS Member Hub</title>
+<title>DeegiZ Member Hub</title>
 <style>
 :root{--bg:#f0fdf4;--card:#ffffff;--text:#0f172a;--muted:#64748b;--accent:#059669;--accent2:#10b981;--sidebar:#ffffff;--border:#dcfce7}
 *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,sans-serif}
 body{background:var(--bg);color:var(--text);display:flex;min-height:100vh}
 button{cursor:pointer;border:0}
 a{color:inherit;text-decoration:none}
-/* LOGIN */
 #loginPage{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:16px;z-index:100}
 .loginCard{background:var(--card);width:100%;max-width:400px;padding:28px;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.08);border:1px solid var(--border)}
 .loginCard h1{font-size:24px}.loginCard p{color:var(--muted);margin:6px 0 18px;font-size:14px}
@@ -21,7 +20,6 @@ a{color:inherit;text-decoration:none}
 .btnGhost{width:100%;margin-top:8px;padding:11px;background:#f1f5f9;border-radius:12px;font-weight:600}
 .hint{margin-top:14px;background:#fef9c3;padding:10px;border-radius:10px;font-size:12px;line-height:1.5}
 .err{margin-top:10px;background:#fee2e2;color:#991b1b;padding:10px;border-radius:10px;font-size:13px;display:none}
-/* SIDEBAR */
 aside{width:260px;background:var(--sidebar);border-right:1px solid var(--border);padding:18px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh;flex-shrink:0}
 .logo{font-weight:900;font-size:20px;letter-spacing:-.5px}.logo span{color:var(--accent);font-size:11px;display:block;letter-spacing:2px}
 .btnKontribusi{margin:14px 0;background:var(--accent);color:#fff;padding:12px;border-radius:12px;font-weight:700}
@@ -31,7 +29,6 @@ aside{width:260px;background:var(--sidebar);border-right:1px solid var(--border)
 .adminOnly{display:none}.isAdmin .adminOnly{display:flex}
 .profile{margin-top:auto;display:flex;gap:10px;align-items:center;padding-top:14px;border-top:1px solid var(--border)}
 .avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800}
-/* MAIN */
 main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
 .topbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap}
 .searchBox{flex:1;max-width:520px;display:flex;background:var(--card);border:1px solid var(--border);border-radius:999px;padding:10px 14px;gap:8px;align-items:center}
@@ -58,10 +55,9 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
 </head>
 <body id="appBody">
 
-<!-- LOGIN -->
 <div id="loginPage">
   <div class="loginCard">
-    <div style="font-weight:900;font-size:26px">ZETTBOS <span style="color:#059669;font-size:11px;letter-spacing:2px">MEMBER HUB</span></div>
+    <div style="font-weight:900;font-size:26px">DeegiZ <span style="color:#059669;font-size:11px;letter-spacing:2px">MEMBER HUB</span></div>
     <p>Silakan masuk untuk lanjut ke materi.</p>
     <label>Username</label><input id="u" placeholder="contoh: admin / leonardo" autocomplete="username">
     <label>Kata Sandi</label><input id="p" type="password" placeholder="••••••••" autocomplete="current-password">
@@ -72,18 +68,17 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
   </div>
 </div>
 
-<!-- SIDEBAR -->
 <aside>
-  <div class="logo">ZETTBOS<span>MEMBER HUB</span></div>
+  <div class="logo">DeegiZ<span>MEMBER HUB</span></div>
   <button class="btnKontribusi" onclick="alert('Fitur Kontribusi segera hadir!')">✦ Kontribusi</button>
   <div class="navTitle">NAVIGASI UTAMA</div>
   <a class="navItem active" href="#" onclick="setNav(this)">🏠 Home</a>
   <a class="navItem" href="#" onclick="setNav(this);showSection('modul')">🎓 Modul Pembelajaran</a>
   <a class="navItem" href="#" onclick="setNav(this)">🔖 Catatan & Simpan</a>
   <div class="navTitle">EKOSISTEM & PROGRES</div>
-  <a class="navItem" href="#" onclick="setNav(this)">🔗 ZettLink</a>
-  <a class="navItem" href="#" onclick="setNav(this)">🧩 Zettbos Library</a>
-  <a class="navItem" href="#" onclick="setNav(this)">🖼️ ZettGallery</a>
+  <a class="navItem" href="#" onclick="setNav(this)">🔗 DeegiLink</a>
+  <a class="navItem" href="#" onclick="setNav(this)">🧩 DeegiZ Library</a>
+  <a class="navItem" href="#" onclick="setNav(this)">🖼️ DeegiGallery</a>
   <a class="navItem" href="#" onclick="setNav(this)">📈 Progres Belajar</a>
   <a class="navItem" href="#" onclick="setNav(this)">⭐ Testimoni</a>
   <div class="profile">
@@ -93,10 +88,9 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
   </div>
 </aside>
 
-<!-- MAIN -->
 <main>
   <div class="topbar">
-    <div><div style="font-size:12px;color:#64748b">ZETTBOS MEMBER HUB</div><b>Home</b></div>
+    <div><div style="font-size:12px;color:#64748b">DEEGIZ MEMBER HUB</div><b>Home</b></div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <div class="searchBox">🔍 <input id="searchInput" placeholder="Cari materi video, modul, catatan..." oninput="filterModul(this.value)"></div>
       <button class="chip" onclick="toggleThemePanel()">🎨 Tema</button>
@@ -104,7 +98,6 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
     </div>
   </div>
 
-  <!-- ADMIN BAR - HANYA ADMIN -->
   <div class="adminBar" id="adminBar">
     <span style="font-weight:800">🛡️ Mode Admin AKTIF -</span>
     <button onclick="openAddModal()">+ Tambah Modul</button>
@@ -133,10 +126,10 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
 
   <div class="quickGrid">
     <div class="qCard"><span>🎓</span><div><b>Modul Belajar</b><small>Video Kurikulum</small></div></div>
-    <div class="qCard"><span>🧩</span><div><b>Zettbos Library</b><small>176 Komponen UI</small></div></div>
+    <div class="qCard"><span>🧩</span><div><b>DeegiZ Library</b><small>176 Komponen UI</small></div></div>
     <div class="qCard"><span>📝</span><div><b>Catatan Saya</b><small>Catatan & Link</small></div></div>
-    <div class="qCard"><span>🔗</span><div><b>ZettLink</b><small>Resource & File</small></div></div>
-    <div class="qCard"><span>🖼️</span><div><b>ZettGallery</b><small>Karya Member</small></div></div>
+    <div class="qCard"><span>🔗</span><div><b>DeegiLink</b><small>Resource & File</small></div></div>
+    <div class="qCard"><span>🖼️</span><div><b>DeegiGallery</b><small>Karya Member</small></div></div>
     <div class="qCard"><span>📈</span><div><b>Progres Belajar</b><small>Roadmap & Streak</small></div></div>
     <div class="qCard"><span>⭐</span><div><b>Testimoni</b><small>Cerita Member</small></div></div>
     <div class="qCard"><span>💬</span><div><b>Kontak Admin</b><small>Chat WhatsApp</small></div></div>
@@ -146,10 +139,8 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
   <div class="modGrid" id="modGrid"></div>
 </main>
 
-<!-- MOBILE NAV -->
 <div class="mobileNav"><a href="#">🏠<br>Home</a><a href="#">🎓<br>Modul</a><a href="#">🔖<br>Catatan</a><a href="#" onclick="doLogout()">↪<br>Keluar</a></div>
 
-<!-- MODAL TAMBAH / EDIT -->
 <div class="modal" id="addModal"><div class="modalBox">
   <h3 id="modalTitle">Tambah Modul Baru</h3>
   <input id="mTitle" placeholder="Judul Modul, contoh: MEMBUAT WEB APP DENGAN AI">
@@ -161,19 +152,15 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
 </div></div>
 
 <script>
-// ===== KEAMANAN: PASSWORD DISIMPAN SEBAGAI HASH, BUKAN TEKS POLOS =====
 async function sha256(str){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
-// Hash dari: Deegitaliz2026! dan member123 - dihitung saat login, tidak ditampilkan di halaman
 const USERS=[
  {user:'admin',passHash:'f1f1f9ac5659fe704ac11061e2a6cc5d81fa0c1ecbfbbf8caf549a71136efeef',role:'Admin',name:'Leonardo'},
  {user:'leonardo',passHash:'5600376e863d2f57a053518f324ad3840b0bc2348b573af281a7b7cbe7a228c6',role:'Member',name:'Leonardo'}
 ];
-// Kita simpan hash-nya di localStorage saat pertama kali, agar tidak terlihat di kode
-async function initUsers(){}
 let currentUser=null;
-let modules=JSON.parse(localStorage.getItem('zettbos_modules')||'null') || [
+let modules=JSON.parse(localStorage.getItem('deegiz_modules')||'null') || [
  {title:'ANTIGRAVITY IDE: MEMBUAT WEB APP DENGAN GOOGLE APPS SCRIPT',desc:'Ini adalah modul utama yang wajib diselesaikan. Kalian bisa menonton modul berikut sambil praktek agar tidak terjadi kesalahan selama proses pengerjaan Web App.',count:'10 Materi',progress:'10/10 Selesai (100%)',pct:100,tag:'MODUL 01'},
- {title:'GEMINI WEB: MEMBUAT WEB APP DENGAN GOOGLE APP SCRIPT',desc:'Pelajari materi fundamental web app AI terstruktur bersama mentor Zettbos.',count:'5 Materi',progress:'3/5 Selesai (60%)',pct:60,tag:'MODUL 02'}
+ {title:'GEMINI WEB: MEMBUAT WEB APP DENGAN GOOGLE APP SCRIPT',desc:'Pelajari materi fundamental web app AI terstruktur bersama mentor DeegiZ.',count:'5 Materi',progress:'3/5 Selesai (60%)',pct:60,tag:'MODUL 02'}
 ];
 function renderModules(filter=''){
   const grid=document.getElementById('modGrid'); grid.innerHTML='';
@@ -187,7 +174,6 @@ function filterModul(v){renderModules(v)}
 function setNav(el){document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));el.classList.add('active')}
 function showSection(s){document.getElementById('modGrid').scrollIntoView({behavior:'smooth'})}
 async function doLogin(){
-  await initUsers();
   const u=document.getElementById('u').value.trim().toLowerCase();
   const p=document.getElementById('p').value;
   const found=USERS.find(x=>x.user===u);
@@ -196,7 +182,7 @@ async function doLogin(){
   const h=await sha256(p);
   if(h!==found.passHash){err.style.display='block';return}
   currentUser={user:found.user,role:found.role,name:found.name};
-  localStorage.setItem('zettbos_session',JSON.stringify(currentUser));
+  localStorage.setItem('deegiz_session',JSON.stringify(currentUser));
   applySession();
 }
 function applySession(){
@@ -210,7 +196,7 @@ function applySession(){
   const hour=new Date().getHours(); document.getElementById('greetWord').textContent=hour<11?'Pagi':hour<15?'Siang':hour<18?'Sore':'Malam';
   renderModules();
 }
-function doLogout(){localStorage.removeItem('zettbos_session');location.reload()}
+function doLogout(){localStorage.removeItem('deegiz_session');location.reload()}
 function fillMember(){document.getElementById('u').value='leonardo';document.getElementById('p').value='member123'}
 function toggleThemePanel(){
   if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin yang boleh ganti tema.');return}
@@ -218,7 +204,7 @@ function toggleThemePanel(){
 }
 function setTheme(name){
   const themes={green:['#059669','#10b981','#f0fdf4','#dcfce7'],blue:['#2563eb','#3b82f6','#eff6ff','#dbeafe'],purple:['#7c3aed','#a78bfa','#faf5ff','#ede9fe'],orange:['#ea580c','#fb923c','#fff7ed','#ffedd5'],pink:['#db2777','#f472b6','#fdf2f8','#fce7f3'],teal:['#0f766e','#14b8a6','#f0fdfa','#ccfbf1']};
-  const t=themes[name]; document.documentElement.style.setProperty('--accent',t[0]); document.documentElement.style.setProperty('--accent2',t[1]); document.documentElement.style.setProperty('--bg',t[2]); document.documentElement.style.setProperty('--border',t[3]); localStorage.setItem('zettbos_theme',name);
+  const t=themes[name]; document.documentElement.style.setProperty('--accent',t[0]); document.documentElement.style.setProperty('--accent2',t[1]); document.documentElement.style.setProperty('--bg',t[2]); document.documentElement.style.setProperty('--border',t[3]); localStorage.setItem('deegiz_theme',name);
 }
 function openAddModal(edit=false){
   if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin yang boleh menambah / edit!');return}
@@ -228,22 +214,19 @@ function openAddModal(edit=false){
 }
 function closeAddModal(){document.getElementById('addModal').classList.remove('open')}
 function editModul(i){openAddModal(true);document.getElementById('mTitle').value=modules[i].title;document.getElementById('mDesc').value=modules[i].desc;document.getElementById('mCount').value=modules[i].count;document.getElementById('editIndex').value=i}
-function delModul(i){if(!confirm('Hapus modul ini?'))return;modules.splice(i,1);localStorage.setItem('zettbos_modules',JSON.stringify(modules));renderModules()}
+function delModul(i){if(!confirm('Hapus modul ini?'))return;modules.splice(i,1);localStorage.setItem('deegiz_modules',JSON.stringify(modules));renderModules()}
 function saveModul(){
   const t=document.getElementById('mTitle').value.trim(); if(!t){alert('Judul wajib diisi');return}
   const obj={title:t,desc:document.getElementById('mDesc').value||'Deskripsi belum diisi.',count:document.getElementById('mCount').value||'0 Materi',progress:document.getElementById('mProgress').value||'0% ',pct:0,tag:'MODUL BARU'};
   const ei=document.getElementById('editIndex').value;
   if(ei!==''&&ei!==undefined&&modules[ei]) modules[ei]={...modules[ei],...obj}; else modules.push(obj);
-  document.getElementById('editIndex').value=''; localStorage.setItem('zettbos_modules',JSON.stringify(modules)); closeAddModal(); renderModules();
+  document.getElementById('editIndex').value=''; localStorage.setItem('deegiz_modules',JSON.stringify(modules)); closeAddModal(); renderModules();
 }
-function resetData(){if(!confirm('Reset semua data ke awal?'))return;localStorage.removeItem('zettbos_modules');location.reload()}
-// hidden field for edit
+function resetData(){if(!confirm('Reset semua data ke awal?'))return;localStorage.removeItem('deegiz_modules');location.reload()}
 const hid=document.createElement('input'); hid.type='hidden'; hid.id='editIndex'; document.body.appendChild(hid);
-// restore session + theme
 (function(){
-  const s=localStorage.getItem('zettbos_session'); if(s){currentUser=JSON.parse(s);applySession()}
-  const th=localStorage.getItem('zettbos_theme'); if(th) setTheme(th);
-  // Enter to login
+  const s=localStorage.getItem('deegiz_session'); if(s){currentUser=JSON.parse(s);applySession()}
+  const th=localStorage.getItem('deegiz_theme'); if(th) setTheme(th);
   document.getElementById('p').addEventListener('keydown',e=>{if(e.key==='Enter') doLogin()});
   renderModules();
 })();
