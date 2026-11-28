@@ -82,10 +82,10 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
   <a class="navItem" href="#" onclick="setNav(this);showSection('modul')">Modul Pembelajaran</a>
   <a class="navItem" href="#" onclick="setNav(this)">Catatan & Simpan</a>
   <div class="navTitle">PROGRES BELAJAR</div>
-  <a class="navItem" href="#" onclick="setNav(this)">🔗 DeegiZLink</a>
+  <a class="navItem" href="#" onclick="setNav(this);openDeegiLink()">🔗 DeegiZLink</a>
   <a class="navItem" href="#" onclick="setNav(this)">🧩 DeegiZ Library</a>
   <a class="navItem" href="#" onclick="setNav(this)">🖼️ Gallery Anda</a>
-  <a class="navItem" href="#" onclick="setNav(this)">📈 Progres Belajar</a>
+  <a class="navItem" href="#" onclick="setNav(this);openProgres()">📈 Progres Belajar</a>
   <a class="navItem" href="#" onclick="setNav(this)">Testimoni</a>
   <div class="profile">
     <div class="avatar" id="avatarLetter">L</div>
@@ -130,9 +130,9 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
     <div class="qCard"><span>🎓</span><div><b>Modul Belajar</b><small>Video Kurikulum</small></div></div>
     <div class="qCard"><span>🧩</span><div><b>DeegiZ Library</b><small>176 Komponen UI</small></div></div>
     <div class="qCard"><span>📝</span><div><b>Catatan Saya</b><small>Catatan & Link</small></div></div>
-    <div class="qCard"><span>🔗</span><div><b>DeegiLink</b><small>Resource & File</small></div></div>
+    <div class="qCard" onclick="openDeegiLink()" style="cursor:pointer"><span>🔗</span><div><b>DeegiLink</b><small>Resource & File</small></div></div>
     <div class="qCard"><span>🖼️</span><div><b>DeegiGallery</b><small>Karya Member</small></div></div>
-    <div class="qCard"><span>📈</span><div><b>Progres Belajar</b><small>Roadmap & Streak</small></div></div>
+    <div class="qCard" onclick="openProgres()" style="cursor:pointer"><span>📈</span><div><b>Progres Belajar</b><small>Roadmap & Streak</small></div></div>
     <div class="qCard"><span>⭐</span><div><b>Testimoni</b><small>Cerita Member</small></div></div>
     <div class="qCard"><span>💬</span><div><b>Kontak Admin</b><small>Chat WhatsApp</small></div></div>
   </div>
