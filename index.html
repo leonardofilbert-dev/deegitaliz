@@ -106,7 +106,7 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
 
   <div class="adminBar" id="adminBar">
     <span style="font-weight:800">🛡️ Mode Admin AKTIF -</span>
-    <button onclick="openAddModal()">+ Tambah Modul</button>
+    <button onclick="openAddModal()">+ Tambah Modul</button><button onclick="openAddLink()" style="background:#0ea5e9">+ Tambah DeegiZLink</button>
     <button onclick="openApproveModal()" style="background:#f59e0b" id="btnPending">🔔 Pendaftar Baru (<span id="pendingCount">0</span>)</button>
     <button onclick="toggleThemePanel()" style="background:#7c3aed">🎨 Ganti Tema</button>
     <button onclick="resetData()" style="background:#ef4444">Reset</button>
@@ -174,7 +174,30 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
   <button class="btnMain" onclick="saveModul()">Simpan Modul</button>
   <button class="btnGhost" onclick="closeAddModal()">Batal</button>
 </div></div>
+<!-- MODAL DEEGIZLINK -->
+<div class="modal" id="linkModal"><div class="modalBox">
+  <h3>🔗 DeegiZLink</h3><p style="font-size:13px;color:#64748b">Semua link penting dari Admin. Klik untuk buka.</p>
+  <div id="linkList" style="margin-top:12px"></div>
+  <button class="btnGhost" onclick="closeModal('linkModal')">Tutup</button>
+</div></div>
 
+<!-- MODAL TAMBAH LINK (ADMIN) -->
+<div class="modal" id="addLinkModal"><div class="modalBox">
+  <h3>+ Tambah DeegiZLink Baru</h3>
+  <input id="linkJudul" placeholder="Judul Link, contoh: Materi PDF EP1">
+  <input id="linkUrl" placeholder="Link-nya, contoh: https://drive.google.com/...">
+  <button class="btnMain" onclick="saveLink()">Simpan Link</button>
+  <button class="btnGhost" onclick="closeModal('addLinkModal')">Batal</button>
+</div></div>
+
+<!-- MODAL PROGRES BELAJAR -->
+<div class="modal" id="progresModal"><div class="modalBox" style="max-width:520px">
+  <h3>📈 Progres Belajar Kamu</h3>
+  <p style="font-size:13px;color:#64748b" id="progresText">Kamu sudah menyelesaikan...</p>
+  <div id="progresList" style="margin-top:12px"></div>
+  <button class="btnMain" onclick="lanjutBelajar()">▶ Lanjutkan Belajar →</button>
+  <button class="btnGhost" onclick="closeModal('progresModal')">Tutup</button>
+</div></div>
 <script>
 async function sha256(str){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
 const USERS=[
@@ -228,6 +251,63 @@ function applySession(){
   document.getElementById('appBody').classList.toggle('isAdmin',currentUser.role==='Admin');
   const hour=new Date().getHours(); document.getElementById('greetWord').textContent=hour<11?'Pagi':hour<15?'Siang':hour<18?'Sore':'Malam';
   updatePendingCount(); renderModules();
+}
+  // ===== DEEGIZLINK =====
+function getLinks(){ return JSON.parse(localStorage.getItem('deegiz_links')||'[]') }
+function openDeegiLink(){
+  const list=document.getElementById('linkList'); const links=getLinks();
+  if(links.length===0){
+    list.innerHTML='<p style="padding:12px;background:#f1f5f9;border-radius:10px">Belum ada link. Minta Admin tambahkan link ya!</p>';
+  } else {
+    list.innerHTML=links.map((l,i)=>`
+      <div style="display:flex;gap:8px;align-items:center;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px">
+        <div style="flex:1"><b>${l.judul}</b><div style="font-size:12px;color:#64748b;word-break:break-all">${l.url}</div></div>
+        <button onclick="window.open('${l.url}','_blank')" style="padding:8px 12px;background:#059669;color:#fff;border-radius:8px;font-weight:700">Buka →</button>
+        ${currentUser&&currentUser.role==='Admin'?`<button onclick="delLink(${i})" style="padding:8px;background:#fee2e2;border-radius:8px">🗑️</button>`:''}
+      </div>`).join('');
+  }
+  document.getElementById('linkModal').classList.add('open');
+}
+function openAddLink(){
+  if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin!');return}
+  document.getElementById('addLinkModal').classList.add('open');
+}
+function saveLink(){
+  const j=document.getElementById('linkJudul').value.trim();
+  let u=document.getElementById('linkUrl').value.trim();
+  if(!j||!u){alert('Judul & Link wajib diisi!');return}
+  if(!u.startsWith('http')) u='https://'+u;
+  const links=getLinks(); links.push({judul:j,url:u});
+  localStorage.setItem('deegiz_links',JSON.stringify(links));
+  document.getElementById('linkJudul').value=''; document.getElementById('linkUrl').value='';
+  closeModal('addLinkModal'); alert('✅ Link berhasil ditambah! Member sekarang bisa buka.');
+}
+function delLink(i){
+  if(!confirm('Hapus link ini?'))return;
+  const links=getLinks(); links.splice(i,1);
+  localStorage.setItem('deegiz_links',JSON.stringify(links)); openDeegiLink();
+}
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+
+// ===== PROGRES BELAJAR =====
+function openProgres(){
+  const list=document.getElementById('progresList');
+  let total=0, done=0;
+  modules.forEach(m=>{ total+=100; done+=m.pct; });
+  const persen = modules.length ? Math.round(done/modules.length) : 0;
+  document.getElementById('progresText').textContent = `Halo ${currentUser?currentUser.name:''}! Total progres kamu ${persen}%. Terus lanjutin ya!`;
+  list.innerHTML = modules.map(m=>`
+    <div style="background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between"><b>${m.title}</b><b>${m.pct}%</b></div>
+      <div class="progress" style="margin-top:8px"><i style="width:${m.pct}%"></i></div>
+      <div style="font-size:12px;color:#64748b;margin-top:4px">${m.progress} • ${m.count}</div>
+    </div>`).join('');
+  document.getElementById('progresModal').classList.add('open');
+}
+function lanjutBelajar(){
+  closeModal('progresModal');
+  document.getElementById('modGrid').scrollIntoView({behavior:'smooth'});
+  alert('Lanjut belajar! Scroll ke bawah, pilih modul yang belum 100% ya!');
 }
 function doLogout(){localStorage.removeItem('deegiz_session');location.reload()}
 function fillMember(){document.getElementById('u').value='leonardo';document.getElementById('p').value='member123'}
