@@ -1,461 +1,150 @@
 <!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DeegiZ Member Hub</title>
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DeegiZ - Belajar Bareng</title>
 <style>
-:root{--bg:#f0fdf4;--card:#ffffff;--text:#0f172a;--muted:#64748b;--accent:#059669;--accent2:#10b981;--sidebar:#ffffff;--border:#dcfce7}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,sans-serif}
-body{background:var(--bg);color:var(--text);display:flex;min-height:100vh}
-button{cursor:pointer;border:0}a{color:inherit;text-decoration:none}
-#loginPage{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:16px;z-index:100;overflow-y:auto}
-.loginCard{background:var(--card);width:100%;max-width:400px;padding:28px;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.08);border:1px solid var(--border);margin:auto}
-.loginCard p{color:var(--muted);margin:6px 0 18px;font-size:14px}
-.loginCard label{font-size:13px;font-weight:600;display:block;margin:12px 0 6px}
-.loginCard input{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:12px;font-size:15px;outline:none}
-.loginCard input:focus{border-color:var(--accent)}
-.btnMain{width:100%;margin-top:18px;padding:13px;background:var(--accent);color:#fff;border-radius:12px;font-weight:700;font-size:15px}
-.btnGhost{width:100%;margin-top:8px;padding:11px;background:#f1f5f9;border-radius:12px;font-weight:600}
-.hint{margin-top:14px;background:#fef9c3;padding:10px;border-radius:10px;font-size:12px;line-height:1.5}
-.err{margin-top:10px;background:#fee2e2;color:#991b1b;padding:10px;border-radius:10px;font-size:13px;display:none}
-.success{background:#dcfce7;color:#065f46;padding:10px;border-radius:10px;font-size:13px;display:none;margin-top:10px}
-.linkDaftar{text-align:center;margin-top:14px;font-size:14px}.linkDaftar b{color:var(--accent);cursor:pointer}
-aside{width:260px;background:var(--sidebar);border-right:1px solid var(--border);padding:18px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh;flex-shrink:0}
-.logo{font-weight:900;font-size:20px}.logo span{color:var(--accent);font-size:11px;display:block;letter-spacing:2px}
-.btnKontribusi{margin:14px 0;background:var(--accent);color:#fff;padding:12px;border-radius:12px;font-weight:700}
-.navTitle{font-size:11px;letter-spacing:1.5px;color:var(--muted);margin:14px 0 8px;font-weight:700}
-.navItem{padding:11px 12px;border-radius:10px;display:flex;gap:10px;align-items:center;font-size:14px;font-weight:500}
-.navItem.active{background:var(--accent);color:#fff}
-.profile{margin-top:auto;display:flex;gap:10px;align-items:center;padding-top:14px;border-top:1px solid var(--border)}
-.avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800}
-main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
-.topbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap}
-.searchBox{flex:1;max-width:520px;display:flex;background:var(--card);border:1px solid var(--border);border-radius:999px;padding:10px 14px;gap:8px;align-items:center}
-.searchBox input{border:0;outline:none;width:100%;background:transparent;font-size:14px}
-.chip{padding:8px 12px;border-radius:999px;background:var(--card);border:1px solid var(--border);font-size:13px;font-weight:600}
-.hero{text-align:center;margin:18px 0 20px}.hero h2{font-size:32px}.hero p{color:var(--muted);margin-top:8px}
-.quickGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
-.qCard{background:var(--card);border:1px solid var(--border);padding:14px;border-radius:16px;display:flex;gap:10px;align-items:center}
-.qCard b{font-size:14px;display:block}.qCard small{color:var(--muted)}
-.modGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.modCard{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px}
-.modCard h3{font-size:18px;line-height:1.3;margin:12px 0 8px}.modCard p{color:var(--muted);font-size:13px;line-height:1.6}
-.badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800}
-.badgeY{background:#facc15}.badgeP{background:#c084fc;color:#fff}.badgeT{background:#e0f2fe;color:#0369a1}
-.progress{height:8px;background:#f1f5f9;border-radius:999px;overflow:hidden;margin-top:12px}.progress i{display:block;height:100%;background:var(--accent)}
-.adminBar{background:#fffbeb;border:1px solid #fde68a;padding:12px;border-radius:14px;display:none;gap:8px;flex-wrap:wrap;margin-bottom:16px}.isAdmin .adminBar{display:flex}
-.adminBar button{padding:10px 14px;border-radius:10px;font-weight:700;background:var(--accent);color:#fff}
-.themeRow{display:flex;gap:8px;flex-wrap:wrap}.themeRow button{width:36px;height:36px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #ddd}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;padding:16px;z-index:200;overflow-y:auto}.modal.open{display:flex}
-.modalBox{background:#fff;width:100%;max-width:480px;padding:20px;border-radius:18px;margin:auto}.modalBox input,.modalBox textarea{width:100%;padding:11px;border:1px solid #e2e8f0;border-radius:10px;margin:6px 0}
-.pendaftarCard{background:#fff;border:1px solid #fde68a;border-radius:14px;padding:14px;margin-bottom:10px}
-@media(max-width:820px){aside{display:none}body{flex-direction:column}.quickGrid{grid-template-columns:1fr 1fr}.modGrid{grid-template-columns:1fr}.hero h2{font-size:26px}.mobileNav{display:flex!important}}
-.mobileNav{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e2e8f0;padding:10px;gap:6px;z-index:90}.mobileNav a{flex:1;text-align:center;font-size:12px;padding:8px;background:#f8fafc;border-radius:10px}
-</style>
-</head>
-<body id="appBody">
+:root{--bg:#eef2ff;--card:#ffffff;--text:#0f172a;--muted:#64748b;--accent:#4f46e5;--accent2:#7c3aed;--border:#e2e8f0;--radius:16px}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
+a{color:var(--accent)}button{cursor:pointer;border:none;font-family:inherit}
+.top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20}
+.logo{display:flex;gap:10px;align-items:center;font-weight:800;font-size:20px}.logo i{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal}
+.layout{display:flex;max-width:1200px;margin:0 auto;gap:16px;padding:16px}
+.sidebar{width:260px;flex-shrink:0;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:14px;height:fit-content;position:sticky;top:70px}
+.main{flex:1;min-width:0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+.navItem{display:flex;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;font-weight:600;font-size:14px}.navItem.active,.navItem:hover{background:var(--bg)}
+.btnMain{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:11px 16px;border-radius:12px;font-weight:700;width:100%}
+.btnGhost{background:var(--bg);padding:10px 14px;border-radius:12px;font-weight:700;width:100%;margin-top:8px}
+.btnSmall{padding:7px 10px;border-radius:10px;font-weight:700;font-size:13px}
+input,select,textarea{width:100%;padding:11px 12px;border:1px solid var(--border);border-radius:12px;margin:6px 0;background:#fff;color:#111}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.qCard{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px;cursor:pointer}
+.qCard b{display:block}.qCard small{color:var(--muted)}
+.mod{display:flex;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:12px}
+.mod img{width:110px;height:80px;object-fit:cover;border-radius:12px;background:#ddd}
+.progress{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.badge{font-size:11px;padding:3px 8px;border-radius:99px;background:#e0e7ff;color:var(--accent);font-weight:700}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-end;justify-content:center;z-index:99}.modal.open{display:flex}.modalBox{background:#fff;width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:18px}
+.loginWrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}.loginCard{width:100%;max-width:420px}
+.chip{font-size:12px;padding:4px 8px;border-radius:99px;background:var(--bg);font-weight:700}
+.themeBtn{padding:9px 12px;border-radius:99px;color:#fff;font-weight:700}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.gallery img{width:100%;height:90px;object-fit:cover;border-radius:10px}
+@media(max-width:820px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.grid,.grid3{grid-template-columns:1fr 1fr}.mod img{width:80px;height:64px}.gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.grid,.grid3{grid-template-columns:1fr}}
+.hidden{display:none!important}
+</style></head>
+<body>
+<div id="authPage" class="loginWrap"><div class="loginCard card">
+<div style="text-align:center"><div style="font-size:44px">🎓</div><h2 style="margin:6px 0">DeegiZ</h2><p style="color:var(--muted);font-size:14px">Belajar Bareng • Aman & Terpercaya</p></div>
+<div id="loginForm"><input id="lUser" placeholder="Username"><input id="lPass" type="password" placeholder="Kata Sandi"><button class="btnMain" onclick="doLogin()">Masuk →</button><button class="btnGhost" onclick="showReg()">Belum Punya Akun? Daftar Sekarang</button><div style="background:#fef9c3;padding:10px;border-radius:12px;font-size:13px;margin-top:12px">Akun Demo:<br><b>Admin:</b> admin / admin123<br><b>Member:</b> leonardo / member123<br><i>Akun baru harus disetujui Admin.</i></div></div>
+<div id="regForm" class="hidden"><input id="rName" placeholder="Nama Lengkap"><input id="rUser" placeholder="Username (tanpa spasi)"><input id="rPass" type="password" placeholder="Buat Kata Sandi (min 6 karakter)"><button class="btnMain" onclick="doRegister()">Daftar & Minta Persetujuan Admin</button><button class="btnGhost" onclick="showLogin()">Sudah Punya Akun? Masuk</button></div>
+</div></div>
 
-<!-- LOGIN -->
-<div id="loginPage">
-  <div class="loginCard">
-    <div style="font-weight:900;font-size:26px">DeegiZ <span style="color:#059669;font-size:11px;letter-spacing:2px">MEMBER HUB</span></div>
-    <p>Login khusus member. Silakan masuk untuk lanjut.</p>
-    <label>Username</label><input id="u" placeholder="Username kamu" autocomplete="username">
-    <label>Kata Sandi</label><input id="p" type="password" placeholder="••••••••" autocomplete="current-password">
-    <div id="errBox" class="err">Username atau kata sandi salah.</div>
-    <div id="pendingBox" class="hint" style="display:none;background:#fef3c7">⏳ Akun kamu masih <b>Menunggu Persetujuan Admin</b>. Silakan hubungi Admin via WhatsApp untuk dipercepat.</div>
-    <div id="successBox" class="success">✅ Pendaftaran berhasil! Silakan tunggu persetujuan Admin, baru bisa login.</div>
-    <button class="btnMain" onclick="doLogin()">Masuk →</button>
-    <div class="linkDaftar">Belum punya akun? <b onclick="openRegister()">Daftar Sekarang</b></div>
-    <button class="btnGhost" onclick="fillMember()">Coba sebagai Member (Demo)</button>
-    <div class="hint">🔒 Halaman ini hanya untuk member DeegiZ. Jangan bagikan akunmu ke orang lain.</div>
-  </div>
+<div id="appPage" class="hidden">
+<div class="top"><div class="logo"><i>D</i> DeegiZ</div><div style="display:flex;gap:8px;align-items:center"><span id="helloUser" class="chip">Halo</span><button class="btnSmall" onclick="openChangePass()" style="background:#fef3c7">🔑 Ganti Sandi</button><button class="btnSmall" onclick="doLogout()" style="background:#fee2e2">Keluar</button></div></div>
+<div class="layout">
+<aside class="sidebar">
+<div style="text-align:center"><div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto" id="avatarLetter">D</div><b id="sideName">User</b><div style="font-size:12px;color:var(--muted)" id="sideRole">Member</div><div style="display:flex;gap:6px;justify-content:center;margin-top:8px"><span class="chip" id="streakChip">🔥 Streak 7 Hari</span><span class="chip">⭐ 80 XP</span></div></div>
+<div style="margin-top:14px"><b style="font-size:12px;color:var(--muted)">MENU UTAMA</b>
+<div class="navItem active" onclick="setNav(this,'home')">🏠 Home</div>
+<div class="navItem" onclick="setNav(this,'home');openDeegiLink()">🔗 DeegiZLink</div>
+<div class="navItem" onclick="setNav(this,'home');openLibrary()">📚 DeegiZ Library</div>
+<div class="navItem" onclick="setNav(this,'home');openGallery()">🖼️ Gallery Anda</div>
+<div class="navItem" onclick="setNav(this,'home');openProgres()">📈 Progres Belajar</div>
+<div class="navItem" onclick="setNav(this,'home');openCatatan()">📝 Catatan Saya</div>
+<div class="navItem" id="navMemberAdmin" onclick="setNav(this,'home');openMemberList()">👥 Lihat Member</div>
+<div class="navItem" onclick="setNav(this,'home');openApproval()">✅ Persetujuan Pendaftar <span class="badge" id="pendingBadge">0</span></div>
 </div>
-
-<!-- SIDEBAR -->
-<aside>
-  <div class="logo">DeegiZ<span>MEMBER HUB</span></div>
-  <button class="btnKontribusi" onclick="alert('Fitur Kontribusi segera hadir!')">Uang Kopi</button>
-  <div class="navTitle">UTAMA</div>
-  <a class="navItem active" href="#" onclick="setNav(this)">🏠 Home</a>
-  <a class="navItem" href="#" onclick="setNav(this);showSection('modul')">Modul Pembelajaran</a>
-  <a class="navItem" href="#" onclick="setNav(this)">Catatan & Simpan</a>
-  <div class="navTitle">PROGRES BELAJAR</div>
-  <a class="navItem" href="#" onclick="setNav(this);openDeegiLink()">🔗 DeegiZLink</a>
-  <a class="navItem" href="#" onclick="setNav(this)">🧩 DeegiZ Library</a>
-  <a class="navItem" href="#" onclick="setNav(this)">🖼️ Gallery Anda</a>
-  <a class="navItem" href="#" onclick="setNav(this);openProgres()">📈 Progres Belajar</a>
-  <a class="navItem" href="#" onclick="setNav(this)">Testimoni</a>
-  <div class="profile">
-    <div class="avatar" id="avatarLetter">L</div>
-    <div style="flex:1"><b id="profileName">Leonardo</b><div style="font-size:12px;color:#64748b" id="profileRole">Member</div></div>
-    <button onclick="doLogout()">↪</button>
-  </div>
+<div style="margin-top:14px"><b style="font-size:12px;color:var(--muted)">TEMA - BEBAS DIUBAH ADMIN & MEMBER</b>
+<button class="btnGhost" onclick="toggleThemePanel()">🎨 Ganti Tema</button>
+<div id="themePanel" style="display:none;margin-top:10px;display:none"><div style="display:flex;gap:6px;flex-wrap:wrap">
+<button class="themeBtn" style="background:#4f46e5" onclick="setTheme('ungu')">Ungu</button>
+<button class="themeBtn" style="background:#0ea5e9" onclick="setTheme('biru')">Biru</button>
+<button class="themeBtn" style="background:#059669" onclick="setTheme('hijau')">Hijau</button>
+<button class="themeBtn" style="background:#ea580c" onclick="setTheme('orange')">Orange</button>
+<button class="themeBtn" style="background:#db2777" onclick="setTheme('pink')">Pink</button>
+<button class="themeBtn" style="background:#0891b2" onclick="setTheme('tosca')">Tosca</button>
+</div><small style="color:var(--muted)">Warna senada, bebas pilih. Tersimpan per HP/Laptop.</small></div></div>
+<div style="margin-top:14px"><button class="btnMain" onclick="openUangKopi()">☕ Uang Kopi</button></div>
 </aside>
 
-<main>
-  <div class="topbar">
-    <div><div style="font-size:12px;color:#64748b">DEEGIZ MEMBER HUB</div><b>Home</b></div>
-    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-      <div class="searchBox">🔍 <input placeholder="Cari materi..." oninput="filterModul(this.value)"></div>
-      <button class="chip" onclick="toggleThemePanel()">🎨 Tema</button>
-      <button class="chip" onclick="doLogout()">Keluar ↪</button>
-    </div>
-  </div>
+<main class="main">
+<div class="card" style="background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none"><h2 style="margin:0">Selamat Datang Kembali 👋</h2><p style="opacity:.9;font-size:14px">Lanjutkan belajar kamu hari ini. Konsisten 15 menit setiap hari!</p><button onclick="openProgres()" style="background:#fff;color:#111;padding:10px 16px;border-radius:99px;font-weight:800">▶ Lanjutkan Belajar</button> <button onclick="openDeegiLink()" style="background:rgba(255,255,255,.2);color:#fff;padding:10px 16px;border-radius:99px;font-weight:700">🔗 DeegiZLink</button></div>
+<div class="grid3" style="margin:14px 0"><div class="qCard" onclick="openDeegiLink()"><span>🔗</span><div><b>DeegiZLink</b><small>Resource & File</small></div></div><div class="qCard" onclick="openLibrary()"><span>📚</span><div><b>Library</b><small>Buku & Materi</small></div></div><div class="qCard" onclick="openGallery()"><span>🖼️</span><div><b>Gallery Anda</b><small>Foto Kamu</small></div></div><div class="qCard" onclick="openProgres()"><span>📈</span><div><b>Progres Belajar</b><small>Roadmap & Streak</small></div></div><div class="qCard" onclick="openCatatan()"><span>📝</span><div><b>Catatan</b><small>Simpan & Edit</small></div></div><div class="qCard" onclick="openMemberList()"><span>👥</span><div><b>Member</b><small>Admin Only</small></div></div></div>
 
-  <div class="adminBar" id="adminBar">
-    <span style="font-weight:800">🛡️ Mode Admin AKTIF -</span>
-    <button onclick="openAddModal()">+ Tambah Modul</button><button onclick="openAddLink()" style="background:#0ea5e9">+ Tambah DeegiZLink</button><button onclick="openMemberList()" style="background:#7c3aed">👥 Lihat Member</button>
-    <button onclick="openApproveModal()" style="background:#f59e0b" id="btnPending">🔔 Pendaftar Baru (<span id="pendingCount">0</span>)</button>
-    <button onclick="toggleThemePanel()" style="background:#7c3aed">🎨 Ganti Tema</button>
-    <button onclick="resetData()" style="background:#ef4444">Reset</button>
-  </div>
+<div id="adminBar" class="card" style="margin-bottom:14px"><b>🛠️ Panel Admin - Hanya Admin Bisa Edit & Tambah</b><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btnSmall" style="background:var(--accent);color:#fff" onclick="openAddModule()">+ Tambah Modul</button><button class="btnSmall" style="background:#0ea5e9;color:#fff" onclick="openAddLink()">+ Tambah DeegiZLink</button><button class="btnSmall" style="background:#059669;color:#fff" onclick="openAddProgres()">+ Tambah Progres</button><button class="btnSmall" style="background:#7c3aed;color:#fff" onclick="openMemberList()">👥 Lihat Member</button></div></div>
 
-  <div id="themePanel" style="display:none;background:#fff;border:1px solid #dcfce7;padding:14px;border-radius:14px;margin-bottom:16px">
-    <b>Pilih Tema Warna (Bebas untuk Member & Admin):</b>
-    <div class="themeRow" style="margin-top:10px">
-      <button style="background:#059669" onclick="setTheme('green')"></button>
-      <button style="background:#2563eb" onclick="setTheme('blue')"></button>
-      <button style="background:#7c3aed" onclick="setTheme('purple')"></button>
-      <button style="background:#ea580c" onclick="setTheme('orange')"></button>
-      <button style="background:#db2777" onclick="setTheme('pink')"></button>
-      <button style="background:#0f766e" onclick="setTheme('teal')"></button>
-    </div>
-  </div>
+<div style="display:flex;justify-content:space-between;align-items:center"><h3>Modul Rekomendasi Utama <span class="badge">MULAI DARI SINI</span></h3></div><div id="modGrid"></div>
+<div class="card"><b>🔥 Tantangan 7 Hari</b><p style="font-size:13px;color:var(--muted)">Selesaikan 1 modul setiap hari selama 7 hari berturut-turut!</p><div class="progress"><i style="width:45%"></i></div><p style="font-size:13px">3 dari 7 hari • Lanjutkan!</p></div>
+</main></div></div>
 
-  <div class="hero"><h2>Selamat <span id="greetWord">Pagi</span>, <span id="heroName">Leonardo</span>!</h2><p>Mau belajar atau praktik membuat web app AI apa hari ini?</p></div>
+<!-- MODALS -->
+<div class="modal" id="linkModal"><div class="modalBox"><h3>🔗 DeegiZLink</h3><div id="linkList"></div><div id="adminLinkBtn"></div><button class="btnGhost" onclick="closeModal('linkModal')">Tutup</button></div></div>
+<div class="modal" id="addLinkModal"><div class="modalBox"><h3>+ Tambah DeegiZLink (Admin)</h3><input id="linkJudul" placeholder="Judul Link"><input id="linkUrl" placeholder="https://..."><button class="btnMain" onclick="saveLink()">Simpan Link</button><button class="btnGhost" onclick="closeModal('addLinkModal')">Batal</button></div></div>
+<div class="modal" id="libraryModal"><div class="modalBox"><h3>📚 DeegiZ Library</h3><div id="libList"></div><input id="libJudul" placeholder="Judul Buku / Materi"><input id="libUrl" placeholder="Link Drive / PDF"><button class="btnMain" onclick="saveLibrary()">+ Tambah ke Library (Admin & Member)</button><button class="btnGhost" onclick="closeModal('libraryModal')">Tutup</button></div></div>
+<div class="modal" id="galleryModal"><div class="modalBox"><h3>🖼️ Gallery Anda</h3><p style="font-size:13px;color:var(--muted)">Gallery ini per akun. Foto kamu tidak tercampur dengan member lain.</p><div class="gallery" id="galGrid"></div><input id="galUrl" placeholder="Link foto (https://...) atau upload di bawah"><input type="file" id="galFile" accept="image/*"><button class="btnMain" onclick="saveGallery()">+ Tambah Foto</button><button class="btnGhost" onclick="closeModal('galleryModal')">Tutup</button></div></div>
+<div class="modal" id="progresModal"><div class="modalBox"><h3>📈 Progres Belajar</h3><p id="progresText" style="font-size:13px;color:var(--muted)"></p><div id="progresList"></div><button class="btnMain" onclick="lanjutBelajar()">▶ Lanjutkan Belajar</button><button class="btnGhost" onclick="closeModal('progresModal')">Tutup</button></div></div>
+<div class="modal" id="addProgresModal"><div class="modalBox"><h3>+ Tambah / Edit Progres (Admin)</h3><input id="progJudul" placeholder="Judul Progres, misal: EP4 Deploy"><input id="progPct" type="number" placeholder="Persen 0-100"><button class="btnMain" onclick="saveProgres()">Simpan Progres</button><button class="btnGhost" onclick="closeModal('addProgresModal')">Batal</button></div></div>
+<div class="modal" id="addModuleModal"><div class="modalBox"><h3>+ Tambah Modul (Admin)</h3><input id="modTitle" placeholder="Judul Modul"><input id="modDesc" placeholder="Deskripsi Modul"><input id="modImg" placeholder="Link Gambar (opsional)"><button class="btnMain" onclick="saveModule()">Simpan Modul</button><button class="btnGhost" onclick="closeModal('addModuleModal')">Batal</button></div></div>
+<div class="modal" id="catatanModal"><div class="modalBox"><h3>📝 Catatan Saya</h3><p style="font-size:13px;color:var(--muted)">Catatan ini pribadi per akun. Hanya kamu & Admin yang bisa lihat.</p><div id="catList"></div><textarea id="catText" placeholder="Tulis catatan baru..."></textarea><button class="btnMain" onclick="saveCatatan()">💾 Simpan Catatan</button><button class="btnGhost" onclick="closeModal('catatanModal')">Tutup</button></div></div>
+<div class="modal" id="memberModal"><div class="modalBox"><h3>👥 Daftar Member - Admin Only</h3><p id="memberCount"></p><input id="cariMember" placeholder="Cari username..." oninput="openMemberList()"><div id="memberList"></div><button class="btnGhost" onclick="closeModal('memberModal')">Tutup</button></div></div>
+<div class="modal" id="approvalModal"><div class="modalBox"><h3>✅ Persetujuan Pendaftar</h3><div id="approvalList"></div><button class="btnGhost" onclick="closeModal('approvalModal')">Tutup</button></div></div>
+<div class="modal" id="passModal"><div class="modalBox"><h3>🔑 Ganti Kata Sandi Sendiri</h3><input id="oldPass" type="password" placeholder="Sandi Lama"><input id="newPass" type="password" placeholder="Sandi Baru (min 6)"><button class="btnMain" onclick="changePass()">Simpan Sandi Baru</button><button class="btnGhost" onclick="closeModal('passModal')">Batal</button></div></div>
+<div class="modal" id="kopiModal"><div class="modalBox" style="text-align:center"><div style="font-size:32px">☕</div><h3>Uang Kopi Buat DeegiZ</h3><p style="font-size:13px;color:var(--muted)">Scan QR pakai GoPay / OVO / DANA / m-Banking</p><img src="qris-deegiz.jpg" style="width:100%;max-width:260px;border-radius:14px" onerror="this.style.display='none'"><p style="font-size:12px;color:var(--muted)">Upload file <b>qris-deegiz.jpg</b> ke GitHub untuk menampilkan QRIS kamu.</p><button class="btnMain" onclick="window.open('https://wa.me/6281234567890?text=Halo%20Admin%2C%20saya%20sudah%20transfer%20Uang%20Kopi','_blank')">Kirim Bukti ke WhatsApp →</button><button class="btnGhost" onclick="closeModal('kopiModal')">Tutup</button></div></div>
 
-  <div class="quickGrid">
-    <div class="qCard"><span>🎓</span><div><b>Modul Belajar</b><small>Video Kurikulum</small></div></div>
-    <div class="qCard"><span>🧩</span><div><b>DeegiZ Library</b><small>176 Komponen UI</small></div></div>
-    <div class="qCard"><span>📝</span><div><b>Catatan Saya</b><small>Catatan & Link</small></div></div>
-    <div class="qCard" onclick="openDeegiLink()" style="cursor:pointer"><span>🔗</span><div><b>DeegiLink</b><small>Resource & File</small></div></div>
-    <div class="qCard"><span>🖼️</span><div><b>DeegiGallery</b><small>Karya Member</small></div></div>
-    <div class="qCard" onclick="openProgres()" style="cursor:pointer"><span>📈</span><div><b>Progres Belajar</b><small>Roadmap & Streak</small></div></div>
-    <div class="qCard"><span>⭐</span><div><b>Testimoni</b><small>Cerita Member</small></div></div>
-    <div class="qCard"><span>💬</span><div><b>Kontak Admin</b><small>Chat WhatsApp</small></div></div>
-  </div>
-  <div style="display:flex;justify-content:space-between;align-items:center;margin:18px 0 12px"><h3>Modul Rekomendasi Utama <span class="badge" style="background:#059669;color:#fff">MULAI DARI SINI</span></h3>
-  <div class="modGrid" id="modGrid"></div>
-</main>
-
-<div class="mobileNav"><a href="#">🏠<br>Home</a><a href="#">🎓<br>Modul</a><a href="#">🔖<br>Catatan</a><a href="#" onclick="doLogout()">↪<br>Keluar</a></div>
-
-<!-- MODAL DAFTAR -->
-<div class="modal" id="regModal"><div class="modalBox">
-  <h3>Daftar Akun Member Baru</h3><p style="font-size:13px;color:#64748b">Lengkapi data di bawah. Setelah daftar, tunggu Admin setujui dulu ya.</p>
-  <label style="font-size:13px;font-weight:600">Nama Lengkap *</label><input id="rNama" placeholder="Nama lengkap sesuai KTP">
-  <label style="font-size:13px;font-weight:600">Alamat *</label><input id="rAlamat" placeholder="Kota / Alamat lengkap">
-  <label style="font-size:13px;font-weight:600">Nomor WA *</label><input id="rWa" placeholder="Contoh: 0812xxxxxxx" inputmode="numeric">
-  <label style="font-size:13px;font-weight:600">Username *</label><input id="rUser" placeholder="Username untuk login, tanpa spasi">
-  <label style="font-size:13px;font-weight:600">Password *</label><input id="rPass" type="password" placeholder="Minimal 6 karakter">
-  <label style="font-size:13px;font-weight:600">Ulangi Password *</label><input id="rPass2" type="password" placeholder="Ketik ulang password">
-  <div id="regErr" class="err"></div>
-  <button class="btnMain" onclick="doRegister()">Daftar Sekarang →</button>
-  <button class="btnGhost" onclick="closeRegister()">Sudah Punya Akun? Login</button>
-</div></div>
-
-<!-- MODAL APPROVE ADMIN -->
-<div class="modal" id="approveModal"><div class="modalBox" style="max-width:560px">
-  <h3>🔔 Pendaftar Menunggu Persetujuan</h3><p style="font-size:13px;color:#64748b">Cek datanya, lalu Setujui / Tolak. Yang disetujui langsung bisa login.</p>
-  <div id="approveList" style="margin-top:12px"></div>
-  <button class="btnGhost" onclick="closeApprove()">Tutup</button>
-</div></div>
-
-<!-- MODAL TAMBAH MODUL -->
-<div class="modal" id="addModal"><div class="modalBox">
-  <h3 id="modalTitle">Tambah Modul Baru</h3>
-  <input id="mTitle" placeholder="Judul Modul">
-  <textarea id="mDesc" rows="3" placeholder="Deskripsi modul..."></textarea>
-  <input id="mCount" placeholder="Jumlah Materi, contoh: 10 Materi">
-  <input id="mProgress" placeholder="Progress, contoh: 0%">
-  <button class="btnMain" onclick="saveModul()">Simpan Modul</button>
-  <button class="btnGhost" onclick="closeAddModal()">Batal</button>
-</div></div>
-<!-- MODAL DEEGIZLINK -->
-<div class="modal" id="linkModal"><div class="modalBox">
-  <h3>🔗 DeegiZLink</h3><p style="font-size:13px;color:#64748b">Semua link penting dari Admin. Klik untuk buka.</p>
-  <div id="linkList" style="margin-top:12px"></div>
-  <button class="btnGhost" onclick="closeModal('linkModal')">Tutup</button>
-</div></div>
-
-<!-- MODAL TAMBAH LINK (ADMIN) -->
-<div class="modal" id="addLinkModal"><div class="modalBox">
-  <h3>+ Tambah DeegiZLink Baru</h3>
-  <input id="linkJudul" placeholder="Judul Link, contoh: Materi PDF EP1">
-  <input id="linkUrl" placeholder="Link-nya, contoh: https://drive.google.com/...">
-  <button class="btnMain" onclick="saveLink()">Simpan Link</button>
-  <button class="btnGhost" onclick="closeModal('addLinkModal')">Batal</button>
-</div></div>
-
-<!-- MODAL PROGRES BELAJAR -->
-<div class="modal" id="progresModal"><div class="modalBox" style="max-width:520px">
-  <h3>📈 Progres Belajar Kamu</h3>
-  <p style="font-size:13px;color:#64748b" id="progresText">Kamu sudah menyelesaikan...</p>
-  <div id="progresList" style="margin-top:12px"></div>
-  <button class="btnMain" onclick="lanjutBelajar()">▶ Lanjutkan Belajar →</button>
-  <button class="btnGhost" onclick="closeModal('progresModal')">Tutup</button>
-</div></div>
-  <!-- MODAL LIHAT MEMBER -->
-<div class="modal" id="memberModal"><div class="modalBox" style="max-width:520px">
-  <h3>👥 Daftar Member DeegiZ</h3>
-  <p style="font-size:13px;color:#64748b" id="memberCount">Total 0 Member</p>
-  <input id="cariMember" placeholder="🔍 Cari nama / email member..." oninput="openMemberList()" style="margin-top:10px">
-  <div id="memberList" style="margin-top:12px"></div>
-  <button class="btnGhost" onclick="closeModal('memberModal')">Tutup</button>
-</div></div>
 <script>
-async function sha256(str){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
-const USERS=[
- {user:'admin',passHash:'f1f1f9ac5659fe704ac11061e2a6cc5d81fa0c1ecbfbbf8caf549a71136efeef',role:'Admin',name:'Leonardo'},
- {user:'leonardo',passHash:'5600376e863d2f57a053518f324ad3840b0bc2348b573af281a7b7cbe7a228c6',role:'Member',name:'Leonardo'}
-];
 let currentUser=null;
-let modules=JSON.parse(localStorage.getItem('deegiz_modules')||'null') || [
- {title:'ANTIGRAVITY IDE: MEMBUAT WEB APP DENGAN GOOGLE APPS SCRIPT',desc:'Ini adalah modul utama yang wajib diselesaikan.',count:'10 Materi',progress:'10/10 Selesai (100%)',pct:100,tag:'MODUL 01'},
- {title:'GEMINI WEB: MEMBUAT WEB APP DENGAN GOOGLE APP SCRIPT',desc:'Pelajari materi fundamental web app AI terstruktur bersama mentor DeegiZ.',count:'5 Materi',progress:'3/5 Selesai (60%)',pct:60,tag:'MODUL 02'}
-];
-function getPending(){return JSON.parse(localStorage.getItem('deegiz_pending')||'[]')}
-function getCustomUsers(){return JSON.parse(localStorage.getItem('deegiz_custom_users')||'[]')}
-function updatePendingCount(){document.getElementById('pendingCount').textContent=getPending().length}
-function renderModules(filter=''){
-  const grid=document.getElementById('modGrid'); grid.innerHTML='';
-  modules.filter(m=>m.title.toLowerCase().includes(filter.toLowerCase())).forEach((m,i)=>{
-    const div=document.createElement('div'); div.className='modCard';
-    div.innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="badge badgeY">★ REKOMENDASI</span><span class="badge badgeP">${m.tag}</span><span class="badge" style="background:#dcfce7;color:#065f46">${m.progress}</span></div><h3>${m.title}</h3><p>${m.desc}</p><div style="display:flex;justify-content:space-between;font-size:13px;margin-top:12px"><span>Daftar Materi</span><b>${m.count}</b></div><div class="progress"><i style="width:${m.pct}%"></i></div>${currentUser&&currentUser.role==='Admin'?`<div style="display:flex;gap:8px;margin-top:12px"><button onclick="editModul(${i})" style="padding:8px 12px;border-radius:8px;background:#f1f5f9;font-weight:700">✏️ Edit</button><button onclick="delModul(${i})" style="padding:8px 12px;border-radius:8px;background:#fee2e2;font-weight:700">🗑️ Hapus</button></div>`:''}`;
-    grid.appendChild(div);
-  });
-}
-function filterModul(v){renderModules(v)}
+let modules=JSON.parse(localStorage.getItem('dz_modules')||'[{"title":"MODUL 01 : Fondasi & Mindset Belajar","desc":"Dasar belajar, mindset, dan cara belajar cepat.","pct":100,"count":"5 Video • 2 File","progress":"5/5 Selesai","img":"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400"},{"title":"MODUL 02 : Niche & Riset Ide","desc":"Riset ide konten & niche yang cuan.","pct":60,"count":"4 Video • 1 File","progress":"3/5 Selesai","img":"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400"}]');
+async function hashPass(p){const e=new TextEncoder().encode(p);const b=await crypto.subtle.digest('SHA-256',e);return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+function getUsers(){return JSON.parse(localStorage.getItem('dz_users')||'[]')}
+function saveUsers(u){localStorage.setItem('dz_users',JSON.stringify(u))}
+function getPending(){return JSON.parse(localStorage.getItem('dz_pending')||'[]')}
+async function seed(){let u=getUsers();if(u.length===0){u=[{name:'DeegiZ Admin',username:'admin',passHash:await hashPass('admin123'),role:'Admin',approved:true},{name:'Leonardo',username:'leonardo',passHash:await hashPass('member123'),role:'Member',approved:true}];saveUsers(u)}}
+seed();
+function showReg(){document.getElementById('loginForm').classList.add('hidden');document.getElementById('regForm').classList.remove('hidden')}
+function showLogin(){document.getElementById('regForm').classList.add('hidden');document.getElementById('loginForm').classList.remove('hidden')}
+async function doRegister(){let n=document.getElementById('rName').value.trim(),u=document.getElementById('rUser').value.trim().toLowerCase(),p=document.getElementById('rPass').value;if(!n||!u||p.length<6){alert('Lengkapi data! Sandi min 6 karakter.');return}let users=getUsers();if(users.find(x=>x.username===u)||getPending().find(x=>x.username===u)){alert('Username sudah dipakai!');return}let pend=getPending();pend.push({name:n,username:u,passHash:await hashPass(p),role:'Member',approved:false,time:new Date().toLocaleString('id-ID')});localStorage.setItem('dz_pending',JSON.stringify(pend));alert('✅ Pendaftaran terkirim! Tunggu Admin menyetujui. Setelah disetujui kamu baru bisa login.');showLogin()}
+async function doLogin(){let u=document.getElementById('lUser').value.trim().toLowerCase(),p=document.getElementById('lPass').value;let users=getUsers();let h=await hashPass(p);let f=users.find(x=>x.username===u&&x.passHash===h);if(!f){let pen=getPending().find(x=>x.username===u);if(pen){alert(pen.passHash===h?'⏳ Akun kamu masih menunggu persetujuan Admin.':'❌ Username / Sandi salah.');}else alert('❌ Username / Sandi salah.');return}if(!f.approved){alert('⏳ Akun belum disetujui Admin.');return}currentUser=f;localStorage.setItem('dz_session',JSON.stringify({username:f.username}));enterApp()}
+function enterApp(){document.getElementById('authPage').classList.add('hidden');document.getElementById('appPage').classList.remove('hidden');document.getElementById('sideName').textContent=currentUser.name;document.getElementById('sideRole').textContent=currentUser.role;document.getElementById('avatarLetter').textContent=currentUser.name.charAt(0).toUpperCase();document.getElementById('helloUser').textContent='Halo, '+currentUser.name;let isAdmin=currentUser.role==='Admin';document.getElementById('adminBar').style.display=isAdmin?'block':'none';document.getElementById('navMemberAdmin').style.display=isAdmin?'flex':'none';document.getElementById('approvalModal');renderModules();updatePendingBadge();let th=localStorage.getItem('dz_theme_'+currentUser.username)||localStorage.getItem('dz_theme')||'ungu';setTheme(th)}
+function doLogout(){localStorage.removeItem('dz_session');location.reload()}
 function setNav(el){document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));el.classList.add('active')}
-function showSection(s){document.getElementById('modGrid').scrollIntoView({behavior:'smooth'})}
-async function doLogin(){
-  const u=document.getElementById('u').value.trim().toLowerCase();
-  const p=document.getElementById('p').value;
-  const err=document.getElementById('errBox'); const pendBox=document.getElementById('pendingBox');
-  err.style.display='none'; pendBox.style.display='none';
-  // 1. Cek apakah masih pending?
-  const pend=getPending().find(x=>x.user===u);
-  if(pend){pendBox.style.display='block';return}
-  // 2. Cek user bawaan + user yang sudah disetujui
-  const allUsers=[...USERS,...getCustomUsers()];
-  const found=allUsers.find(x=>x.user===u);
-  if(!found){err.style.display='block';return}
-  const h=await sha256(p);
-  if(h!==found.passHash){err.style.display='block';return}
-  currentUser={user:found.user,role:found.role,name:found.name};
-  localStorage.setItem('deegiz_session',JSON.stringify(currentUser));
-  applySession();
-}
-function applySession(){
-  if(!currentUser) return;
-  document.getElementById('loginPage').style.display='none';
-  document.getElementById('heroName').textContent=currentUser.name;
-  document.getElementById('profileName').textContent=currentUser.name;
-  document.getElementById('profileRole').textContent=currentUser.role;
-  document.getElementById('avatarLetter').textContent=currentUser.name[0];
-  document.getElementById('appBody').classList.toggle('isAdmin',currentUser.role==='Admin');
-  const hour=new Date().getHours(); document.getElementById('greetWord').textContent=hour<11?'Pagi':hour<15?'Siang':hour<18?'Sore':'Malam';
-  updatePendingCount(); renderModules();
-}
-  // ===== DEEGIZLINK =====
-function getLinks(){ return JSON.parse(localStorage.getItem('deegiz_links')||'[]') }
-function openDeegiLink(){
-  const list=document.getElementById('linkList'); const links=getLinks();
-  if(links.length===0){
-    list.innerHTML='<p style="padding:12px;background:#f1f5f9;border-radius:10px">Belum ada link. Minta Admin tambahkan link ya!</p>';
-  } else {
-    list.innerHTML=links.map((l,i)=>`
-      <div style="display:flex;gap:8px;align-items:center;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px">
-        <div style="flex:1"><b>${l.judul}</b><div style="font-size:12px;color:#64748b;word-break:break-all">${l.url}</div></div>
-        <button onclick="window.open('${l.url}','_blank')" style="padding:8px 12px;background:#059669;color:#fff;border-radius:8px;font-weight:700">Buka →</button>
-        ${currentUser&&currentUser.role==='Admin'?`<button onclick="delLink(${i})" style="padding:8px;background:#fee2e2;border-radius:8px">🗑️</button>`:''}
-      </div>`).join('');
-  }
-  document.getElementById('linkModal').classList.add('open');
-}
-function openAddLink(){
-  if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin!');return}
-  document.getElementById('addLinkModal').classList.add('open');
-}
-function saveLink(){
-  const j=document.getElementById('linkJudul').value.trim();
-  let u=document.getElementById('linkUrl').value.trim();
-  if(!j||!u){alert('Judul & Link wajib diisi!');return}
-  if(!u.startsWith('http')) u='https://'+u;
-  const links=getLinks(); links.push({judul:j,url:u});
-  localStorage.setItem('deegiz_links',JSON.stringify(links));
-  document.getElementById('linkJudul').value=''; document.getElementById('linkUrl').value='';
-  closeModal('addLinkModal'); alert('✅ Link berhasil ditambah! Member sekarang bisa buka.');
-}
-function delLink(i){
-  if(!confirm('Hapus link ini?'))return;
-  const links=getLinks(); links.splice(i,1);
-  localStorage.setItem('deegiz_links',JSON.stringify(links)); openDeegiLink();
-}
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
-
-// ===== PROGRES BELAJAR =====
-function openProgres(){
-  const list=document.getElementById('progresList');
-  let total=0, done=0;
-  modules.forEach(m=>{ total+=100; done+=m.pct; });
-  const persen = modules.length ? Math.round(done/modules.length) : 0;
-  document.getElementById('progresText').textContent = `Halo ${currentUser?currentUser.name:''}! Total progres kamu ${persen}%. Terus lanjutin ya!`;
-  list.innerHTML = modules.map(m=>`
-    <div style="background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px">
-      <div style="display:flex;justify-content:space-between"><b>${m.title}</b><b>${m.pct}%</b></div>
-      <div class="progress" style="margin-top:8px"><i style="width:${m.pct}%"></i></div>
-      <div style="font-size:12px;color:#64748b;margin-top:4px">${m.progress} • ${m.count}</div>
-    </div>`).join('');
-  document.getElementById('progresModal').classList.add('open');
-}
-function lanjutBelajar(){
-  closeModal('progresModal');
-  document.getElementById('modGrid').scrollIntoView({behavior:'smooth'});
-  alert('Lanjut belajar! Scroll ke bawah, pilih modul yang belum 100% ya!');
-}
-  // ===== LIHAT MEMBER =====
-function getAllMembers(){
-  // Ambil dari pendaftar baru + akun bawaan
-  let daftar = JSON.parse(localStorage.getItem('deegiz_users')||'[]');
-  // Tambah akun bawaan biar gak kosong
-  let bawaan = [
-    {name:'DeegiZ (Admin)', email:'admin@deegiz.id', role:'Admin'},
-    {name:'Leonardo', email:'leonardo', role:'Member'},
-    {name:'Budi', email:'budi', role:'Member'}
-  ];
-  // Gabung, hindari duplikat email
-  let gabung = [...bawaan];
-  daftar.forEach(u=>{
-    if(!gabung.find(x=>x.email===u.email)) gabung.push(u);
-  });
-  return gabung;
-}
-function openMemberList(){
-  const cari = document.getElementById('cariMember') ? document.getElementById('cariMember').value.toLowerCase() : '';
-  let members = getAllMembers();
-  if(cari) members = members.filter(m => (m.name+m.email).toLowerCase().includes(cari));
-  
-  document.getElementById('memberCount').textContent = `Total ${members.length} Member • ${getAllMembers().length} Terdaftar`;
-  
-  const list = document.getElementById('memberList');
-  if(members.length===0){
-    list.innerHTML = '<p style="padding:12px;background:#f1f5f9;border-radius:10px">Tidak ada member ditemukan.</p>';
-  } else {
-    list.innerHTML = members.map((m,i)=>{
-      let inisial = m.name.charAt(0).toUpperCase();
-      let warna = m.role==='Admin' ? '#dc2626' : '#059669';
-      let badge = m.role==='Admin' ? '👑 ADMIN' : 'MEMBER';
-      return `
-      <div style="display:flex;gap:10px;align-items:center;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px">
-        <div style="width:42px;height:42px;border-radius:50%;background:${warna};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0">${inisial}</div>
-        <div style="flex:1;min-width:0">
-          <b style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${m.name} <span style="font-size:11px;background:${m.role==='Admin'?'#fee2e2':'#dcfce7'};color:${warna};padding:2px 6px;border-radius:99px">${badge}</span></b>
-          <span style="font-size:12px;color:#64748b;word-break:break-all">${m.email}</span>
-        </div>
-        ${currentUser&&currentUser.role==='Admin'&&m.role!=='Admin'?`<button onclick="hapusMember('${m.email}')" style="padding:8px;background:#fee2e2;border-radius:8px;flex-shrink:0">🗑️</button>`:''}
-      </div>`;
-    }).join('');
-  }
-  document.getElementById('memberModal').classList.add('open');
-}
-function hapusMember(email){
-  if(!confirm('Hapus member '+email+' ?')) return;
-  let daftar = JSON.parse(localStorage.getItem('deegiz_users')||'[]');
-  daftar = daftar.filter(u=>u.email!==email);
-  localStorage.setItem('deegiz_users', JSON.stringify(daftar));
-  openMemberList();
-}
-function doLogout(){localStorage.removeItem('deegiz_session');location.reload()}
-function fillMember(){document.getElementById('u').value='leonardo';document.getElementById('p').value='member123'}
-// ===== DAFTAR =====
-function openRegister(){document.getElementById('regModal').classList.add('open')}
-function closeRegister(){document.getElementById('regModal').classList.remove('open')}
-async function doRegister(){
-  const nama=document.getElementById('rNama').value.trim();
-  const alamat=document.getElementById('rAlamat').value.trim();
-  const wa=document.getElementById('rWa').value.trim();
-  const user=document.getElementById('rUser').value.trim().toLowerCase().replace(/\s+/g,'');
-  const pass=document.getElementById('rPass').value;
-  const pass2=document.getElementById('rPass2').value;
-  const e=document.getElementById('regErr'); e.style.display='none';
-  function fail(msg){e.textContent=msg;e.style.display='block'}
-  if(!nama||!alamat||!wa||!user||!pass||!pass2) return fail('Semua kolom wajib diisi ya!');
-  if(user.length<4) return fail('Username minimal 4 karakter, tanpa spasi.');
-  if(pass.length<6) return fail('Password minimal 6 karakter.');
-  if(pass!==pass2) return fail('Ulangi Password tidak sama! Cek lagi.');
-  const allUsers=[...USERS,...getCustomUsers(),...getPending()];
-  if(allUsers.find(x=>x.user===user)) return fail('Username sudah dipakai! Coba username lain.');
-  const h=await sha256(pass);
-  const pending=getPending();
-  pending.push({user,passHash:h,role:'Member',name:nama,alamat,wa,tanggal:new Date().toLocaleString('id-ID')});
-  localStorage.setItem('deegiz_pending',JSON.stringify(pending));
-  closeRegister();
-  document.getElementById('successBox').style.display='block';
-  document.getElementById('u').value=user; document.getElementById('p').value='';
-  // Kosongkan form
-  ['rNama','rAlamat','rWa','rUser','rPass','rPass2'].forEach(id=>document.getElementById(id).value='');
-  updatePendingCount();
-}
-// ===== APPROVE ADMIN =====
-function openApproveModal(){
-  if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin!');return}
-  const list=document.getElementById('approveList'); const pend=getPending();
-  if(pend.length===0){list.innerHTML='<p style="padding:12px;background:#f1f5f9;border-radius:10px">Belum ada pendaftar baru. Semua sudah diproses.</p>'}
-  else{
-    list.innerHTML=pend.map((p,i)=>`<div class="pendaftarCard"><b>${p.name}</b> <span style="font-size:11px;background:#fef3c7;padding:3px 7px;border-radius:999px">MENUNGGU</span><div style="font-size:13px;color:#475569;margin-top:6px;line-height:1.6">👤 Username: <b>${p.user}</b><br>📍 Alamat: ${p.alamat}<br>📱 WA: <a href="https://wa.me/${p.wa.replace(/[^0-9]/g,'')}" target="_blank" style="color:#059669;font-weight:700">${p.wa} (Chat)</a><br>🕒 Daftar: ${p.tanggal}</div><div style="display:flex;gap:8px;margin-top:10px"><button onclick="approveUser(${i})" style="flex:1;padding:10px;background:#059669;color:#fff;border-radius:10px;font-weight:700">✅ Setujui</button><button onclick="rejectUser(${i})" style="flex:1;padding:10px;background:#fee2e2;border-radius:10px;font-weight:700">❌ Tolak</button></div></div>`).join('');
-  }
-  document.getElementById('approveModal').classList.add('open');
-}
-function closeApprove(){document.getElementById('approveModal').classList.remove('open')}
-function approveUser(i){
-  const pend=getPending(); const u=pend.splice(i,1)[0];
-  const custom=getCustomUsers(); custom.push({user:u.user,passHash:u.passHash,role:'Member',name:u.name,alamat:u.alamat,wa:u.wa});
-  localStorage.setItem('deegiz_pending',JSON.stringify(pend));
-  localStorage.setItem('deegiz_custom_users',JSON.stringify(custom));
-  updatePendingCount(); openApproveModal(); alert('✅ '+u.name+' ('+u.user+') sudah disetujui! Sekarang dia bisa login.');
-}
-function rejectUser(i){
-  if(!confirm('Tolak pendaftar ini? Datanya akan dihapus.'))return;
-  const pend=getPending(); pend.splice(i,1);
-  localStorage.setItem('deegiz_pending',JSON.stringify(pend));
-  updatePendingCount(); openApproveModal();
-}
-// ===== TEMA & MODUL =====
-function toggleThemePanel(){
-  // Sekarang Member & Admin sama-sama boleh ganti tema
-  const p=document.getElementById('themePanel'); p.style.display=p.style.display==='none'?'block':'none';
-}
-function setTheme(name){
-  const themes={green:['#059669','#10b981','#f0fdf4','#dcfce7'],blue:['#2563eb','#3b82f6','#eff6ff','#dbeafe'],purple:['#7c3aed','#a78bfa','#faf5ff','#ede9fe'],orange:['#ea580c','#fb923c','#fff7ed','#ffedd5'],pink:['#db2777','#f472b6','#fdf2f8','#fce7f3'],teal:['#0f766e','#14b8a6','#f0fdfa','#ccfbf1']};
-  const t=themes[name]; document.documentElement.style.setProperty('--accent',t[0]); document.documentElement.style.setProperty('--accent2',t[1]); document.documentElement.style.setProperty('--bg',t[2]); document.documentElement.style.setProperty('--border',t[3]); localStorage.setItem('deegiz_theme',name);
-}
-function openAddModal(edit=false){
-  if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin yang boleh menambah / edit!');return}
-  document.getElementById('addModal').classList.add('open');
-  document.getElementById('modalTitle').textContent=edit?'Edit Modul Pertama':'Tambah Modul Baru';
-  if(edit&&modules[0]){document.getElementById('mTitle').value=modules[0].title;document.getElementById('mDesc').value=modules[0].desc;document.getElementById('mCount').value=modules[0].count;document.getElementById('editIndex').value=0}
-}
-function closeAddModal(){document.getElementById('addModal').classList.remove('open')}
-function editModul(i){openAddModal(true);document.getElementById('mTitle').value=modules[i].title;document.getElementById('mDesc').value=modules[i].desc;document.getElementById('mCount').value=modules[i].count;document.getElementById('editIndex').value=i}
-function delModul(i){if(!confirm('Hapus modul ini?'))return;modules.splice(i,1);localStorage.setItem('deegiz_modules',JSON.stringify(modules));renderModules()}
-function saveModul(){
-  const t=document.getElementById('mTitle').value.trim(); if(!t){alert('Judul wajib diisi');return}
-  const obj={title:t,desc:document.getElementById('mDesc').value||'Deskripsi belum diisi.',count:document.getElementById('mCount').value||'0 Materi',progress:document.getElementById('mProgress').value||'0% ',pct:0,tag:'MODUL BARU'};
-  const ei=document.getElementById('editIndex').value;
-  if(ei!==''&&ei!==undefined&&modules[ei]) modules[ei]={...modules[ei],...obj}; else modules.push(obj);
-  document.getElementById('editIndex').value=''; localStorage.setItem('deegiz_modules',JSON.stringify(modules)); closeAddModal(); renderModules();
-}
-function resetData(){if(!confirm('Reset semua data ke awal?'))return;localStorage.removeItem('deegiz_modules');location.reload()}
-const hid=document.createElement('input'); hid.type='hidden'; hid.id='editIndex'; document.body.appendChild(hid);
-(function(){
-  const s=localStorage.getItem('deegiz_session'); if(s){currentUser=JSON.parse(s);applySession()}
-  const th=localStorage.getItem('deegiz_theme'); if(th) setTheme(th);
-  document.getElementById('p').addEventListener('keydown',e=>{if(e.key==='Enter') doLogin()});
-  updatePendingCount(); renderModules();
-})();
-</script>
-</body>
-</html>
+function toggleThemePanel(){let p=document.getElementById('themePanel');p.style.display=p.style.display==='none'?'block':'none'}
+function setTheme(n){let map={ungu:['#eef2ff','#ffffff','#0f172a','#4f46e5','#7c3aed'],biru:['#eff6ff','#ffffff','#0f172a','#0ea5e9','#2563eb'],hijau:['#f0fdf4','#ffffff','#0f172a','#059669','#10b981'],orange:['#fff7ed','#ffffff','#0f172a','#ea580c','#f97316'],pink:['#fdf2f8','#ffffff','#0f172a','#db2777','#ec4899'],tosca:['#ecfeff','#ffffff','#0f172a','#0891b2','#06b6d4']};let t=map[n]||map.ungu;document.documentElement.style.setProperty('--bg',t[0]);document.documentElement.style.setProperty('--card',t[1]);document.documentElement.style.setProperty('--text',t[2]);document.documentElement.style.setProperty('--accent',t[3]);document.documentElement.style.setProperty('--accent2',t[4]);if(currentUser)localStorage.setItem('dz_theme_'+currentUser.username,n);localStorage.setItem('dz_theme',n);let p=document.getElementById('themePanel');if(p)p.style.display='none'}
+function renderModules(){let g=document.getElementById('modGrid');g.innerHTML=modules.map((m,i)=>`<div class="mod"><img src="${m.img||'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400'}"><div style="flex:1"><b>${m.title}</b><div style="font-size:13px;color:var(--muted)">${m.desc}</div><div style="font-size:12px;margin:6px 0">${m.progress} • ${m.count}</div><div class="progress"><i style="width:${m.pct}%"></i></div></div><div style="display:flex;flex-direction:column;gap:6px"><button class="btnSmall" style="background:var(--accent);color:#fff" onclick="openProgres()">Masuk Progres →</button>${currentUser&&currentUser.role==='Admin'?`<button class="btnSmall" style="background:#fef3c7" onclick="editModule(${i})">✏️ Edit</button><button class="btnSmall" style="background:#fee2e2" onclick="delModule(${i})">🗑️</button>`:''}</div></div>`).join('')}
+function openAddModule(){if(!isAdmin())return;document.getElementById('addModuleModal').classList.add('open')}
+function isAdmin(){if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin yang boleh!');return false}return true}
+function saveModule(){let t=document.getElementById('modTitle').value.trim(),d=document.getElementById('modDesc').value.trim(),img=document.getElementById('modImg').value.trim();if(!t){alert('Judul wajib!');return}modules.push({title:t,desc:d||'Modul baru',pct:0,count:'0 Video',progress:'0/0 Selesai',img:img});localStorage.setItem('dz_modules',JSON.stringify(modules));closeModal('addModuleModal');renderModules()}
+function editModule(i){let m=modules[i];let nt=prompt('Edit Judul Modul:',m.title);if(nt===null)return;let np=prompt('Edit Progres (0-100):',m.pct);modules[i].title=nt;if(np!==null)modules[i].pct=parseInt(np)||0;localStorage.setItem('dz_modules',JSON.stringify(modules));renderModules()}
+function delModule(i){if(!confirm('Hapus modul ini?'))return;modules.splice(i,1);localStorage.setItem('dz_modules',JSON.stringify(modules));renderModules()}
+function getLinks(){return JSON.parse(localStorage.getItem('dz_links')||'[]')}
+function openDeegiLink(){let l=document.getElementById('linkList');let links=getLinks();l.innerHTML=links.length?links.map((x,i)=>`<div style="display:flex;gap:8px;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="flex:1"><b>${x.judul}</b><div style="font-size:12px;color:#64748b;word-break:break-all">${x.url}</div></div><button class="btnSmall" style="background:#059669;color:#fff" onclick="window.open('${x.url}','_blank')">Buka →</button>${currentUser.role==='Admin'?`<button class="btnSmall" style="background:#fee2e2" onclick="delLink(${i})">🗑️</button>`:''}</div>`).join(''):'<p style="background:#f1f5f9;padding:12px;border-radius:10px">Belum ada link. Admin bisa tambah.</p>';document.getElementById('linkModal').classList.add('open')}
+function openAddLink(){if(!isAdmin())return;document.getElementById('addLinkModal').classList.add('open')}
+function saveLink(){let j=document.getElementById('linkJudul').value.trim(),u=document.getElementById('linkUrl').value.trim();if(!j||!u){alert('Isi judul & link!');return}if(!u.startsWith('http'))u='https://'+u;let a=getLinks();a.push({judul:j,url:u});localStorage.setItem('dz_links',JSON.stringify(a));closeModal('addLinkModal');alert('✅ Link ditambah!');}
+function delLink(i){if(!confirm('Hapus link?'))return;let a=getLinks();a.splice(i,1);localStorage.setItem('dz_links',JSON.stringify(a));openDeegiLink()}
+function getLib(){return JSON.parse(localStorage.getItem('dz_lib')||'[]')}
+function openLibrary(){let l=document.getElementById('libList');let a=getLib();l.innerHTML=a.length?a.map((x,i)=>`<div style="display:flex;gap:8px;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="flex:1"><b>📚 ${x.judul}</b><div style="font-size:12px;color:#64748b">Oleh: ${x.by} • ${x.url}</div></div><button class="btnSmall" style="background:#059669;color:#fff" onclick="window.open('${x.url}','_blank')">Buka</button><button class="btnSmall" style="background:#fee2e2" onclick="delLib(${i})">🗑️</button></div>`).join(''):'<p style="background:#f1f5f9;padding:12px;border-radius:10px">Library masih kosong. Admin & Member bisa tambah.</p>';document.getElementById('libraryModal').classList.add('open')}
+function saveLibrary(){let j=document.getElementById('libJudul').value.trim(),u=document.getElementById('libUrl').value.trim();if(!j||!u){alert('Isi judul & link!');return}if(!u.startsWith('http'))u='https://'+u;let a=getLib();a.push({judul:j,url:u,by:currentUser.username});localStorage.setItem('dz_lib',JSON.stringify(a));document.getElementById('libJudul').value='';document.getElementById('libUrl').value='';openLibrary()}
+function delLib(i){let a=getLib();if(a[i].by!==currentUser.username&&currentUser.role!=='Admin'){alert('Hanya pemilik / Admin yang boleh hapus!');return}if(!confirm('Hapus?'))return;a.splice(i,1);localStorage.setItem('dz_lib',JSON.stringify(a));openLibrary()}
+function galKey(){return 'dz_gallery_'+currentUser.username}
+function openGallery(){let a=JSON.parse(localStorage.getItem(galKey())||'[]');let g=document.getElementById('galGrid');g.innerHTML=a.length?a.map((x,i)=>`<div style="position:relative"><img src="${x}"><button onclick="delGal(${i})" style="position:absolute;top:4px;right:4px;background:#fee2e2;border-radius:50%;width:24px;height:24px">×</button></div>`).join(''):'<p style="grid-column:1/-1;background:#f1f5f9;padding:12px;border-radius:10px">Belum ada foto. Tambah foto kamu!</p>';document.getElementById('galleryModal').classList.add('open')}
+function saveGallery(){let u=document.getElementById('galUrl').value.trim();let f=document.getElementById('galFile').files[0];let a=JSON.parse(localStorage.getItem(galKey())||'[]');if(f){let r=new FileReader();r.onload=e=>{a.push(e.target.result);localStorage.setItem(galKey(),JSON.stringify(a));openGallery()};r.readAsDataURL(f);return}if(u){a.push(u);localStorage.setItem(galKey(),JSON.stringify(a));document.getElementById('galUrl').value='';openGallery();return}alert('Pilih foto / isi link foto!')}
+function delGal(i){if(!confirm('Hapus foto?'))return;let a=JSON.parse(localStorage.getItem(galKey())||'[]');a.splice(i,1);localStorage.setItem(galKey(),JSON.stringify(a));openGallery()}
+function openProgres(){let list=document.getElementById('progresList');let avg=modules.length?Math.round(modules.reduce((s,m)=>s+m.pct,0)/modules.length):0;document.getElementById('progresText').textContent=`Halo ${currentUser.name}! Total progres kamu ${avg}%.`;list.innerHTML=modules.map((m,i)=>`<div style="background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="display:flex;justify-content:space-between"><b>${m.title}</b><b>${m.pct}%</b></div><div class="progress" style="margin-top:8px"><i style="width:${m.pct}%"></i></div><div style="font-size:12px;color:#64748b">${m.progress}</div></div>`).join('');document.getElementById('progresModal').classList.add('open')}
+function openAddProgres(){if(!isAdmin())return;document.getElementById('addProgresModal').classList.add('open')}
+function saveProgres(){let j=document.getElementById('progJudul').value.trim(),p=parseInt(document.getElementById('progPct').value)||0;if(!j){alert('Isi judul!');return}modules.push({title:j,desc:'Progres baru dari Admin',pct:p,count:'-',progress:p+'% Selesai',img:''});localStorage.setItem('dz_modules',JSON.stringify(modules));closeModal('addProgresModal');renderModules();alert('✅ Progres ditambah!')}
+function lanjutBelajar(){closeModal('progresModal');document.getElementById('modGrid').scrollIntoView({behavior:'smooth'})}
+function catKey(){return 'dz_cat_'+currentUser.username}
+function openCatatan(){let a=JSON.parse(localStorage.getItem(catKey())||'[]');let l=document.getElementById('catList');l.innerHTML=a.length?a.map((x,i)=>`<div style="background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><b>${x.time}</b><div>${x.text}</div><div style="margin-top:8px"><button class="btnSmall" style="background:#fef3c7" onclick="editCat(${i})">✏️ Edit</button> <button class="btnSmall" style="background:#fee2e2" onclick="delCat(${i})">🗑️ Hapus</button></div></div>`).join(''):'<p style="background:#f1f5f9;padding:12px;border-radius:10px">Belum ada catatan.</p>';document.getElementById('catatanModal').classList.add('open')}
+function saveCatatan(){let t=document.getElementById('catText').value.trim();if(!t){alert('Tulis dulu!');return}let a=JSON.parse(localStorage.getItem(catKey())||'[]');a.push({text:t,time:new Date().toLocaleString('id-ID')});localStorage.setItem(catKey(),JSON.stringify(a));document.getElementById('catText').value='';openCatatan()}
+function editCat(i){let a=JSON.parse(localStorage.getItem(catKey())||'[]');let nt=prompt('Edit catatan:',a[i].text);if(nt===null)return;a[i].text=nt;localStorage.setItem(catKey(),JSON.stringify(a));openCatatan()}
+function delCat(i){if(!confirm('Hapus catatan?'))return;let a=JSON.parse(localStorage.getItem(catKey())||'[]');a.splice(i,1);localStorage.setItem(catKey(),JSON.stringify(a));openCatatan()}
+function openMemberList(){if(!currentUser||currentUser.role!=='Admin'){alert('⛔ Hanya Admin yang boleh melihat daftar member!');return}let cari=document.getElementById('cariMember')?document.getElementById('cariMember').value.toLowerCase():'';let users=getUsers();if(cari)users=users.filter(u=>(u.name+u.username).toLowerCase().includes(cari));document.getElementById('memberCount').textContent='Total Member: '+users.length+' orang • Admin: '+users.filter(u=>u.role==='Admin').length;document.getElementById('memberList').innerHTML=users.map(u=>`<div style="display:flex;gap:10px;align-items:center;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px"><div style="width:40px;height:40px;border-radius:50%;background:${u.role==='Admin'?'#dc2626':'#059669'};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800">${u.name.charAt(0).toUpperCase()}</div><div style="flex:1"><b>${u.name} ${u.role==='Admin'?'👑':''}</b><div style="font-size:12px;color:#64748b">@${u.username} • ${u.role}</div></div></div>`).join('');document.getElementById('memberModal').classList.add('open')}
+function openApproval(){if(!isAdmin())return;let p=getPending();let l=document.getElementById('approvalList');l.innerHTML=p.length?p.map((u,i)=>`<div style="background:#fef9c3;padding:12px;border-radius:12px;margin-bottom:8px"><b>${u.name} (@${u.username})</b><div style="font-size:12px;color:#64748b">${u.time}</div><div style="margin-top:8px"><button class="btnSmall" style="background:#059669;color:#fff" onclick="approveUser(${i})">✅ Setujui</button> <button class="btnSmall" style="background:#fee2e2" onclick="rejectUser(${i})">❌ Tolak</button></div></div>`).join(''):'<p style="background:#f1f5f9;padding:12px;border-radius:10px">Tidak ada pendaftar baru.</p>';document.getElementById('approvalModal').classList.add('open')}
+function updatePendingBadge(){let b=document.getElementById('pendingBadge');if(b)b.textContent=getPending().length}
+async function approveUser(i){let p=getPending();let u=p.splice(i,1)[0];u.approved=true;let users=getUsers();users.push(u);saveUsers(users);localStorage.setItem('dz_pending',JSON.stringify(p));updatePendingBadge();openApproval();alert('✅ '+u.name+' disetujui! Sekarang bisa login.')}
+function rejectUser(i){if(!confirm('Tolak pendaftar ini?'))return;let p=getPending();p.splice(i,1);localStorage.setItem('dz_pending',JSON.stringify(p));updatePendingBadge();openApproval()}
+function openChangePass(){document.getElementById('passModal').classList.add('open')}
+async function changePass(){let o=document.getElementById('oldPass').value,n=document.getElementById('newPass').value;if(n.length<6){alert('Sandi baru min 6 karakter!');return}let hOld=await hashPass(o);if(hOld!==currentUser.passHash){alert('Sandi lama salah!');return}let hNew=await hashPass(n);let users=getUsers();let f=users.find(u=>u.username===currentUser.username);f.passHash=hNew;saveUsers(users);currentUser.passHash=hNew;closeModal('passModal');alert('✅ Sandi berhasil diubah!')}
+function openUangKopi(){document.getElementById('kopiModal').classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+window.onload=()=>{let s=JSON.parse(localStorage.getItem('dz_session')||'null');if(s){let u=getUsers().find(x=>x.username===s.username);if(u){currentUser=u;enterApp()}}}
+</script></body></html>
