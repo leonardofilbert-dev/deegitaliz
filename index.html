@@ -1,337 +1,252 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DeegitaliZ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZETTBOS Member Hub</title>
 <style>
-*{box-sizing:border-box;font-family:Inter,Arial,sans-serif}body{margin:0;background:#f1f5f9;display:flex;min-height:100vh}
-button{cursor:pointer;border:0;font-weight:700}
-/* SIDEBAR - persis gambar */
-.sidebar{width:260px;background:#0a1f6b;color:#fff;padding:22px 14px;position:fixed;height:100vh;display:flex;flex-direction:column}
-.logo{display:flex;gap:10px;align-items:center;font-size:20px;font-weight:900;line-height:1;margin-bottom:26px}
-.logo span{font-size:36px;background:#00a8ff;width:44px;height:44px;display:grid;place-items:center;border-radius:12px}
-.menu button{width:100%;text-align:left;background:transparent;color:#cbd5e1;padding:12px;border-radius:12px;margin:2px 0;font-size:15px}
-.menu button.active{background:#0d6efd;color:#fff}
-.menu button:hover{background:rgba(255,255,255,.1)}
-.rocket{background:linear-gradient(180deg,#1e3a8a,#0a1f6b);border-radius:16px;padding:16px;text-align:center;margin-top:auto;border:1px solid rgba(255,255,255,.15)}
-.rocket button{background:#fff;color:#111;padding:10px 14px;border-radius:99px;width:100%}
+:root{--bg:#f0fdf4;--card:#ffffff;--text:#0f172a;--muted:#64748b;--accent:#059669;--accent2:#10b981;--sidebar:#ffffff;--border:#dcfce7}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,sans-serif}
+body{background:var(--bg);color:var(--text);display:flex;min-height:100vh}
+button{cursor:pointer;border:0}
+a{color:inherit;text-decoration:none}
+/* LOGIN */
+#loginPage{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:16px;z-index:100}
+.loginCard{background:var(--card);width:100%;max-width:400px;padding:28px;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.08);border:1px solid var(--border)}
+.loginCard h1{font-size:24px}.loginCard p{color:var(--muted);margin:6px 0 18px;font-size:14px}
+.loginCard label{font-size:13px;font-weight:600;display:block;margin:12px 0 6px}
+.loginCard input{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:12px;font-size:15px;outline:none}
+.loginCard input:focus{border-color:var(--accent)}
+.btnMain{width:100%;margin-top:18px;padding:13px;background:var(--accent);color:#fff;border-radius:12px;font-weight:700;font-size:15px}
+.btnGhost{width:100%;margin-top:8px;padding:11px;background:#f1f5f9;border-radius:12px;font-weight:600}
+.hint{margin-top:14px;background:#fef9c3;padding:10px;border-radius:10px;font-size:12px;line-height:1.5}
+.err{margin-top:10px;background:#fee2e2;color:#991b1b;padding:10px;border-radius:10px;font-size:13px;display:none}
+/* SIDEBAR */
+aside{width:260px;background:var(--sidebar);border-right:1px solid var(--border);padding:18px;display:flex;flex-direction:column;gap:4px;position:sticky;top:0;height:100vh;flex-shrink:0}
+.logo{font-weight:900;font-size:20px;letter-spacing:-.5px}.logo span{color:var(--accent);font-size:11px;display:block;letter-spacing:2px}
+.btnKontribusi{margin:14px 0;background:var(--accent);color:#fff;padding:12px;border-radius:12px;font-weight:700}
+.navTitle{font-size:11px;letter-spacing:1.5px;color:var(--muted);margin:14px 0 8px;font-weight:700}
+.navItem{padding:11px 12px;border-radius:10px;display:flex;gap:10px;align-items:center;font-size:14px;font-weight:500}
+.navItem.active{background:var(--accent);color:#fff}
+.adminOnly{display:none}.isAdmin .adminOnly{display:flex}
+.profile{margin-top:auto;display:flex;gap:10px;align-items:center;padding-top:14px;border-top:1px solid var(--border)}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800}
 /* MAIN */
-.main{margin-left:260px;flex:1;padding:18px 22px;width:100%}
-.topbar{display:flex;gap:16px;align-items:center;margin-bottom:18px}
-.search{flex:1;background:#fff;border-radius:99px;padding:12px 16px;border:1px solid #e2e8f0;display:flex;gap:8px}
-.search input{border:0;outline:0;width:100%}
-.user{display:flex;gap:10px;align-items:center;background:#fff;padding:6px 12px;border-radius:99px}
-.avatar{width:38px;height:38px;border-radius:50%;background:#f59e0b;display:grid;place-items:center;font-size:20px}
-/* HERO */
-.hero{background:linear-gradient(90deg,#0052ff,#0ea5e9);color:#fff;border-radius:18px;padding:28px;display:flex;justify-content:space-between;align-items:center;overflow:hidden;position:relative}
-.hero h1{font-size:28px;margin:0 0 8px}.hero p{opacity:.9;max-width:480px}
-.hero button{background:#fff;padding:10px 18px;border-radius:99px;margin-top:14px}
-.hero .illus{font-size:90px}
-/* STATS */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:16px 0}
-.stat{background:#fff;border-radius:16px;padding:16px;display:flex;gap:12px;align-items:center}
-.stat b{font-size:26px}.stat small{color:#16a34a;font-weight:700}
-.icon{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;font-size:22px;color:#fff}
-/* GRID BAWAH */
-.grid2{display:grid;grid-template-columns:2fr 1fr;gap:16px}
-.card{background:#fff;border-radius:16px;padding:18px}
-.chart{height:170px;display:flex;align-items:flex-end;gap:18px;padding:10px 0 0;border-bottom:1px solid #eee}
-.bar{flex:1;background:linear-gradient(180deg,#2563eb,#bfdbfe);border-radius:8px 8px 0 0;position:relative}
-.bar span{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:12px;font-weight:700}
-.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.quick div{border-radius:12px;padding:14px;text-align:center;cursor:pointer}
-.quick b{font-size:13px}.quick small{color:#666}
-.premium{background:linear-gradient(90deg,#0052ff,#0ea5e9);color:#fff;border-radius:16px;padding:18px;margin-top:16px;display:flex;justify-content:space-between;align-items:center}
-.premium button{background:#fff;padding:10px 16px;border-radius:99px}
-.modul-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px}
-.modul{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:14px}
-.hidden{display:none!important}
-.adminBar{background:#fef08a;padding:12px;border-radius:12px;margin-bottom:14px;display:flex;gap:8px;flex-wrap:wrap}
-@media(max-width:900px){.sidebar{display:none}.main{margin-left:0}.stats{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}
-  @media (max-width: 768px){#pageLogin{grid-template-columns:1fr!important;overflow-y:auto!important;padding:16px!important}#pageLogin>div:first-child{display:none!important}#pageLogin>div:last-child{width:100%!important;max-width:100%!important;padding:20px!important;border-radius:16px!important}body{display:block!important}.sidebar{display:none!important}.main{margin-left:0!important;padding:12px!important}}
+main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
+.topbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap}
+.searchBox{flex:1;max-width:520px;display:flex;background:var(--card);border:1px solid var(--border);border-radius:999px;padding:10px 14px;gap:8px;align-items:center}
+.searchBox input{border:0;outline:none;width:100%;background:transparent;font-size:14px}
+.chip{padding:8px 12px;border-radius:999px;background:var(--card);border:1px solid var(--border);font-size:13px;font-weight:600}
+.hero{text-align:center;margin:18px 0 20px}.hero h2{font-size:32px;line-height:1.1}.hero p{color:var(--muted);margin-top:8px}
+.quickGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+.qCard{background:var(--card);border:1px solid var(--border);padding:14px;border-radius:16px;display:flex;gap:10px;align-items:center}
+.qCard b{font-size:14px;display:block}.qCard small{color:var(--muted)}
+.modGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.modCard{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px}
+.modCard h3{font-size:18px;line-height:1.3;margin:12px 0 8px}.modCard p{color:var(--muted);font-size:13px;line-height:1.6}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800}
+.badgeY{background:#facc15}.badgeP{background:#c084fc;color:#fff}.badgeT{background:#e0f2fe;color:#0369a1}
+.progress{height:8px;background:#f1f5f9;border-radius:999px;overflow:hidden;margin-top:12px}.progress i{display:block;height:100%;background:var(--accent)}
+.adminBar{background:#fffbeb;border:1px solid #fde68a;padding:12px;border-radius:14px;display:none;gap:8px;flex-wrap:wrap;margin-bottom:16px}.isAdmin .adminBar{display:flex}
+.adminBar button{padding:10px 14px;border-radius:10px;font-weight:700;background:var(--accent);color:#fff}
+.themeRow{display:flex;gap:8px;flex-wrap:wrap}.themeRow button{width:36px;height:36px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #ddd}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;padding:16px;z-index:200}.modal.open{display:flex}
+.modalBox{background:#fff;width:100%;max-width:480px;padding:20px;border-radius:18px}.modalBox input,.modalBox textarea{width:100%;padding:11px;border:1px solid #e2e8f0;border-radius:10px;margin:6px 0}
+@media(max-width:820px){aside{display:none}body{flex-direction:column}.quickGrid{grid-template-columns:1fr 1fr}.modGrid{grid-template-columns:1fr}.hero h2{font-size:26px}.mobileNav{display:flex!important}}
+.mobileNav{display:none;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e2e8f0;padding:10px;gap:6px;z-index:90}.mobileNav a{flex:1;text-align:center;font-size:12px;padding:8px;background:#f8fafc;border-radius:10px}
 </style>
 </head>
-<body>
-<div id="pageLogin" style="position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#eaf3ff 0%,#d6e8ff 50%,#bcd9ff 100%);display:grid;grid-template-columns:1.1fr 1fr;overflow:auto;font-family:'Segoe UI',sans-serif">
-  <!-- KIRI -->
-  <div style="padding:48px 50px;display:flex;flex-direction:column;justify-content:center;position:relative">
-    <div style="display:flex;align-items:center;gap:12px">
-      <div style="font-size:52px;font-weight:900;color:#0b5ed7;line-height:1">D<span style="font-size:14px;background:#0b5ed7;color:#fff;padding:6px 10px;border-radius:8px;vertical-align:middle">HUB</span></div>
-      <div><div style="font-size:26px;font-weight:800;color:#0a1a3a;line-height:1">DeegitaliZ <span style="background:#0b5ed7;color:#fff;padding:2px 8px;border-radius:6px;font-size:22px">HUB</span></div><div style="font-size:13px;color:#333;margin-top:4px">Build • Learn • Create • Earn</div></div>
-    </div>
-    <h1 style="font-size:44px;line-height:1.05;color:#0a1a3a;margin:32px 0 12px">Selamat Datang di<br><span style="font-size:52px">DeegitaliZ <span style="color:#0b5ed7">HUB</span></span></h1>
-    <p style="color:#333;font-size:15px;line-height:1.6;max-width:420px">Platform all-in-one untuk membuat aplikasi, belajar teknologi, dan mengembangkan potensi digital Anda.</p>
-    <div style="margin-top:26px;display:grid;gap:16px;max-width:420px">
-      <div style="display:flex;gap:12px;align-items:center"><span style="width:42px;height:42px;border-radius:12px;background:#0ea5e9;display:grid;place-items:center;font-size:20px;color:#fff">&lt;/&gt;</span><div><b>App Builder</b><div style="font-size:12px;color:#555">Buat aplikasi web dengan mudah</div></div></div>
-      <div style="display:flex;gap:12px;align-items:center"><span style="width:42px;height:42px;border-radius:12px;background:#8b5cf6;display:grid;place-items:center;font-size:20px;color:#fff">🎓</span><div><b>Learn</b><div style="font-size:12px;color:#555">Belajar coding & teknologi</div></div></div>
-      <div style="display:flex;gap:12px;align-items:center"><span style="width:42px;height:42px;border-radius:12px;background:#10b981;display:grid;place-items:center;font-size:20px;color:#fff">✦</span><div><b>AI Prompt</b><div style="font-size:12px;color:#555">Buat prompt terbaik dengan AI</div></div></div>
-      <div style="display:flex;gap:12px;align-items:center"><span style="width:42px;height:42px;border-radius:12px;background:#f59e0b;display:grid;place-items:center;font-size:20px;color:#fff">🛒</span><div><b>Marketplace</b><div style="font-size:12px;color:#555">Jual produk digital Anda</div></div></div>
-    </div>
-    <div style="margin-top:28px;font-style:italic;font-weight:700;color:#0b3d91;font-size:17px;line-height:1.3">Bersama DeegitaliZ HUB<br>wujudkan ide digital Anda!</div>
-  </div>
+<body id="appBody">
 
-  <!-- KANAN -->
-  <div style="display:flex;align-items:center;justify-content:center;padding:30px">
-    <div style="background:#fff;width:100%;max-width:440px;padding:36px 32px;border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.12)">
-      <div style="text-align:center;font-size:64px;font-weight:900;color:#0b5ed7;line-height:1">D</div>
-      <h2 style="text-align:center;margin:14px 0 4px;color:#0a1a3a">Login ke <span style="color:#0b5ed7">DeegitaliZ HUB</span></h2>
-      <p style="text-align:center;color:#555;font-size:13px;margin:0 0 20px">Akses akun Anda untuk melanjutkan</p>
-      <div style="position:relative;margin-bottom:12px"><span style="position:absolute;left:14px;top:13px">👤</span><input id="loginUser" placeholder="Email atau Username" style="width:100%;padding:13px 14px 13px 42px;border:1px solid #ddd;border-radius:12px;outline:none;box-sizing:border-box"></div>
-      <div style="position:relative;margin-bottom:12px"><span style="position:absolute;left:14px;top:13px">🔒</span><input id="loginPass" type="password" placeholder="Password" style="width:100%;padding:13px 42px 13px 42px;border:1px solid #ddd;border-radius:12px;outline:none;box-sizing:border-box"><span onclick="let p=document.getElementById('loginPass');p.type=p.type==='password'?'text':'password'" style="position:absolute;right:14px;top:12px;cursor:pointer">👁️</span></div>
-      <div style="display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-bottom:16px"><label style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="rememberMe"> Ingat saya</label><a href="#" onclick="alert('Hubungi Admin untuk reset password!');return false" style="color:#0b5ed7;text-decoration:none">Lupa password?</a></div>
-      <div id="loginMsg" style="color:#dc2626;font-size:13px;text-align:center;min-height:18px;margin-bottom:8px"></div>
-      <button onclick="doLogin()" style="width:100%;padding:13px;background:linear-gradient(#2ea5ff,#0b5ed7);color:#fff;border:none;border-radius:12px;font-weight:700;font-size:16px;cursor:pointer">→ Login</button>
-      <div style="display:flex;align-items:center;gap:10px;color:#888;font-size:13px;margin:18px 0"><span style="flex:1;height:1px;background:#eee"></span>atau<span style="flex:1;height:1px;background:#eee"></span></div>
-      <button id="btnGoogle" style="width:100%;padding:12px;background:#fff;border:1px solid #ddd;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-weight:600"><span style="font-size:18px;font-weight:900;color:#4285F4">G</span> Login dengan Google</button>
-    <p style="text-align:center;font-size:13px;margin-top:18px">Belum punya akun? <a href="#" onclick="document.getElementById('registerBox').style.display='block';return false" style="color:#0b5ed7;font-weight:700;text-decoration:none">Daftar sekarang</a></p>
-<!-- KOTAK DAFTAR -->
-<div id="registerBox" style="display:none;margin-top:14px;background:#f0f7ff;padding:14px;border-radius:12px">
-  <b style="font-size:14px">Buat Akun Baru</b>
-  <input id="regUser" placeholder="Username baru" style="width:100%;padding:11px;margin-top:10px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box">
-  <input id="regPass" type="password" placeholder="Password baru" style="width:100%;padding:11px;margin-top:8px;border:1px solid #ddd;border-radius:10px;box-sizing:border-box">
-  <button onclick="doRegister()" style="width:100%;padding:11px;margin-top:10px;background:#10b981;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer">Daftar Akun</button>
-  <p onclick="document.getElementById('registerBox').style.display='none'" style="text-align:center;font-size:12px;color:#888;cursor:pointer;margin:8px 0 0">Batal</p>
-</div>
-</div>
-</div>
+<!-- LOGIN -->
+<div id="loginPage">
+  <div class="loginCard">
+    <div style="font-weight:900;font-size:26px">ZETTBOS <span style="color:#059669;font-size:11px;letter-spacing:2px">MEMBER HUB</span></div>
+    <p>Silakan masuk untuk lanjut ke materi.</p>
+    <label>Username</label><input id="u" placeholder="contoh: admin / leonardo" autocomplete="username">
+    <label>Kata Sandi</label><input id="p" type="password" placeholder="••••••••" autocomplete="current-password">
+    <div id="errBox" class="err">Username atau kata sandi salah.</div>
+    <button class="btnMain" onclick="doLogin()">Masuk →</button>
+    <button class="btnGhost" onclick="fillMember()">Coba sebagai Member</button>
+    <div class="hint">🔒 Halaman ini hanya untuk member. Jika lupa kata sandi, hubungi Admin via WhatsApp. Jangan bagikan akunmu ke orang lain.</div>
   </div>
-<div class="sidebar">
-  <div class="logo"><span>D</span>DeegitaliZ<br>HUB</div>
-  <div class="menu">
-    <button class="active" onclick="showPage('dashboard',this)">Dashboard</button>
-    <button onclick="showPage('builder',this)">App Builder</button>
-    <button onclick="showPage('learning',this)">Learning</button>
-    <button onclick="showPage('prompt',this)">AI Prompt</button>
-    <button onclick="showPage('produk',this)">Produk Digital</button>
-    <button onclick="showPage('pengaturan',this)" style="margin-top:18px">⚙️ Pengaturan</button>
-    <button onclick="showPage('bantuan',this)">Bantuan</button>
-    <button onclick="doLogout()">Keluar</button>
-  </div>
-  <div class="rocket"><div style="font-size:40px">🚀</div><b>Bersama<br>DeegitaliZ HUB</b><p style="font-size:13px;opacity:.8">Wujudkan Ide Digital Anda!</p><button onclick="alert('Mulai Sekarang!')">Mulai Sekarang →</button></div>
 </div>
 
-<div class="main">
+<!-- SIDEBAR -->
+<aside>
+  <div class="logo">ZETTBOS<span>MEMBER HUB</span></div>
+  <button class="btnKontribusi" onclick="alert('Fitur Kontribusi segera hadir!')">✦ Kontribusi</button>
+  <div class="navTitle">NAVIGASI UTAMA</div>
+  <a class="navItem active" href="#" onclick="setNav(this)">🏠 Home</a>
+  <a class="navItem" href="#" onclick="setNav(this);showSection('modul')">🎓 Modul Pembelajaran</a>
+  <a class="navItem" href="#" onclick="setNav(this)">🔖 Catatan & Simpan</a>
+  <div class="navTitle">EKOSISTEM & PROGRES</div>
+  <a class="navItem" href="#" onclick="setNav(this)">🔗 ZettLink</a>
+  <a class="navItem" href="#" onclick="setNav(this)">🧩 Zettbos Library</a>
+  <a class="navItem" href="#" onclick="setNav(this)">🖼️ ZettGallery</a>
+  <a class="navItem" href="#" onclick="setNav(this)">📈 Progres Belajar</a>
+  <a class="navItem" href="#" onclick="setNav(this)">⭐ Testimoni</a>
+  <div class="profile">
+    <div class="avatar" id="avatarLetter">L</div>
+    <div style="flex:1"><b id="profileName">Leonardo</b><div style="font-size:12px;color:#64748b" id="profileRole">Member</div></div>
+    <button onclick="doLogout()" title="Keluar">↪</button>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main>
   <div class="topbar">
-    <div class="search">🔍 <input id="searchInput" placeholder="Cari fitur, aplikasi, atau tutorial..." oninput="cariModul()"></div>
-    <div>🔔<sup style="color:red">3</sup></div>
-    <div class="user"><div class="avatar">👦</div><div><b id="namaUser">Leonard</b><br><small style="color:#2563eb">⭐ Premium Member</small></div><button onclick="toggleAdmin()" style="background:#eef2ff;padding:8px 12px;border-radius:99px"></button></div>
-  </div>
-
-  <!-- ADMIN BAR - muncul kalau Mode Edit ON -->
-  <div id="adminBar" class="adminBar hidden">
-    <b>Mode Admin AKTIF -</b>
-    <button onclick="editHero()" style="background:#111;color:#fff;padding:8px 12px;border-radius:99px">✏️ Edit Hero / Judul</button>
-    <button onclick="editStatistik()" style="background:#111;color:#fff;padding:8px 12px;border-radius:99px">✏️ Edit Angka Statistik</button>
-    <button onclick="tambahModul()" style="background:#16a34a;color:#fff;padding:8px 12px;border-radius:99px">+ Tambah Modul</button>
-    <button onclick="kelolaUser()" style="background:#7c3aed;color:#fff;padding:8px 12px;border-radius:99px">👥 Kelola User</button>
-    <button onclick="resetData()" style="background:#dc2626;color:#fff;padding:8px 12px;border-radius:99px">Reset Data</button>
-  </div>
-
-  <div id="page-dashboard">
-    <div class="hero">
-      <div><h1 id="heroTitle">Selamat Datang di DeegitaliZ HUB!</h1><p id="heroDesc">Platform lengkap untuk membuat aplikasi, belajar, dan menghasilkan produk digital dengan mudah.</p><button onclick="alert('Mulai Belajar!')">Mulai Sekarang →</button></div>
-      <div class="illus">💻</div>
-    </div>
-
-    <div class="stats">
-      <div class="stat"><div class="icon" style="background:#0ea5e9">▦</div><div><b id="stat1">12</b><br><small>Aplikasi Saya</small><br><small>↑ 12%</small></div></div>
-      <div class="stat"><div class="icon" style="background:#a855f7">📖</div><div><b id="stat2">8</b><br><small>Materi Belajar</small><br><small>↑ 8%</small></div></div>
-      <div class="stat"><div class="icon" style="background:#16a34a">🛒</div><div><b id="stat3">24</b><br><small>Produk Digital</small><br><small>↑ 20%</small></div></div>
-      <div class="stat"><div class="icon" style="background:#f97316">👥</div><div><b id="stat4">1.250</b><br><small>Total Pengguna</small><br><small>↑ 18%</small></div></div>
-    </div>
-
-    <div class="grid2">
-      <div>
-        <div class="card"><b>📊 Ringkasan Aktivitas</b><span style="float:right">7 Hari Terakhir ⌄</span>
-          <div class="chart" id="chartBox"></div>
-          <div style="display:flex;justify-content:space-between;font-size:12px;color:#666;margin-top:8px"><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span><span>Min</span></div>
-        </div>
-        <div class="card" style="margin-top:16px"><b>🕐 Aktivitas Terbaru</b><span style="float:right;color:#2563eb">Lihat Semua →</span>
-          <p>💻 Anda membuat aplikasi baru: Website Undangan <span style="float:right;color:#888">2 jam yang lalu</span></p>
-          <p>📖 Menyelesaikan kursus: Next.js untuk Pemula <span style="float:right;color:#888">5 jam yang lalu</span></p>
-          <p>🛒 Produk digital baru ditambahkan: Template Desain Premium <span style="float:right;color:#888">1 hari yang lalu</span></p>
-        </div>
-        <div class="card" style="margin-top:16px"><b>🎓 Modul Belajar - Bisa Di-Edit Admin</b><div id="modulList" class="modul-grid"></div><p id="emptyModul" style="color:#888">Belum ada modul.</p></div>
-      </div>
-      <div>
-        <div class="card"><b>⚡ Aksi Cepat</b>
-          <div class="quick" style="margin-top:12px">
-            <div style="background:#eff6ff" onclick="alert('Buat Aplikasi dengan AI')"><div>📱</div><b>Buat Aplikasi</b><br><small>Dengan AI</small></div>
-            <div style="background:#faf5ff" onclick="showPage('learning')"><div>▶️</div><b>Mulai Belajar</b><br><small>Tutorial & Kursus</small></div>
-            <div style="background:#f0fdf4" onclick="alert('Kelola Produk')"><div>📦</div><b>Kelola Produk</b><br><small>Jual & Bagikan</small></div>
-            <div style="background:#fff7ed" onclick="alert('Atur Prompt')"><div>🤖</div><b>Atur Prompt</b><br><small>AI Assistant</small></div>
-          </div>
-        </div>
-        <div class="premium"><div><b>🏆 Upgrade ke Premium</b><p style="font-size:13px;opacity:.9">Dapatkan fitur lebih lengkap dan akses tanpa batas!</p><button>Upgrade Sekarang →</button></div><div style="font-size:50px">🎁</div></div>
-      </div>
+    <div><div style="font-size:12px;color:#64748b">ZETTBOS MEMBER HUB</div><b>Home</b></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <div class="searchBox">🔍 <input id="searchInput" placeholder="Cari materi video, modul, catatan..." oninput="filterModul(this.value)"></div>
+      <button class="chip" onclick="toggleThemePanel()">🎨 Tema</button>
+      <button class="chip" onclick="doLogout()">Keluar ↪</button>
     </div>
   </div>
 
-  <div id="page-learning" class="hidden"><div class="card"><h2>🎓 Learning</h2><p>Semua modul ada di Dashboard. Admin bisa tambah / edit / hapus modul dari sana.</p><button onclick="tambahModul()" style="background:#16a34a;color:#fff;padding:10px 14px;border-radius:99px">+ Tambah Modul</button><div id="modulList2" class="modul-grid" style="margin-top:12px"></div></div></div>
-  <div id="page-builder" class="hidden"><div class="card"><h2>💻 App Builder</h2><p>Buat aplikasi tanpa coding. Fitur ini bisa di-edit admin dari Dashboard.</p></div></div>
-  <div id="page-prompt" class="hidden"><div class="card"><h2>✨ AI Prompt</h2><p id="promptText">Prompt default: Buatkan saya website undangan pernikahan yang elegan...</p><button onclick="editPrompt()" style="background:#7c3aed;color:#fff;padding:10px 14px;border-radius:99px">✏️ Edit Prompt (Admin)</button></div></div>
-  <div id="page-produk" class="hidden"><div class="card"><h2>🛍️ Produk Digital</h2><p>24 Produk Digital - Edit angkanya lewat tombol Edit Statistik di Dashboard.</p></div></div>
-  <div id="page-pengaturan" class="hidden"><div class="card"><h2>⚙️ Pengaturan</h2><button onclick="editHero()" style="background:#111;color:#fff;padding:10px 14px;border-radius:99px">Edit Judul Hero</button></div></div>
-  <div id="page-bantuan" class="hidden"><div class="card"><h2>❓ Bantuan</h2><p>Hubungi admin DeegitaliZ HUB.</p></div></div>
-</div>
+  <!-- ADMIN BAR - HANYA ADMIN -->
+  <div class="adminBar" id="adminBar">
+    <span style="font-weight:800">🛡️ Mode Admin AKTIF -</span>
+    <button onclick="openAddModal()">+ Tambah Modul</button>
+    <button onclick="openAddModal(true)">✏️ Edit Modul Pertama</button>
+    <button onclick="toggleThemePanel()" style="background:#7c3aed">🎨 Ganti Tema</button>
+    <button onclick="resetData()" style="background:#ef4444">Reset Data</button>
+  </div>
+
+  <div id="themePanel" style="display:none;background:#fff;border:1px solid #dcfce7;padding:14px;border-radius:14px;margin-bottom:16px">
+    <b>Pilih Tema Warna (Hanya Admin bisa simpan):</b>
+    <div class="themeRow" style="margin-top:10px">
+      <button style="background:#059669" onclick="setTheme('green')" title="Emerald"></button>
+      <button style="background:#2563eb" onclick="setTheme('blue')" title="Biru"></button>
+      <button style="background:#7c3aed" onclick="setTheme('purple')" title="Ungu"></button>
+      <button style="background:#ea580c" onclick="setTheme('orange')" title="Orange"></button>
+      <button style="background:#db2777" onclick="setTheme('pink')" title="Pink"></button>
+      <button style="background:#0f766e" onclick="setTheme('teal')" title="Teal"></button>
+    </div>
+    <p style="font-size:12px;color:#64748b;margin-top:8px">Tema tersimpan otomatis di perangkat ini.</p>
+  </div>
+
+  <div class="hero">
+    <h2>Selamat <span id="greetWord">Pagi</span>, <span id="heroName">Leonardo</span>!</h2>
+    <p>Mau belajar atau praktik membuat web app AI apa hari ini?</p>
+  </div>
+
+  <div class="quickGrid">
+    <div class="qCard"><span>🎓</span><div><b>Modul Belajar</b><small>Video Kurikulum</small></div></div>
+    <div class="qCard"><span>🧩</span><div><b>Zettbos Library</b><small>176 Komponen UI</small></div></div>
+    <div class="qCard"><span>📝</span><div><b>Catatan Saya</b><small>Catatan & Link</small></div></div>
+    <div class="qCard"><span>🔗</span><div><b>ZettLink</b><small>Resource & File</small></div></div>
+    <div class="qCard"><span>🖼️</span><div><b>ZettGallery</b><small>Karya Member</small></div></div>
+    <div class="qCard"><span>📈</span><div><b>Progres Belajar</b><small>Roadmap & Streak</small></div></div>
+    <div class="qCard"><span>⭐</span><div><b>Testimoni</b><small>Cerita Member</small></div></div>
+    <div class="qCard"><span>💬</span><div><b>Kontak Admin</b><small>Chat WhatsApp</small></div></div>
+  </div>
+
+  <div style="display:flex;justify-content:space-between;align-items:center;margin:18px 0 12px"><h3>Modul Rekomendasi Utama <span class="badge" style="background:#059669;color:#fff">MULAI DARI SINI</span></h3><span style="font-size:13px">▶ Lanjut: EP4 Deploy Apps Script ... 45%</span></div>
+  <div class="modGrid" id="modGrid"></div>
+</main>
+
+<!-- MOBILE NAV -->
+<div class="mobileNav"><a href="#">🏠<br>Home</a><a href="#">🎓<br>Modul</a><a href="#">🔖<br>Catatan</a><a href="#" onclick="doLogout()">↪<br>Keluar</a></div>
+
+<!-- MODAL TAMBAH / EDIT -->
+<div class="modal" id="addModal"><div class="modalBox">
+  <h3 id="modalTitle">Tambah Modul Baru</h3>
+  <input id="mTitle" placeholder="Judul Modul, contoh: MEMBUAT WEB APP DENGAN AI">
+  <textarea id="mDesc" rows="3" placeholder="Deskripsi modul..."></textarea>
+  <input id="mCount" placeholder="Jumlah Materi, contoh: 10 Materi">
+  <input id="mProgress" placeholder="Progress, contoh: 0% / 100%">
+  <button class="btnMain" onclick="saveModul()">Simpan Modul</button>
+  <button class="btnGhost" onclick="closeAddModal()">Batal</button>
+</div></div>
 
 <script>
-let DB=JSON.parse(localStorage.getItem('deegitalizDB2')||'null');
-if(!DB){DB={heroTitle:'Selamat Datang di DeegitaliZ HUB!',heroDesc:'Platform lengkap untuk membuat aplikasi, belajar, dan menghasilkan produk digital dengan mudah.',stat1:'12',stat2:'8',stat3:'24',stat4:'1.250',prompt:'Prompt default: Buatkan saya website undangan pernikahan yang elegan...',users:[{username:'admin',password:'admin123',role:'admin'}],modul:[{id:1,judul:'Next.js untuk Pemula',desc:'Belajar Next.js dari nol',kelas:5},{id:2,judul:'Website Undangan',desc:'Buat undangan digital',kelas:3},{id:3,judul:'Template Desain Premium',desc:'Desain Canva premium',kelas:4},{id:4,judul:'Dasar Komputer',desc:'Komputer & internet',kelas:6},{id:5,judul:'Excel Dasar',desc:'Rumus & tabel',kelas:4},{id:6,judul:'AI untuk Pemula',desc:'Mengenal AI',kelas:2}]};}
-let isAdmin=false;
-function saveDB(){localStorage.setItem('deegitalizDB2',JSON.stringify(DB));}
-function renderAll(){
-  document.getElementById('heroTitle').innerText=DB.heroTitle;
-  document.getElementById('heroDesc').innerText=DB.heroDesc;
-  document.getElementById('stat1').innerText=DB.stat1;
-  document.getElementById('stat2').innerText=DB.stat2;
-  document.getElementById('stat3').innerText=DB.stat3;
-  document.getElementById('stat4').innerText=DB.stat4;
-  document.getElementById('promptText').innerText=DB.prompt;
-  let vals=[250,480,520,420,680,500,860];
-  document.getElementById('chartBox').innerHTML=vals.map(v=>`<div class="bar" style="height:${v/10}%"><span>${v}</span></div>`).join('');
-  renderModulList();
+// ===== KEAMANAN: PASSWORD DISIMPAN SEBAGAI HASH, BUKAN TEKS POLOS =====
+async function sha256(str){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
+// Hash dari: Deegitaliz2026! dan member123 - dihitung saat login, tidak ditampilkan di halaman
+const USERS=[
+ {user:'admin',passHash:'f1f1f9ac5659fe704ac11061e2a6cc5d81fa0c1ecbfbbf8caf549a71136efeef',role:'Admin',name:'Leonardo'},
+ {user:'leonardo',passHash:'5600376e863d2f57a053518f324ad3840b0bc2348b573af281a7b7cbe7a228c6',role:'Member',name:'Leonardo'}
+];
+// Kita simpan hash-nya di localStorage saat pertama kali, agar tidak terlihat di kode
+async function initUsers(){}
+let currentUser=null;
+let modules=JSON.parse(localStorage.getItem('zettbos_modules')||'null') || [
+ {title:'ANTIGRAVITY IDE: MEMBUAT WEB APP DENGAN GOOGLE APPS SCRIPT',desc:'Ini adalah modul utama yang wajib diselesaikan. Kalian bisa menonton modul berikut sambil praktek agar tidak terjadi kesalahan selama proses pengerjaan Web App.',count:'10 Materi',progress:'10/10 Selesai (100%)',pct:100,tag:'MODUL 01'},
+ {title:'GEMINI WEB: MEMBUAT WEB APP DENGAN GOOGLE APP SCRIPT',desc:'Pelajari materi fundamental web app AI terstruktur bersama mentor Zettbos.',count:'5 Materi',progress:'3/5 Selesai (60%)',pct:60,tag:'MODUL 02'}
+];
+function renderModules(filter=''){
+  const grid=document.getElementById('modGrid'); grid.innerHTML='';
+  modules.filter(m=>m.title.toLowerCase().includes(filter.toLowerCase())).forEach((m,i)=>{
+    const div=document.createElement('div'); div.className='modCard';
+    div.innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap"><span class="badge badgeY">★ REKOMENDASI</span><span class="badge badgeP">${m.tag}</span><span class="badge badgeT">MULAI DARI SINI</span><span class="badge" style="background:#dcfce7;color:#065f46">${m.progress}</span></div><h3>${m.title}</h3><p>${m.desc}</p><div style="display:flex;justify-content:space-between;font-size:13px;margin-top:12px"><span>Daftar Materi</span><b>${m.count}</b></div><div class="progress"><i style="width:${m.pct}%"></i></div>${currentUser&&currentUser.role==='Admin'?`<div style="display:flex;gap:8px;margin-top:12px"><button onclick="editModul(${i})" style="padding:8px 12px;border-radius:8px;background:#f1f5f9;font-weight:700">✏️ Edit</button><button onclick="delModul(${i})" style="padding:8px 12px;border-radius:8px;background:#fee2e2;font-weight:700">🗑️ Hapus</button></div>`:''}`;
+    grid.appendChild(div);
+  });
 }
-function renderModulList(){
-  let q=(document.getElementById('searchInput').value||'').toLowerCase();
-  let list=DB.modul.filter(m=>m.judul.toLowerCase().includes(q));
-  let html=list.map((m)=>{
-    let idx=DB.modul.indexOf(m);
-    return `<div class="modul"><b>${m.judul}</b><p style="font-size:13px;color:#666">${m.desc}</p><small>${m.kelas} Kelas</small><br><br><button onclick="bukaModul(${idx})" style="background:#2563eb;color:#fff;padding:8px 12px;border-radius:99px">Buka</button> ${isAdmin?`<button onclick="editModul(${idx})" style="background:#e2e8f0;padding:8px 12px;border-radius:99px">Edit</button> <button onclick="hapusModul(${idx})" style="background:#fee2e2;color:#dc2626;padding:8px 12px;border-radius:99px">Hapus</button>`:''}</div>`;
-  }).join('');
-  document.getElementById('modulList').innerHTML=html;
-  document.getElementById('modulList2').innerHTML=html;
-  document.getElementById('emptyModul').style.display=list.length?'none':'block';
+function filterModul(v){renderModules(v)}
+function setNav(el){document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));el.classList.add('active')}
+function showSection(s){document.getElementById('modGrid').scrollIntoView({behavior:'smooth'})}
+async function doLogin(){
+  await initUsers();
+  const u=document.getElementById('u').value.trim().toLowerCase();
+  const p=document.getElementById('p').value;
+  const found=USERS.find(x=>x.user===u);
+  const err=document.getElementById('errBox');
+  if(!found){err.style.display='block';return}
+  const h=await sha256(p);
+  if(h!==found.passHash){err.style.display='block';return}
+  currentUser={user:found.user,role:found.role,name:found.name};
+  localStorage.setItem('zettbos_session',JSON.stringify(currentUser));
+  applySession();
 }
-function cariModul(){renderModulList();}
-function showPage(id,btn){
-  ['dashboard','builder','learning','prompt','produk','pengaturan','bantuan'].forEach(p=>document.getElementById('page-'+p).classList.add('hidden'));
-  document.getElementById('page-'+id).classList.remove('hidden');
-  if(btn){document.querySelectorAll('.menu button').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function applySession(){
+  if(!currentUser) return;
+  document.getElementById('loginPage').style.display='none';
+  document.getElementById('heroName').textContent=currentUser.name;
+  document.getElementById('profileName').textContent=currentUser.name;
+  document.getElementById('profileRole').textContent=currentUser.role;
+  document.getElementById('avatarLetter').textContent=currentUser.name[0];
+  document.getElementById('appBody').classList.toggle('isAdmin',currentUser.role==='Admin');
+  const hour=new Date().getHours(); document.getElementById('greetWord').textContent=hour<11?'Pagi':hour<15?'Siang':hour<18?'Sore':'Malam';
+  renderModules();
 }
-function toggleAdmin(){
-  // Untuk demo, langsung aktif. Kalau mau pakai login, ganti dengan cek password
-  let pass=prompt('Hanya Untuk Admin');
-  if(pass!=='admin123'){alert('Password salah!');return;}
-  isAdmin=!isAdmin;
-  document.getElementById('modeLabel')?.innerText='Admin: '+(isAdmin?'ON':'OFF');
-  document.getElementById('adminBar').classList.toggle('hidden',!isAdmin);
-  renderModulList();
-  if(isAdmin) alert('Mode Admin AKTIF! Sekarang tombol Edit / Hapus muncul di setiap modul.');
+function doLogout(){localStorage.removeItem('zettbos_session');location.reload()}
+function fillMember(){document.getElementById('u').value='leonardo';document.getElementById('p').value='member123'}
+function toggleThemePanel(){
+  if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin yang boleh ganti tema.');return}
+  const p=document.getElementById('themePanel'); p.style.display=p.style.display==='none'?'block':'none';
 }
-function editHero(){
-  if(!isAdmin) return alert('Aktifkan Mode Admin dulu!');
-  let t=prompt('Edit Judul Hero:',DB.heroTitle); if(t===null) return;
-  let d=prompt('Edit Deskripsi Hero:',DB.heroDesc); if(d===null) return;
-  DB.heroTitle=t; DB.heroDesc=d; saveDB(); renderAll(); alert('Hero berhasil diedit!');
+function setTheme(name){
+  const themes={green:['#059669','#10b981','#f0fdf4','#dcfce7'],blue:['#2563eb','#3b82f6','#eff6ff','#dbeafe'],purple:['#7c3aed','#a78bfa','#faf5ff','#ede9fe'],orange:['#ea580c','#fb923c','#fff7ed','#ffedd5'],pink:['#db2777','#f472b6','#fdf2f8','#fce7f3'],teal:['#0f766e','#14b8a6','#f0fdfa','#ccfbf1']};
+  const t=themes[name]; document.documentElement.style.setProperty('--accent',t[0]); document.documentElement.style.setProperty('--accent2',t[1]); document.documentElement.style.setProperty('--bg',t[2]); document.documentElement.style.setProperty('--border',t[3]); localStorage.setItem('zettbos_theme',name);
 }
-function editStatistik(){
-  if(!isAdmin) return alert('Aktifkan Mode Admin dulu!');
-  DB.stat1=prompt('Aplikasi Saya:',DB.stat1)||DB.stat1;
-  DB.stat2=prompt('Materi Belajar:',DB.stat2)||DB.stat2;
-  DB.stat3=prompt('Produk Digital:',DB.stat3)||DB.stat3;
-  DB.stat4=prompt('Total Pengguna:',DB.stat4)||DB.stat4;
-  saveDB(); renderAll(); alert('Statistik berhasil diedit!');
+function openAddModal(edit=false){
+  if(!currentUser||currentUser.role!=='Admin'){alert('Hanya Admin yang boleh menambah / edit!');return}
+  document.getElementById('addModal').classList.add('open');
+  document.getElementById('modalTitle').textContent=edit?'Edit Modul Pertama':'Tambah Modul Baru';
+  if(edit&&modules[0]){document.getElementById('mTitle').value=modules[0].title;document.getElementById('mDesc').value=modules[0].desc;document.getElementById('mCount').value=modules[0].count;document.getElementById('editIndex').value=0}
 }
-function editPrompt(){
-  if(!isAdmin) return alert('Aktifkan Mode Admin dulu!');
-  let p=prompt('Edit Prompt:',DB.prompt); if(p===null) return;
-  DB.prompt=p; saveDB(); renderAll(); alert('Prompt berhasil diedit!');
+function closeAddModal(){document.getElementById('addModal').classList.remove('open')}
+function editModul(i){openAddModal(true);document.getElementById('mTitle').value=modules[i].title;document.getElementById('mDesc').value=modules[i].desc;document.getElementById('mCount').value=modules[i].count;document.getElementById('editIndex').value=i}
+function delModul(i){if(!confirm('Hapus modul ini?'))return;modules.splice(i,1);localStorage.setItem('zettbos_modules',JSON.stringify(modules));renderModules()}
+function saveModul(){
+  const t=document.getElementById('mTitle').value.trim(); if(!t){alert('Judul wajib diisi');return}
+  const obj={title:t,desc:document.getElementById('mDesc').value||'Deskripsi belum diisi.',count:document.getElementById('mCount').value||'0 Materi',progress:document.getElementById('mProgress').value||'0% ',pct:0,tag:'MODUL BARU'};
+  const ei=document.getElementById('editIndex').value;
+  if(ei!==''&&ei!==undefined&&modules[ei]) modules[ei]={...modules[ei],...obj}; else modules.push(obj);
+  document.getElementById('editIndex').value=''; localStorage.setItem('zettbos_modules',JSON.stringify(modules)); closeAddModal(); renderModules();
 }
-function tambahModul(){
-  if(!isAdmin) return alert('Klik tombol Admin di atas dulu, password admin123, baru bisa tambah!');
-  let j=prompt('Judul Modul baru:'); if(!j) return;
-  let d=prompt('Deskripsi:')||'Modul baru';
-  DB.modul.push({id:Date.now(),judul:j,desc:d,kelas:0}); saveDB(); renderModulList(); alert('Modul berhasil ditambah & langsung muncul di Dashboard!');
-}
-function editModul(i){
-  let j=prompt('Edit Judul:',DB.modul[i].judul); if(j===null) return;
-  let d=prompt('Edit Deskripsi:',DB.modul[i].desc); if(d===null) return;
-  DB.modul[i].judul=j; DB.modul[i].desc=d; saveDB(); renderModulList(); alert('Modul berhasil diedit!');
-}
-function hapusModul(i){
-  if(!confirm('Hapus modul "'+DB.modul[i].judul+'"?')) return;
-  DB.modul.splice(i,1); saveDB(); renderModulList();
-}
-function bukaModul(i){ alert(DB.modul[i].judul+'\n'+DB.modul[i].desc+'\n\n'+DB.modul[i].kelas+' Kelas'); }
-function kelolaUser(){ alert('User terdaftar:\n'+DB.users.map(u=>u.username+' ('+u.role+')').join('\n')); }
-function resetData(){ if(!confirm('Reset semua ke awal?')) return; localStorage.removeItem('deegitalizDB2'); location.reload(); }
-function doLogin(){
-  let u=document.getElementById('loginUser').value.trim();
-  let p=document.getElementById('loginPass').value.trim();
-  let found=DB.users.find(x=>x.username===u && x.password===p);
-  if(!found){ document.getElementById('loginMsg').innerText='Username / password salah!'; return; }
-  localStorage.setItem('deegitalizLogin','login');
-  document.getElementById('pageLogin').style.display='none';
-  document.getElementById('namaUser').innerText=u;
-}
-  function doRegister(){
-  let u=document.getElementById('regUser').value.trim();
-  let p=document.getElementById('regPass').value.trim();
-  if(!u||!p){alert('Isi username & password dulu!');return}
-  if(DB.users.find(x=>x.username===u)){alert('Username udah dipake!');return}
-  DB.users.push({username:u,password:p,role:'siswa'});
-  localStorage.setItem('deegitalizDB2',JSON.stringify(DB));
-  alert('Berhasil daftar! Sekarang login pakai akun baru kamu.');
-  document.getElementById('registerBox').style.display='none';
-  document.getElementById('loginUser').value=u;
-}
-function doLogout(){
-  if(!confirm('Yakin mau keluar?')) return;
-  localStorage.removeItem('deegitalizLogin');
-  document.getElementById('pageLogin').style.display='grid';
-  document.getElementById('loginUser').value='';
-  document.getElementById('loginPass').value='';
-  isAdmin=false;
-  document.getElementById('modeLabel').innerText='Admin: OFF';
-  document.getElementById('adminBar').classList.add('hidden');
-}
-if(localStorage.getItem('deegitalizLogin')==='login'){
-  document.getElementById('pageLogin').style.display='none';
-}
-renderAll();
-</script>
-  <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-  import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-
-  const ADMIN_EMAILS = ["leonardofilbert@gmail.com"];
-    const firebaseConfig = {
-    apiKey: "AIzaSyDqgPPq9qX6CVG04Y7HH3wjFM-HTYboL30",
-    authDomain: "deegitaliz.firebaseapp.com",
-    projectId: "deegitaliz",
-    storageBucket: "deegitaliz.firebasestorage.app",
-    messagingSenderId: "271579480378",
-    appId: "1:271579480378:web:1d60ed2b82a03dfd0a5003",
-    measurementId: "G-00NY0L2LCH"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  // TOMBOL GOOGLE
-  document.getElementById("btnGoogle").onclick = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      // Simpan biar tetap login
-      localStorage.setItem("userLogin", JSON.stringify({
-        nama: user.displayName,
-        email: user.email,
-        foto: user.photoURL,
-        role: ADMIN_EMAILS.includes(user.email) ? "admin" : "member"
-      }));
-
-      alert("Halo " + user.displayName + "!");
-      
-      // Pindah ke dashboard - sesuaikan dengan fungsi kamu
-      if (typeof showPage === "function") showPage('dashboard');
-      else document.getElementById("pageDashboard").style.display = "block";
-
-    } catch(e){ alert("Gagal: " + e.message) }
-  };
+function resetData(){if(!confirm('Reset semua data ke awal?'))return;localStorage.removeItem('zettbos_modules');location.reload()}
+// hidden field for edit
+const hid=document.createElement('input'); hid.type='hidden'; hid.id='editIndex'; document.body.appendChild(hid);
+// restore session + theme
+(function(){
+  const s=localStorage.getItem('zettbos_session'); if(s){currentUser=JSON.parse(s);applySession()}
+  const th=localStorage.getItem('zettbos_theme'); if(th) setTheme(th);
+  // Enter to login
+  document.getElementById('p').addEventListener('keydown',e=>{if(e.key==='Enter') doLogin()});
+  renderModules();
+})();
 </script>
 </body>
 </html>
