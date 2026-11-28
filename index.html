@@ -106,7 +106,7 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
 
   <div class="adminBar" id="adminBar">
     <span style="font-weight:800">🛡️ Mode Admin AKTIF -</span>
-    <button onclick="openAddModal()">+ Tambah Modul</button><button onclick="openAddLink()" style="background:#0ea5e9">+ Tambah DeegiZLink</button>
+    <button onclick="openAddModal()">+ Tambah Modul</button><button onclick="openAddLink()" style="background:#0ea5e9">+ Tambah DeegiZLink</button><button onclick="openMemberList()" style="background:#7c3aed">👥 Lihat Member</button>
     <button onclick="openApproveModal()" style="background:#f59e0b" id="btnPending">🔔 Pendaftar Baru (<span id="pendingCount">0</span>)</button>
     <button onclick="toggleThemePanel()" style="background:#7c3aed">🎨 Ganti Tema</button>
     <button onclick="resetData()" style="background:#ef4444">Reset</button>
@@ -196,6 +196,14 @@ main{flex:1;padding:22px;max-width:1100px;margin:0 auto;width:100%}
   <div id="progresList" style="margin-top:12px"></div>
   <button class="btnMain" onclick="lanjutBelajar()">▶ Lanjutkan Belajar →</button>
   <button class="btnGhost" onclick="closeModal('progresModal')">Tutup</button>
+</div></div>
+  <!-- MODAL LIHAT MEMBER -->
+<div class="modal" id="memberModal"><div class="modalBox" style="max-width:520px">
+  <h3>👥 Daftar Member DeegiZ</h3>
+  <p style="font-size:13px;color:#64748b" id="memberCount">Total 0 Member</p>
+  <input id="cariMember" placeholder="🔍 Cari nama / email member..." oninput="openMemberList()" style="margin-top:10px">
+  <div id="memberList" style="margin-top:12px"></div>
+  <button class="btnGhost" onclick="closeModal('memberModal')">Tutup</button>
 </div></div>
 <script>
 async function sha256(str){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
@@ -307,6 +315,58 @@ function lanjutBelajar(){
   closeModal('progresModal');
   document.getElementById('modGrid').scrollIntoView({behavior:'smooth'});
   alert('Lanjut belajar! Scroll ke bawah, pilih modul yang belum 100% ya!');
+}
+  // ===== LIHAT MEMBER =====
+function getAllMembers(){
+  // Ambil dari pendaftar baru + akun bawaan
+  let daftar = JSON.parse(localStorage.getItem('deegiz_users')||'[]');
+  // Tambah akun bawaan biar gak kosong
+  let bawaan = [
+    {name:'DeegiZ (Admin)', email:'admin@deegiz.id', role:'Admin'},
+    {name:'Leonardo', email:'leonardo', role:'Member'},
+    {name:'Budi', email:'budi', role:'Member'}
+  ];
+  // Gabung, hindari duplikat email
+  let gabung = [...bawaan];
+  daftar.forEach(u=>{
+    if(!gabung.find(x=>x.email===u.email)) gabung.push(u);
+  });
+  return gabung;
+}
+function openMemberList(){
+  const cari = document.getElementById('cariMember') ? document.getElementById('cariMember').value.toLowerCase() : '';
+  let members = getAllMembers();
+  if(cari) members = members.filter(m => (m.name+m.email).toLowerCase().includes(cari));
+  
+  document.getElementById('memberCount').textContent = `Total ${members.length} Member • ${getAllMembers().length} Terdaftar`;
+  
+  const list = document.getElementById('memberList');
+  if(members.length===0){
+    list.innerHTML = '<p style="padding:12px;background:#f1f5f9;border-radius:10px">Tidak ada member ditemukan.</p>';
+  } else {
+    list.innerHTML = members.map((m,i)=>{
+      let inisial = m.name.charAt(0).toUpperCase();
+      let warna = m.role==='Admin' ? '#dc2626' : '#059669';
+      let badge = m.role==='Admin' ? '👑 ADMIN' : 'MEMBER';
+      return `
+      <div style="display:flex;gap:10px;align-items:center;background:#f8fafc;padding:12px;border-radius:12px;margin-bottom:8px">
+        <div style="width:42px;height:42px;border-radius:50%;background:${warna};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0">${inisial}</div>
+        <div style="flex:1;min-width:0">
+          <b style="display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${m.name} <span style="font-size:11px;background:${m.role==='Admin'?'#fee2e2':'#dcfce7'};color:${warna};padding:2px 6px;border-radius:99px">${badge}</span></b>
+          <span style="font-size:12px;color:#64748b;word-break:break-all">${m.email}</span>
+        </div>
+        ${currentUser&&currentUser.role==='Admin'&&m.role!=='Admin'?`<button onclick="hapusMember('${m.email}')" style="padding:8px;background:#fee2e2;border-radius:8px;flex-shrink:0">🗑️</button>`:''}
+      </div>`;
+    }).join('');
+  }
+  document.getElementById('memberModal').classList.add('open');
+}
+function hapusMember(email){
+  if(!confirm('Hapus member '+email+' ?')) return;
+  let daftar = JSON.parse(localStorage.getItem('deegiz_users')||'[]');
+  daftar = daftar.filter(u=>u.email!==email);
+  localStorage.setItem('deegiz_users', JSON.stringify(daftar));
+  openMemberList();
 }
 function doLogout(){localStorage.removeItem('deegiz_session');location.reload()}
 function fillMember(){document.getElementById('u').value='leonardo';document.getElementById('p').value='member123'}
